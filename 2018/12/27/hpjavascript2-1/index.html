@@ -130,19 +130,19 @@
 
 
 
-  <meta name="description" content="##执行环境context 执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁 1234function add(num1, num2)&amp;#123;  var sum = num1 + num2;">
+  <meta name="description" content="执行环境context执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁 1234function add(num1, num2)&amp;#123;  var sum = num1 + num2;  r">
 <meta name="keywords" content="高性能JavaScript,作用域，执行环境context">
 <meta property="og:type" content="article">
 <meta property="og:title" content="作用域管理原理">
 <meta property="og:url" content="http://yoursite.com/2018/12/27/hpjavascript2-1/index.html">
 <meta property="og:site_name" content="Alan&#39;s Blog">
-<meta property="og:description" content="##执行环境context 执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁 1234function add(num1, num2)&amp;#123;  var sum = num1 + num2;">
+<meta property="og:description" content="执行环境context执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁 1234function add(num1, num2)&amp;#123;  var sum = num1 + num2;  r">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/activationObject.png">
-<meta property="og:updated_time" content="2018-12-27T11:34:46.093Z">
+<meta property="og:updated_time" content="2018-12-27T11:48:55.397Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="作用域管理原理">
-<meta name="twitter:description" content="##执行环境context 执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁 1234function add(num1, num2)&amp;#123;  var sum = num1 + num2;">
+<meta name="twitter:description" content="执行环境context执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁 1234function add(num1, num2)&amp;#123;  var sum = num1 + num2;  r">
 <meta name="twitter:image" content="http://yoursite.com/assets/activationObject.png">
 
 
@@ -448,7 +448,7 @@
                 
               
 
-              <time title="创建时间：2018-12-27 18:15:58 / 修改时间：19:34:46" itemprop="dateCreated datePublished" datetime="2018-12-27T18:15:58+08:00">2018-12-27</time>
+              <time title="创建时间：2018-12-27 18:15:58 / 修改时间：19:48:55" itemprop="dateCreated datePublished" datetime="2018-12-27T18:15:58+08:00">2018-12-27</time>
             
 
             
@@ -511,13 +511,20 @@
       
 
       
-        <p>##执行环境context</p>
-<p><strong>执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁</strong></p>
+        <h2 id="执行环境context"><a href="#执行环境context" class="headerlink" title="执行环境context"></a>执行环境context</h2><p><strong>执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function add(num1, num2)&#123;</span><br><span class="line">  var sum = num1 + num2;</span><br><span class="line">  return ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>##作用域链与活动对象</p>
-<p><strong>每个执行环境都有自己的作用域链，用于解析标识符。如图</strong></p>
+<h2 id="作用域链与活动对象"><a href="#作用域链与活动对象" class="headerlink" title="作用域链与活动对象"></a>作用域链与活动对象</h2><p><strong>每个执行环境都有自己的作用域链，用于解析标识符。如图</strong></p>
 <p><img src="/assets/activationObject.png" alt=""></p>
-<p><strong>当执行环境被创建时，它的作用域链初始化为当前运行函数的[Scope]属性中的对象。这些值按照它们出现在函数中的顺序，被复制到执行环境的作用域链中</strong></p>
+<p><strong>当执行环境被创建时，它的作用域链初始化为当前运行函数的[Scope]属性中的对象。这些值按照它们出现在函数中的顺序，被复制到执行环境的作用域链中</strong><br><strong>这个过程一旦完成，一个称为“活动对象”(activation Object)的新对象在执行环境中创建好了</strong><br><strong>如上图，活动对象与其他的对象在一个队列中，作用链的最顶端为活动对象，当执行环境被销毁，活动对象也随之销毁</strong></p>
+<ul>
+<li><strong>在函数执行过程中，每遇到一个变量，都会经历一次标识符解析过程：</strong><ul>
+<li>搜索过程从作用域链头部开始搜索（当前活动对象）该变量标识符</li>
+<li>如找到则使用，直接使用该标识符</li>
+<li>如没有找到，继续搜索作用域链的下一个对象，直到找到为止</li>
+<li>若作用域链中所有对象中都没有找到该标识符，那么该标识符被视为未定义的。</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -609,8 +616,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -712,6 +728,22 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#执行环境context"><span class="nav-number">1.</span> <span class="nav-text">执行环境context</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域链与活动对象"><span class="nav-number">2.</span> <span class="nav-text">作用域链与活动对象</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
