@@ -1,7 +1,10 @@
 ---
 title: 无阻塞加载js文件
-categories: javascript
-tags: [高性能JavaScript, 无堵塞加载]
+categories: 
+- javascript
+tags: 
+- 高性能JavaScript
+- 无堵塞加载
 ---
 
 

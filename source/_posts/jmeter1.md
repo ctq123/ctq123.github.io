@@ -1,7 +1,11 @@
 ---
 title: jmeter介绍
-categories: jmeter
-tags: [jmeter学习笔记, jmeter, 性能压测]
+categories: 
+- jmeter
+tags: 
+- jmeter学习笔记
+- jmeter
+- 性能压测
 ---
 
 ## 简介

@@ -1,7 +1,11 @@
 ---
 title: 作用域管理原理
-categories: javascript
-tags: [高性能JavaScript, 作用域, 执行环境context]
+categories: 
+- javascript
+tags: 
+- 高性能JavaScript
+- 作用域
+- 执行环境context
 ---
 
 ## 执行环境context
