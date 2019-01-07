@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[jmeter介绍]]></title>
+    <url>%2F2019%2F01%2F07%2Fjmeter1%2F</url>
+    <content type="text"><![CDATA[简介 测试系统的负载能力和性能测试工具纯Java开发支持多种类型服务和协议界面模式和命令行模式扩展性强 安装和启动下载地址：https://jmeter.apache.org/download_jmeter.cgi历史版本：https://archive.apache.org/dist/jmeter/binaries/加压后双击运行 jmeter-3.3/bin/jmeter.bat 即可 各元件介绍jmeter有许多的元件，如图： Jmeter元件主要包括： 1.逻辑控制器（controller）2.配置元件3.定时器4.前置处理器5.采样器（Sampler）6.后置处理器7.断言8.监听器 Jmeter各元件优先级顺序： 1.配置元件2.前置处理器3.定时器4.采样器（Sampler）5.后置处理器6.断言7.监听器 Jmeter各元件是以控制器（controller）和采样器（sampler）为中心，其他元件都是围绕这两个元件进行逻辑处理。采样器一般内嵌在逻辑控制器Controller中]]></content>
+      <categories>
+        <category>jmeter</category>
+      </categories>
+      <tags>
+        <tag>jmeter学习笔记</tag>
+        <tag>jmeter</tag>
+        <tag>性能压测</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DOM编程之渲染引擎原理]]></title>
+    <url>%2F2019%2F01%2F04%2Fhpjavascript3-1%2F</url>
+    <content type="text"><![CDATA[背景]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>高性能JavaScript</tag>
+        <tag>DOM编程</tag>
+        <tag>渲染引擎原理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[作用域管理原理]]></title>
     <url>%2F2019%2F01%2F02%2Fhpjavascript2-1%2F</url>
     <content type="text"><![CDATA[执行环境context执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁 1234function add(num1, num2)&#123; var sum = num1 + num2; return ;&#125; 作用域链与活动对象每个执行环境都有自己的作用域链，用于解析标识符。如图 当执行环境被创建时，它的作用域链初始化为当前运行函数的[Scope]属性中的对象。这些值按照它们出现在函数中的顺序，被复制到执行环境的作用域链中这个过程一旦完成，一个称为“活动对象”(activation Object)的新对象在执行环境中创建好了如上图，活动对象与其他的对象在一个队列中，作用链的最顶端为活动对象，当执行环境被销毁，活动对象也随之销毁 在函数执行过程中，每遇到一个变量，都会经历一次标识符解析过程： 搜索过程从作用域链头部开始搜索（当前活动对象）该变量标识符 如找到则使用，直接使用该标识符 如没有找到，继续搜索作用域链的下一个对象，直到找到为止 若作用域链中所有对象中都没有找到该标识符，那么该标识符被视为未定义的。 全局变量总是存在于执行环境作用域链的最末端，因此它是最远的。要想提高代码性能，请将函数内的全局变量转化成局部变量，提高读取标识符解析速度。 改变作用域链一般来说，一个执行环境的作用域链是不会改变的，但是有两个语句可以使其发生改变：1.with语句2.try-catch中catch子句 优化JavaScript代码策略1.访问字面量和局部变量的速度最快，相反，访问数组元素和对象成员相对较慢 2.由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨域变量更快。变量在作用域链的位置越深，访问的速度越慢。由于全局变量总处于作用域链的最末端，因此访问的速度也是最慢的 3.避免使用with语句，因为它会改变执行环境的作用域链，同样，try-catch语句中的catch子句也有同样的影响，因此要小心使用 4.嵌套的对象成员会明显影响性能，因此尽量少用 5.属性和方法在原型链中的位置越深，访问它的速度也就越慢 6.通常来说，你可以通过把常用的对象成员，数组元素，跨域变量保存在局部变量中来改善JavaScript性能，因为局部变量访问的速度更快。以空间换时间的代价，需要自己权衡]]></content>
