@@ -8,7 +8,9 @@ tags:
 - 渲染引擎原理
 ---
 
-## 背景
+## 1、背景
+> 浏览器引擎主要由两部分组成：渲染引擎（rendering engine）和js解析器（javascript interpreter）
+
 
 
 

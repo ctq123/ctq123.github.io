@@ -8,19 +8,19 @@ tags:
 - 性能压测
 ---
 
-## 简介
+## 1、简介
 > 测试系统的负载能力和性能测试工具
 > 纯Java开发
 > 支持多种类型服务和协议
 > 界面模式和命令行模式
 > 扩展性强
 
-## 安装和启动
+## 2、安装和启动
 **下载地址：https://jmeter.apache.org/download_jmeter.cgi**
 **历史版本：https://archive.apache.org/dist/jmeter/binaries/**
 **加压后双击运行 jmeter-3.3/bin/jmeter.bat 即可**
 
-## 各元件介绍
+## 3、各元件介绍
 jmeter有许多的元件，如图：
 ![](/assets/jmeter1.png)
 
