@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[jmeter介绍]]></title>
     <url>%2F2019%2F01%2F07%2Fjmeter1%2F</url>
-    <content type="text"><![CDATA[1.简介 测试系统的负载能力和性能测试工具纯Java开发支持多种类型服务和协议界面模式和命令行模式扩展性强 2.安装和启动下载地址：https://jmeter.apache.org/download_jmeter.cgi历史版本：https://archive.apache.org/dist/jmeter/binaries/加压后双击运行 jmeter-3.3/bin/jmeter.bat 即可 3.各元件介绍jmeter有许多的元件，如图： Jmeter元件主要包括： 1.逻辑控制器（controller）2.配置元件3.定时器4.前置处理器5.采样器（Sampler）6.后置处理器7.断言8.监听器 Jmeter各元件优先级顺序： 1.配置元件2.前置处理器3.定时器4.采样器（Sampler）5.后置处理器6.断言7.监听器 Jmeter各元件是以控制器（controller）和采样器（sampler）为中心，其他元件都是围绕这两个元件进行逻辑处理。采样器一般内嵌在逻辑控制器Controller中]]></content>
+    <content type="text"><![CDATA[1、简介 测试系统的负载能力和性能测试工具纯Java开发支持多种类型服务和协议界面模式和命令行模式扩展性强 2、安装和启动下载地址：https://jmeter.apache.org/download_jmeter.cgi历史版本：https://archive.apache.org/dist/jmeter/binaries/加压后双击运行 jmeter-3.3/bin/jmeter.bat 即可 3、各元件介绍jmeter有许多的元件，如图： Jmeter元件主要包括： 1.逻辑控制器（controller）2.配置元件3.定时器4.前置处理器5.采样器（Sampler）6.后置处理器7.断言8.监听器 Jmeter各元件优先级顺序： 1.配置元件2.前置处理器3.定时器4.采样器（Sampler）5.后置处理器6.断言7.监听器 Jmeter各元件是以控制器（controller）和采样器（sampler）为中心，其他元件都是围绕这两个元件进行逻辑处理。采样器一般内嵌在逻辑控制器Controller中]]></content>
       <categories>
         <category>jmeter</category>
       </categories>
