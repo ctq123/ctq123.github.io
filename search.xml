@@ -16,7 +16,7 @@
   <entry>
     <title><![CDATA[DOM编程之渲染引擎原理]]></title>
     <url>%2F2019%2F01%2F04%2Fhpjavascript3-1%2F</url>
-    <content type="text"><![CDATA[1、背景 浏览器引擎主要由两部分组成：渲染引擎（rendering engine）和js解析器（javascript interpreter）]]></content>
+    <content type="text"><![CDATA[1、背景 浏览器引擎主要由两部分组成：渲染引擎（rendering engine）和js解析器（javascript interpreter） 参考浏览器工作原理：http://domenicodefelice.blogspot.com/2015/08/how-browsers-work.html?t=2]]></content>
       <categories>
         <category>javascript</category>
       </categories>
