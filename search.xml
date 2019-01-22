@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[css之flex布局]]></title>
     <url>%2F2019%2F01%2F16%2Fcss-flex-layout%2F</url>
-    <content type="text"><![CDATA[1、背景 我们知道一切dom元素对css而言都是一个盒子，css正是以盒子模型为基础进行渲染CSSDom，而页面布局一直是css一个应用重点，那么如何通过css实现水平居中和垂直居中？相信实现的方法有很多，如table，float等，但它们都有各自的缺陷。然而当flex出现后，一切都变得相当的简约而不简单，优雅而不优越，因为它也存在兼容性问题。当然对不支持它的IE8-，你可以当它们是透明的，我也一直是这样做的。 2、概念flex 参考一劳永逸的搞定 flex 布局：https://juejin.im/post/58e3a5a0a0bb9f0069fc16bbFlex 布局教程：语法篇：http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html]]></content>
+    <content type="text"><![CDATA[1、背景 我们知道一切dom元素对css而言都是一个盒子，css正是以盒子模型为基础进行渲染CSSDom，而页面布局一直是css一个应用重点，那么如何通过css实现水平居中和垂直居中？相信实现的方法有很多，如table，float等，但它们都有各自的缺陷。然而当flex出现后，一切都变得相当的简约而不简单，优雅而不优越，因为它也存在兼容性问题。当然对不支持它的IE8-，你可以当它们是透明的，我也一直是这样做的。 2、概念flex由两个核心构成：容器和轴。容器包括父容器和子容器，轴分为主轴和交叉轴（即以横轴为主轴时，纵轴为交叉轴；以纵轴为主轴时，横轴为交叉轴；交叉轴=主轴逆时针90度） 参考一劳永逸的搞定 flex 布局：https://juejin.im/post/58e3a5a0a0bb9f0069fc16bbFlex 布局教程：语法篇：http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html]]></content>
       <categories>
         <category>css</category>
       </categories>
