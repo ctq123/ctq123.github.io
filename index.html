@@ -461,7 +461,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-23 19:26:25" itemprop="dateModified" datetime="2019-01-23T19:26:25+08:00">2019-01-23</time>
+                <time title="修改时间：2019-01-23 20:33:44" itemprop="dateModified" datetime="2019-01-23T20:33:44+08:00">2019-01-23</time>
               
             
           </span>
@@ -518,7 +518,7 @@
 <p>我们知道一切dom元素对css而言都是一个盒子，css正是以盒子模型为基础进行渲染CSSDom，而页面布局一直是css一个应用重点，那么如何通过css实现水平居中和垂直居中？<br>相信实现的方法有很多，如table，float等，但它们都有各自的缺陷。然而当flex出现后，一切都变得相当的简约而不简单，优雅而不优越，因为它也存在兼容性问题。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.centerContainer</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <blockquote>
-<p>浏览器兼容性方面：IE10+  <a href="https://caniuse.com/#search=flex" target="_blank" rel="noopener"><strong><em>详情点击这里</em></strong></a></p>
+<p>它的子元素就是水平和垂直居中，浏览器兼容性方面：IE10+  <a href="https://caniuse.com/#search=flex" target="_blank" rel="noopener"><strong><em>详情点击这里</em></strong></a></p>
 </blockquote>
 <h2 id="2、概念"><a href="#2、概念" class="headerlink" title="2、概念"></a>2、概念</h2><p>flex由两个核心概念构成：容器和轴。容器包括父容器和子容器，轴分为主轴和交叉轴（即以横轴为主轴时，纵轴为交叉轴；以纵轴为主轴时，横轴为交叉轴；交叉轴=主轴逆时针90度）。flex属性一共有12个，父容器和子容器对应的属性各6个。</p>
 <h2 id="3、属性介绍"><a href="#3、属性介绍" class="headerlink" title="3、属性介绍"></a>3、属性介绍</h2><p><strong>父容器属性</strong></p>
@@ -814,8 +814,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><p>flex的每一个属性都是围绕着容器和轴两个概念而进行描述的。<br>flex有两个复合属性，复合属性允许设置单个属性和多个属性<br>align-self属性与align-items属性值相同，前者在子容器中设置子容器自身属性，后者在父容器中设置子容器的属性，因此当同时子容器的属性时，以align-self的属性值为准<br>常用的属性如下：flex-direction, justify-content, align-items, align-self, flex<br>进阶的属性如下：align-content, flex-warp, flex-flow, flex-grow, flex-shrink, flex-basis, order<br>复合属性如下：flex-flow, flex</p>
-<p><strong>参考</strong><br>一劳永逸的搞定 flex 布局：<a href="https://juejin.im/post/58e3a5a0a0bb9f0069fc16bb" target="_blank" rel="noopener">https://juejin.im/post/58e3a5a0a0bb9f0069fc16bb</a><br>Flex 布局教程：语法篇：<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></p>
+<h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><p>flex的每一个属性都是围绕着容器和轴两个概念而进行描述的。<br>flex有两个复合属性，复合属性允许设置单个属性和多个属性<br>align-self属性与align-items属性值相同，前者在子容器中设置子容器自身属性，后者在父容器中设置子容器的属性，因此当同时子容器的属性时，以align-self的属性值为准<br>常用的属性如下：<strong><em>flex-direction, justify-content, align-items, align-self, flex</em></strong><br>进阶的属性如下：<strong><em>align-content, flex-warp, flex-flow, flex-grow, flex-shrink, flex-basis, order</em></strong><br>复合属性如下：<strong><em>flex-flow, flex</em></strong></p>
+<p><strong>参考</strong><br><strong><em>一劳永逸的搞定 flex 布局：<a href="https://juejin.im/post/58e3a5a0a0bb9f0069fc16bb" target="_blank" rel="noopener">https://juejin.im/post/58e3a5a0a0bb9f0069fc16bb</a></em></strong><br><strong><em>Flex 布局教程：语法篇：<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></em></strong></p>
 
           
         
