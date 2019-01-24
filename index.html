@@ -444,7 +444,7 @@
                 
               
 
-              <time title="创建时间：2019-01-24 11:24:21 / 修改时间：11:37:56" itemprop="dateCreated datePublished" datetime="2019-01-24T11:24:21+08:00">2019-01-24</time>
+              <time title="创建时间：2019-01-24 11:24:21 / 修改时间：11:42:05" itemprop="dateCreated datePublished" datetime="2019-01-24T11:24:21+08:00">2019-01-24</time>
             
 
             
@@ -508,6 +508,7 @@
 <p>然而，上述方式只适用于在当前线程组内session共享，若需要跨线程组共享一个session，那就需要使用property属性。</p>
 <h3 id="2-2、利用property属性共享session（多个线程组）"><a href="#2-2、利用property属性共享session（多个线程组）" class="headerlink" title="2.2、利用property属性共享session（多个线程组）"></a>2.2、利用property属性共享session（多个线程组）</h3><p>利用Jmeter本身提供的property属性，垮线程组的session共享，使用${ __setProperty(,,) }保存，如图<br><img src="/assets/jmeter3-2.png" alt=""></p>
 <p>然后在要用的地方，使用${ __property() }提取， 如图<br><img src="/assets/jmeter3-3.png" alt=""></p>
+<h2 id="3、总结"><a href="#3、总结" class="headerlink" title="3、总结"></a>3、总结</h2><p><strong>仅一次控制器适用于单线程组内共享session，property属性适用于多个线程组共享session</strong></p>
 
           
         
