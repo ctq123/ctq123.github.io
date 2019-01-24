@@ -444,7 +444,7 @@
                 
               
 
-              <time title="创建时间：2019-01-24 10:43:21 / 修改时间：10:49:19" itemprop="dateCreated datePublished" datetime="2019-01-24T10:43:21+08:00">2019-01-24</time>
+              <time title="创建时间：2019-01-24 10:43:21 / 修改时间：10:52:04" itemprop="dateCreated datePublished" datetime="2019-01-24T10:43:21+08:00">2019-01-24</time>
             
 
             
@@ -504,14 +504,10 @@
           
             <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。</p>
 <p>假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？</p>
-<h2 id="2、揭秘"><a href="#2、揭秘" class="headerlink" title="2、揭秘"></a>2、揭秘</h2><h2 id="3、总结"><a href="#3、总结" class="headerlink" title="3、总结"></a>3、总结</h2><p>1.同一线程组，同一轮http请求执行顺序，按从上到下顺序执行；</p>
-<p>2.同一线程组，不同轮http请求执行顺序，与线程组的启动时间有关；</p>
-<blockquote>
-<p>2-1）若启动时间远大于执行完一轮所需的时间，那么每一轮都会按步就班执行；</p>
-</blockquote>
-<blockquote>
-<p>2-2）若启动时间小于执行每一轮所需的时间，那么其他线程就会直接抢占cpu资源，先执行</p>
-</blockquote>
+<h2 id="2、揭秘"><a href="#2、揭秘" class="headerlink" title="2、揭秘"></a>2、揭秘</h2><h2 id="3、总结"><a href="#3、总结" class="headerlink" title="3、总结"></a>3、总结</h2><p><strong>1.同一线程组，同一轮http请求执行顺序，按从上到下顺序执行；</strong></p>
+<p><strong>2.同一线程组，不同轮http请求执行顺序，与线程组的启动时间有关；</strong></p>
+<p><strong>2-1）若启动时间远大于执行完一轮所需的时间，那么每一轮都会按步就班执行；</strong></p>
+<p><strong>2-2）若启动时间小于执行每一轮所需的时间，那么其他线程就会直接抢占cpu资源，先执行</strong></p>
 
           
         
