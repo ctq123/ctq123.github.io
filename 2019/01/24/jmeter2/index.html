@@ -130,18 +130,26 @@
 
 
 
-  <meta name="description" content="1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘3、总结1.同一线程组，同一轮http请求执行顺序，按从上到下顺序执行； 2.同一">
+  <meta name="description" content="1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘假设有5个http请求，其中第3个http加入固定定时器，等待3秒，如图 2.1、">
 <meta name="keywords" content="jmeter学习笔记,jmeter,性能压测,jmeter执行顺序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jmeter线程组内各请求组轮询执行顺序">
+<meta property="og:title" content="Jmeter线程组内各请求的执行顺序">
 <meta property="og:url" content="http://yoursite.com/2019/01/24/jmeter2/index.html">
 <meta property="og:site_name" content="Alan&#39;s Blog">
-<meta property="og:description" content="1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘3、总结1.同一线程组，同一轮http请求执行顺序，按从上到下顺序执行； 2.同一">
+<meta property="og:description" content="1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘假设有5个http请求，其中第3个http加入固定定时器，等待3秒，如图 2.1、">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-24T02:52:04.993Z">
+<meta property="og:image" content="http://yoursite.com/assets/jmeter2-1.png">
+<meta property="og:image" content="http://yoursite.com/assets/jmeter2-2.png">
+<meta property="og:image" content="http://yoursite.com/assets/jmeter2-3.png">
+<meta property="og:image" content="http://yoursite.com/assets/jmeter2-4.png">
+<meta property="og:image" content="http://yoursite.com/assets/jmeter2-5.png">
+<meta property="og:image" content="http://yoursite.com/assets/jmeter2-6.png">
+<meta property="og:image" content="http://yoursite.com/assets/jmeter2-7.png">
+<meta property="og:updated_time" content="2019-01-24T03:08:09.271Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jmeter线程组内各请求组轮询执行顺序">
-<meta name="twitter:description" content="1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘3、总结1.同一线程组，同一轮http请求执行顺序，按从上到下顺序执行； 2.同一">
+<meta name="twitter:title" content="Jmeter线程组内各请求的执行顺序">
+<meta name="twitter:description" content="1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘假设有5个http请求，其中第3个http加入固定定时器，等待3秒，如图 2.1、">
+<meta name="twitter:image" content="http://yoursite.com/assets/jmeter2-1.png">
 
 
 
@@ -158,7 +166,7 @@
   };
 </script>
 
-  <title>Jmeter线程组内各请求组轮询执行顺序 | Alan's Blog</title>
+  <title>Jmeter线程组内各请求的执行顺序 | Alan's Blog</title>
   
 
 
@@ -420,7 +428,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Jmeter线程组内各请求组轮询执行顺序
+          <h1 class="post-title" itemprop="name headline">Jmeter线程组内各请求的执行顺序
 
               
             
@@ -446,7 +454,7 @@
                 
               
 
-              <time title="创建时间：2019-01-24 10:43:21 / 修改时间：10:52:04" itemprop="dateCreated datePublished" datetime="2019-01-24T10:43:21+08:00">2019-01-24</time>
+              <time title="创建时间：2019-01-24 10:43:21 / 修改时间：11:08:09" itemprop="dateCreated datePublished" datetime="2019-01-24T10:43:21+08:00">2019-01-24</time>
             
 
             
@@ -511,7 +519,20 @@
       
         <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。</p>
 <p>假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？</p>
-<h2 id="2、揭秘"><a href="#2、揭秘" class="headerlink" title="2、揭秘"></a>2、揭秘</h2><h2 id="3、总结"><a href="#3、总结" class="headerlink" title="3、总结"></a>3、总结</h2><p><strong>1.同一线程组，同一轮http请求执行顺序，按从上到下顺序执行；</strong></p>
+<h2 id="2、揭秘"><a href="#2、揭秘" class="headerlink" title="2、揭秘"></a>2、揭秘</h2><p>假设有5个http请求，其中第3个http加入固定定时器，等待3秒，如图<br><img src="/assets/jmeter2-1.png" alt=""></p>
+<h3 id="2-1、例子1-单个线程"><a href="#2-1、例子1-单个线程" class="headerlink" title="2.1、例子1-单个线程"></a>2.1、例子1-单个线程</h3><p>线程组控制参数，如下<br><img src="/assets/jmeter2-2.png" alt=""></p>
+<p>执行结果如下：<br><img src="/assets/jmeter2-3.png" alt=""></p>
+<p>可是我们的线程（模拟的用户数），通常情况下都不会只有一个，而是有多个</p>
+<h3 id="2-2、例子2-多个线程"><a href="#2-2、例子2-多个线程" class="headerlink" title="2.2、例子2-多个线程"></a>2.2、例子2-多个线程</h3><p>线程组控制参数，如下<br><img src="/assets/jmeter2-4.png" alt=""></p>
+<p>执行结果如下：<br><img src="/assets/jmeter2-5.png" alt=""></p>
+<p>如上图，对应的线程1，先执行线程1的第一轮和线程1的第二轮，接下来执行线程2，线程2的第一轮和线程2的第二轮……以此类推</p>
+<p>答案是不是那么简单？</p>
+<p>如果真是这么简单，呵呵，我就没必要写这篇博客笔记了……</p>
+<h3 id="2-3、例子3-多个线程调整启动时间"><a href="#2-3、例子3-多个线程调整启动时间" class="headerlink" title="2.3、例子3-多个线程调整启动时间"></a>2.3、例子3-多个线程调整启动时间</h3><p>我们调整线程组启动时间参数，如下<br><img src="/assets/jmeter2-6.png" alt=""></p>
+<p>执行结果如下：<br><img src="/assets/jmeter2-7.png" alt=""></p>
+<p>如上图，对应的线程组就不是按步就班地执行了，线程1，线程2，线程3所对应的第一轮前两个http先抢占cpu资源，先执行，等到线程1的第3个http等待3秒的时间到后，才执行线程1剩余的后3个http请求。</p>
+<p>由此可见，前一个http加入定时器后会影响下一个http请求，等待资源期间，其他线程的http请求会抢占cpu，先执行；批量http请求的执行顺序与线程组启动时间有关；</p>
+<h2 id="3、总结"><a href="#3、总结" class="headerlink" title="3、总结"></a>3、总结</h2><p><strong>1.同一线程组，同一轮http请求执行顺序，按从上到下顺序执行；</strong></p>
 <p><strong>2.同一线程组，不同轮http请求执行顺序，与线程组的启动时间有关；</strong></p>
 <p><strong>2-1）若启动时间远大于执行完一轮所需的时间，那么每一轮都会按步就班执行；</strong></p>
 <p><strong>2-2）若启动时间小于执行每一轮所需的时间，那么其他线程就会直接抢占cpu资源，先执行</strong></p>
@@ -756,7 +777,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、背景"><span class="nav-number">1.</span> <span class="nav-text">1、背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、揭秘"><span class="nav-number">2.</span> <span class="nav-text">2、揭秘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、总结"><span class="nav-number">3.</span> <span class="nav-text">3、总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、背景"><span class="nav-number">1.</span> <span class="nav-text">1、背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、揭秘"><span class="nav-number">2.</span> <span class="nav-text">2、揭秘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1、例子1-单个线程"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、例子1-单个线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2、例子2-多个线程"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、例子2-多个线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3、例子3-多个线程调整启动时间"><span class="nav-number">2.3.</span> <span class="nav-text">2.3、例子3-多个线程调整启动时间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、总结"><span class="nav-number">3.</span> <span class="nav-text">3、总结</span></a></li></ol></div>
             
 
           </div>
