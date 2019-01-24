@@ -444,7 +444,7 @@
                 
               
 
-              <time title="创建时间：2019-01-24 11:24:21 / 修改时间：11:29:20" itemprop="dateCreated datePublished" datetime="2019-01-24T11:24:21+08:00">2019-01-24</time>
+              <time title="创建时间：2019-01-24 11:24:21 / 修改时间：11:36:54" itemprop="dateCreated datePublished" datetime="2019-01-24T11:24:21+08:00">2019-01-24</time>
             
 
             
@@ -503,7 +503,12 @@
         
           
             <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>有很多情况，我测试的接口或场景与登录操作无关，而又必须先登录才拥有对应的接口权限，测试对应的接口。那么有哪些共享session的方法？</p>
-<h2 id="2、共享登录session方式"><a href="#2、共享登录session方式" class="headerlink" title="2、共享登录session方式"></a>2、共享登录session方式</h2><h3 id="2-1、利用仅一次控制器共享session"><a href="#2-1、利用仅一次控制器共享session" class="headerlink" title="2.1、利用仅一次控制器共享session"></a>2.1、利用仅一次控制器共享session</h3><h3 id="2-2、利用property属性共享session"><a href="#2-2、利用property属性共享session" class="headerlink" title="2.2、利用property属性共享session"></a>2.2、利用property属性共享session</h3>
+<h2 id="2、共享登录session方式"><a href="#2、共享登录session方式" class="headerlink" title="2、共享登录session方式"></a>2、共享登录session方式</h2><h3 id="2-1、利用仅一次控制器共享session（单个线程组）"><a href="#2-1、利用仅一次控制器共享session（单个线程组）" class="headerlink" title="2.1、利用仅一次控制器共享session（单个线程组）"></a>2.1、利用仅一次控制器共享session（单个线程组）</h3><p>利用简单的仅一次控制器，处理登录操作，如下图<br><img src="/assets/jmeter3-1.png" alt=""></p>
+<p>提取登录请求的session，然后将其保存在一个变量中即可。</p>
+<p>然而，上述方式只适用于在当前线程组内session共享，若需要跨线程组共享一个session，那就需要使用property属性。</p>
+<h3 id="2-2、利用property属性共享session（多个线程组）"><a href="#2-2、利用property属性共享session（多个线程组）" class="headerlink" title="2.2、利用property属性共享session（多个线程组）"></a>2.2、利用property属性共享session（多个线程组）</h3><p>利用Jmeter本身提供的property属性，垮线程组的session共享，如图<br><img src="/assets/jmeter3-2.png" alt=""></p>
+<p>使用${ <strong>setProperty(,,) }保存，使用${ </strong>property() }获取， 如图<br><img src="/assets/jmeter3-3.png" alt=""></p>
+
           
         
       
