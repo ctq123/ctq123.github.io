@@ -130,22 +130,21 @@
 
 
 
-  <meta name="description" content="1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Thread Group加压是有一些区别">
+  <meta name="description" content="1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《Jmeter线程组内各请求的执行顺序》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Th">
 <meta name="keywords" content="jmeter学习笔记,jmeter,性能压测,阶梯式加压">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Jmeter做阶梯式加压">
 <meta property="og:url" content="http://yoursite.com/2019/01/28/jmeter4/index.html">
 <meta property="og:site_name" content="Alan&#39;s Blog">
-<meta property="og:description" content="1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Thread Group加压是有一些区别">
+<meta property="og:description" content="1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《Jmeter线程组内各请求的执行顺序》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Th">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://ctq123.github.io/2019/01/24/jmeter2/">
 <meta property="og:image" content="http://yoursite.com/assets/jmeter4-1.png">
 <meta property="og:image" content="http://yoursite.com/assets/jmeter4-2.png">
-<meta property="og:updated_time" content="2019-01-28T06:43:31.208Z">
+<meta property="og:updated_time" content="2019-01-28T06:48:08.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Jmeter做阶梯式加压">
-<meta name="twitter:description" content="1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Thread Group加压是有一些区别">
-<meta name="twitter:image" content="https://ctq123.github.io/2019/01/24/jmeter2/">
+<meta name="twitter:description" content="1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《Jmeter线程组内各请求的执行顺序》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Th">
+<meta name="twitter:image" content="http://yoursite.com/assets/jmeter4-1.png">
 
 
 
@@ -450,7 +449,7 @@
                 
               
 
-              <time title="创建时间：2019-01-28 14:04:30 / 修改时间：14:43:31" itemprop="dateCreated datePublished" datetime="2019-01-28T14:04:30+08:00">2019-01-28</time>
+              <time title="创建时间：2019-01-28 14:04:30 / 修改时间：14:48:08" itemprop="dateCreated datePublished" datetime="2019-01-28T14:04:30+08:00">2019-01-28</time>
             
 
             
@@ -513,7 +512,7 @@
       
 
       
-        <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少<br>虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《<img src="https://ctq123.github.io/2019/01/24/jmeter2/" alt="Jmeter线程组内各请求的执行顺序">》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。<br>注意这里介绍的阶梯式加压，与普通Thread Group加压是有一些区别，具体后面会有介绍。</p>
+        <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少<br>虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《<a href="https://ctq123.github.io/2019/01/24/jmeter2/" target="_blank" rel="noopener">Jmeter线程组内各请求的执行顺序</a>》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。<br>注意这里介绍的阶梯式加压，与普通Thread Group加压是有一些区别，具体后面会有介绍。</p>
 <h2 id="2、阶梯式加压"><a href="#2、阶梯式加压" class="headerlink" title="2、阶梯式加压"></a>2、阶梯式加压</h2><p>Jmeter提供两种方式可以实现批量逐步往上加的效果，一是Stepping Thread Group，二是Concurrency Thread Group</p>
 <p>下载方式：</p>
 <p>Jmeter Plugins Manager中下载Custom Thread Groups</p>
