@@ -444,7 +444,7 @@
                 
               
 
-              <time title="创建时间：2019-01-28 14:04:30 / 修改时间：14:48:08" itemprop="dateCreated datePublished" datetime="2019-01-28T14:04:30+08:00">2019-01-28</time>
+              <time title="创建时间：2019-01-28 14:04:30 / 修改时间：14:57:09" itemprop="dateCreated datePublished" datetime="2019-01-28T14:04:30+08:00">2019-01-28</time>
             
 
             
@@ -527,7 +527,7 @@
 <p>由上图可以看出，每隔1s（10(C)/10(A)）启动一个线程。程序内部设置定时器也应该为1s，否则线程启动数量不可控</p>
 <p>再达到目标线程10个，总的启动线程数量为：1+2+3+….+10 = 10<em>(10+1)/2=55<br>持续10个线程运行时间为1s，数量为：10</em>1=10（同理若持续为5s，则为10 * 5=50）<br>总的线程数量为：55+10=65</p>
 <p><strong>注意：最终运行线程数量运算较复杂，非必要场景下，不推荐使用</strong></p>
-<h2 id="3、Concurrency-Thread-Group与普通-Thread-Group区别"><a href="#3、Concurrency-Thread-Group与普通-Thread-Group区别" class="headerlink" title="3、Concurrency Thread Group与普通 Thread Group区别"></a>3、Concurrency Thread Group与普通 Thread Group区别</h2><p><strong>1.最大的区别就是假设目标线程为100，运行过程中若有线程出错，普通线程组最终运行的目标线程会小于100，而Concurrency Thread Group最终运行的目标线程始终会保持100</strong></p>
+<h2 id="3、总结"><a href="#3、总结" class="headerlink" title="3、总结"></a>3、总结</h2><h3 id="Concurrency-Thread-Group与普通-Thread-Group区别："><a href="#Concurrency-Thread-Group与普通-Thread-Group区别：" class="headerlink" title="Concurrency Thread Group与普通 Thread Group区别："></a>Concurrency Thread Group与普通 Thread Group区别：</h3><p><strong>1.最大的区别就是假设目标线程为100，运行过程中若有线程出错，普通线程组最终运行的目标线程会小于100，而Concurrency Thread Group最终运行的目标线程始终会保持100</strong></p>
 <p><strong>2.普通线程组若想查看其中错误的线程出错，根据日志是很难查找得到的（当目标线程很大的情况下），而Concurrency Thread Group可以将错误的线程保存在日志文件中，更容易得到错误线程的报错信息</strong></p>
 
           
