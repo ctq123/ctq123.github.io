@@ -130,20 +130,28 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Alan&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/无堵塞加载/index.html">
+  <meta name="description" content="1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少 2、阶梯式加压Jmeter提供两种方式可以实现批量逐步往上加的效果，一是Stepping Thread Group，二是Concurrency Thread Group 下载方式： Jmeter Plugins Manager中下载Custom Thread Groups 如果选项中没">
+<meta name="keywords" content="jmeter学习笔记,jmeter,性能压测,阶梯式加压">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Jmeter做阶梯式加压">
+<meta property="og:url" content="http://yoursite.com/2019/01/28/jmeter4/index.html">
 <meta property="og:site_name" content="Alan&#39;s Blog">
+<meta property="og:description" content="1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少 2、阶梯式加压Jmeter提供两种方式可以实现批量逐步往上加的效果，一是Stepping Thread Group，二是Concurrency Thread Group 下载方式： Jmeter Plugins Manager中下载Custom Thread Groups 如果选项中没">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/assets/jmeter4-1.png">
+<meta property="og:image" content="http://yoursite.com/assets/jmeter4-2.png">
+<meta property="og:updated_time" content="2019-01-28T06:20:09.500Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Alan&#39;s Blog">
+<meta name="twitter:title" content="使用Jmeter做阶梯式加压">
+<meta name="twitter:description" content="1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少 2、阶梯式加压Jmeter提供两种方式可以实现批量逐步往上加的效果，一是Stepping Thread Group，二是Concurrency Thread Group 下载方式： Jmeter Plugins Manager中下载Custom Thread Groups 如果选项中没">
+<meta name="twitter:image" content="http://yoursite.com/assets/jmeter4-1.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/无堵塞加载/">
+  <link rel="canonical" href="http://yoursite.com/2019/01/28/jmeter4/">
 
 
 
@@ -153,7 +161,7 @@
   };
 </script>
 
-  <title>标签: 无堵塞加载 | Alan's Blog</title>
+  <title>使用Jmeter做阶梯式加压 | Alan's Blog</title>
   
 
 
@@ -201,7 +209,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/ctq123" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
@@ -277,7 +285,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -378,85 +386,231 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>无堵塞加载<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/28/jmeter4/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/12124169?s=400&u=39badfedffc31671546ee6843bfcc3ff1fce2df0&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/01/02/hpjavascript1/" itemprop="url">
-              
-                <span itemprop="name">无阻塞加载js文件</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">使用Jmeter做阶梯式加压
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-02T17:23:20+08:00" content="2019-01-02">
-          01-02
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-28 14:04:30 / 修改时间：14:20:09" itemprop="dateCreated datePublished" datetime="2019-01-28T14:04:30+08:00">2019-01-28</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/jmeter/" itemprop="url" rel="index"><span itemprop="name">jmeter</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少</p>
+<h2 id="2、阶梯式加压"><a href="#2、阶梯式加压" class="headerlink" title="2、阶梯式加压"></a>2、阶梯式加压</h2><p>Jmeter提供两种方式可以实现批量逐步往上加的效果，一是Stepping Thread Group，二是Concurrency Thread Group</p>
+<p>下载方式：</p>
+<p>Jmeter Plugins Manager中下载Custom Thread Groups</p>
+<p>如果选项中没有Plugins Manager（如下图），请自行下载，地址：<a href="https://jmeter-plugins.org/install/Install/" target="_blank" rel="noopener">https://jmeter-plugins.org/install/Install/</a><br><img src="/assets/jmeter4-1.png" alt=""></p>
+<p>使用Concurrency Thread Group,如图<br><img src="/assets/jmeter4-2.png" alt=""></p>
+<p>Concurrency Thread Group比Stepping Thread Group优点：</p>
+<blockquote>
+<p>1）并发线程组允许控制测试的长度<br>2）线程在进程中间结束的情况下创建替换线程，节省内存（压测机器）</p>
+</blockquote>
+<p>参数说明：</p>
+<ul>
+<li>Target Concurrency: 并发线程数</li>
+<li>Ramp Up Time: 加速时间</li>
+<li>Ramp-Up Steps Count: 加速步奏计数</li>
+<li>Hold Target Rate Time: 保持目标速率运行时间</li>
+<li>Time Unnit: 时间单位（分或秒）</li>
+<li>Thread Iterations Limit：线程迭代次数限制</li>
+<li>Log Threads Status into File: 将线程状态记录到日志文件（线程启动和停止事件保存为日志文件）</li>
+</ul>
+<p>举个栗子：<br>Target Concurrency：10（A）<br>Ramp Up Time： 10（B）<br>Ramp-Up Steps Count: 10（C）<br>Hold Target Rate Time: 1<br>Time Unit: seconds<br>（程序组内每个线程启动的定时器设置为1s）</p>
+<p>由上图可以看出，每隔1s（10(C)/10(A)）启动一个线程。程序内部设置定时器也应该为1s，否则线程启动数量不可控</p>
+<p>再达到目标线程10个，总的启动线程数量为：1+2+3+….+10 = 10<em>(10+1)/2=55<br>持续10个线程运行时间为1s，数量为：10</em>1=10（同理若持续为5s，则为10 * 5=50）<br>总的线程数量为：55+10=65<br><strong>注意：最终运行线程数量运算较复杂，非必要场景下，不推荐使用</strong></p>
+<h2 id="3、Concurrency-Thread-Group与普通-Thread-Group区别"><a href="#3、Concurrency-Thread-Group与普通-Thread-Group区别" class="headerlink" title="3、Concurrency Thread Group与普通 Thread Group区别"></a>3、Concurrency Thread Group与普通 Thread Group区别</h2><p><strong>1.最大的区别就是假设目标线程为100，运行过程中若有线程出错，普通线程组最终运行的目标线程会小于100，而Concurrency Thread Group最终运行的目标线程始终会保持100</strong><br><strong>2.普通线程组若想查看其中错误的线程出错，根据日志是很难查找得到的（当目标线程很大的情况下），而Concurrency Thread Group可以将错误的线程保存在日志文件中，更容易得到错误线程的报错信息</strong></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jmeter学习笔记/" rel="tag"><i class="fa fa-tag"></i> jmeter学习笔记</a>
+          
+            <a href="/tags/jmeter/" rel="tag"><i class="fa fa-tag"></i> jmeter</a>
+          
+            <a href="/tags/性能压测/" rel="tag"><i class="fa fa-tag"></i> 性能压测</a>
+          
+            <a href="/tags/阶梯式加压/" rel="tag"><i class="fa fa-tag"></i> 阶梯式加压</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/24/jmeter3/" rel="next" title="Jmeter登录session共享">
+                <i class="fa fa-chevron-left"></i> Jmeter登录session共享
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -477,8 +631,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -608,6 +771,22 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、背景"><span class="nav-number">1.</span> <span class="nav-text">1、背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、阶梯式加压"><span class="nav-number">2.</span> <span class="nav-text">2、阶梯式加压</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、Concurrency-Thread-Group与普通-Thread-Group区别"><span class="nav-number">3.</span> <span class="nav-text">3、Concurrency Thread Group与普通 Thread Group区别</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -767,6 +946,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
 
   
 
