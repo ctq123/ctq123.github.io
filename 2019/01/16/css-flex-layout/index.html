@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Alan&#39;s Blog">
 <meta property="og:description" content="1、背景 我们知道一切dom元素对css而言都是一个盒子，css正是以盒子模型为基础进行渲染CSSDom，而页面布局一直是css一个应用重点，那么如何通过css实现水平居中和垂直居中？相信实现的方法有很多，如table，float等，但它们都有各自的缺陷。然而当flex出现后，一切都变得相当的简约而不简单，优雅而不优越，因为它也存在兼容性问题。12345.centerContainer &amp;#123">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-23T12:33:44.940Z">
+<meta property="og:updated_time" content="2019-01-28T02:55:09.931Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css之flex布局">
 <meta name="twitter:description" content="1、背景 我们知道一切dom元素对css而言都是一个盒子，css正是以盒子模型为基础进行渲染CSSDom，而页面布局一直是css一个应用重点，那么如何通过css实现水平居中和垂直居中？相信实现的方法有很多，如table，float等，但它们都有各自的缺陷。然而当flex出现后，一切都变得相当的简约而不简单，优雅而不优越，因为它也存在兼容性问题。12345.centerContainer &amp;#123">
@@ -463,7 +463,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-23 20:33:44" itemprop="dateModified" datetime="2019-01-23T20:33:44+08:00">2019-01-23</time>
+                <time title="修改时间：2019-01-28 10:55:09" itemprop="dateModified" datetime="2019-01-28T10:55:09+08:00">2019-01-28</time>
               
             
           </span>
@@ -627,7 +627,7 @@
 </table>
 <h4 id="4-align-self"><a href="#4-align-self" class="headerlink" title="4) align-self"></a>4) align-self</h4><p>功能：align-self属性用于定义每个子容器自身如何沿着交叉轴方向排列（交叉轴），注意与align-items区别</p>
 <blockquote>
-<p>align-self属性与align-items属性一致，若是同时定义了align-items和align-self，以align-self属性值为准。<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>align-self属性与align-items属性一致，若是一个子容器同时被定义了align-items和align-self，以align-self属性值为准。<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <table>
 <thead>
@@ -678,6 +678,7 @@
 </tr>
 </tbody>
 </table>
+<p>常用的flex属性基本就这5个，掌握这5个属性之后，一般场景下的布局设置可以基本实现了。倘若需要满足其他特殊的布局，那么就有必要进一步了解其他7个属性了。</p>
 <h3 id="3-2-进阶属性介绍"><a href="#3-2-进阶属性介绍" class="headerlink" title="3.2.进阶属性介绍"></a>3.2.进阶属性介绍</h3><h4 id="1-flex-wrap"><a href="#1-flex-wrap" class="headerlink" title="1) flex-wrap"></a>1) flex-wrap</h4><p>功能：flex-wrap属性用于确定子容器是否需要换行<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <table>
 <thead>
@@ -821,7 +822,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><p>flex的每一个属性都是围绕着容器和轴两个概念而进行描述的。<br>flex有两个复合属性，复合属性允许设置单个属性和多个属性<br>align-self属性与align-items属性值相同，前者在子容器中设置子容器自身属性，后者在父容器中设置子容器的属性，因此当同时子容器的属性时，以align-self的属性值为准<br>常用的属性如下：<strong><em>flex-direction, justify-content, align-items, align-self, flex</em></strong><br>进阶的属性如下：<strong><em>align-content, flex-warp, flex-flow, flex-grow, flex-shrink, flex-basis, order</em></strong><br>复合属性如下：<strong><em>flex-flow, flex</em></strong></p>
+<h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><p>flex的每一个属性都是围绕着容器和轴两个概念而进行描述的。<br>flex有两个复合属性，复合属性允许设置单个属性和多个属性<br>align-self属性与align-items属性值相同，但两者设置的位置不同，前者在子容器中设置子容器自身属性，后者在父容器中设置子容器的属性，因此当同时设置子容器的属性时，以align-self的属性值为准<br>常用的属性如下：<strong><em>flex-direction, justify-content, align-items, align-self, flex</em></strong><br>进阶的属性如下：<strong><em>align-content, flex-warp, flex-flow, flex-grow, flex-shrink, flex-basis, order</em></strong><br>复合属性如下：<strong><em>flex-flow, flex</em></strong></p>
 <p><strong>参考</strong><br><strong><em>一劳永逸的搞定 flex 布局：<a href="https://juejin.im/post/58e3a5a0a0bb9f0069fc16bb" target="_blank" rel="noopener">https://juejin.im/post/58e3a5a0a0bb9f0069fc16bb</a></em></strong><br><strong><em>Flex 布局教程：语法篇：<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></em></strong></p>
 
       
