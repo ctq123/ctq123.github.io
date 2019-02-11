@@ -20,3 +20,18 @@ tags:
 
 
 
+
+
+
+
+
+### 参考
+浏览器工作原理：http://domenicodefelice.blogspot.com/2015/08/how-browsers-work.html?t=2
+
+
+
+
+
+
+
+
