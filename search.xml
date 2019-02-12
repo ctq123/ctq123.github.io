@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[高性能JavaScript读书笔记]]></title>
+    <url>%2F2019%2F02%2F12%2Fhpjavascript8-1%2F</url>
+    <content type="text"><![CDATA[1、js如何将十进制的数字转换成二进制？使用toString(2)进行转换即可，例如：12var num = 8;console.log(num.toString(2)); // "1000"]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>高性能JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[DOM编程之渲染引擎原理]]></title>
     <url>%2F2019%2F02%2F11%2Fhpjavascript3-1%2F</url>
     <content type="text"><![CDATA[1、背景 浏览器引擎主要由两部分组成：渲染引擎（rendering engine）和js解析器（javascript interpreter） 参考浏览器工作原理：http://domenicodefelice.blogspot.com/2015/08/how-browsers-work.html?t=2]]></content>

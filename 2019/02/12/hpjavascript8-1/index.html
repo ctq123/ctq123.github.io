@@ -130,28 +130,25 @@
 
 
 
-  <meta name="description" content="1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《Jmeter线程组内各请求的执行顺序》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Th">
-<meta name="keywords" content="jmeter学习笔记,jmeter,性能压测,阶梯式加压">
+  <meta name="description" content="1、js如何将十进制的数字转换成二进制？使用toString(2)进行转换即可，例如：12var num = 8;console.log(num.toString(2)); // &quot;1000&quot;">
+<meta name="keywords" content="高性能JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Jmeter做阶梯式加压">
-<meta property="og:url" content="http://yoursite.com/2019/01/28/jmeter4/index.html">
+<meta property="og:title" content="高性能JavaScript读书笔记">
+<meta property="og:url" content="http://yoursite.com/2019/02/12/hpjavascript8-1/index.html">
 <meta property="og:site_name" content="Alan&#39;s Blog">
-<meta property="og:description" content="1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《Jmeter线程组内各请求的执行顺序》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Th">
+<meta property="og:description" content="1、js如何将十进制的数字转换成二进制？使用toString(2)进行转换即可，例如：12var num = 8;console.log(num.toString(2)); // &quot;1000&quot;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/assets/jmeter4-1.png">
-<meta property="og:image" content="http://yoursite.com/assets/jmeter4-2.png">
-<meta property="og:updated_time" content="2019-01-28T06:57:09.029Z">
+<meta property="og:updated_time" content="2019-02-12T02:25:01.071Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Jmeter做阶梯式加压">
-<meta name="twitter:description" content="1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《Jmeter线程组内各请求的执行顺序》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Th">
-<meta name="twitter:image" content="http://yoursite.com/assets/jmeter4-1.png">
+<meta name="twitter:title" content="高性能JavaScript读书笔记">
+<meta name="twitter:description" content="1、js如何将十进制的数字转换成二进制？使用toString(2)进行转换即可，例如：12var num = 8;console.log(num.toString(2)); // &quot;1000&quot;">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/28/jmeter4/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/12/hpjavascript8-1/">
 
 
 
@@ -161,7 +158,7 @@
   };
 </script>
 
-  <title>使用Jmeter做阶梯式加压 | Alan's Blog</title>
+  <title>高性能JavaScript读书笔记 | Alan's Blog</title>
   
 
 
@@ -406,7 +403,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/28/jmeter4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/12/hpjavascript8-1/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alan">
@@ -423,7 +420,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用Jmeter做阶梯式加压
+          <h1 class="post-title" itemprop="name headline">高性能JavaScript读书笔记
 
               
             
@@ -449,7 +446,7 @@
                 
               
 
-              <time title="创建时间：2019-01-28 14:04:30 / 修改时间：14:57:09" itemprop="dateCreated datePublished" datetime="2019-01-28T14:04:30+08:00">2019-01-28</time>
+              <time title="创建时间：2019-02-12 10:17:55 / 修改时间：10:25:01" itemprop="dateCreated datePublished" datetime="2019-02-12T10:17:55+08:00">2019-02-12</time>
             
 
             
@@ -471,7 +468,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/jmeter/" itemprop="url" rel="index"><span itemprop="name">jmeter</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
 
                 
                 
@@ -512,33 +509,7 @@
       
 
       
-        <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少<br>虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《<a href="https://ctq123.github.io/2019/01/24/jmeter2/" target="_blank" rel="noopener">Jmeter线程组内各请求的执行顺序</a>》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。<br>注意这里介绍的阶梯式加压，与普通Thread Group加压是有一些区别，具体后面会有介绍。</p>
-<h2 id="2、阶梯式加压"><a href="#2、阶梯式加压" class="headerlink" title="2、阶梯式加压"></a>2、阶梯式加压</h2><p>Jmeter提供两种方式可以实现批量逐步往上加的效果，一是Stepping Thread Group，二是Concurrency Thread Group</p>
-<p>下载方式：</p>
-<p>Jmeter Plugins Manager中下载Custom Thread Groups</p>
-<p>如果选项中没有Plugins Manager（如下图），请自行下载，地址：<a href="https://jmeter-plugins.org/install/Install/" target="_blank" rel="noopener">https://jmeter-plugins.org/install/Install/</a></p>
-<p><img src="/assets/jmeter4-1.png" alt=""></p>
-<p>使用Concurrency Thread Group,如图<br><img src="/assets/jmeter4-2.png" alt=""></p>
-<p>Concurrency Thread Group比Stepping Thread Group优点：</p>
-<blockquote>
-<p>1）并发线程组允许控制测试的长度<br>2）线程在进程中间结束的情况下创建替换线程，节省内存（压测机器）</p>
-</blockquote>
-<p>参数说明：</p>
-<ul>
-<li>Target Concurrency: 并发线程数</li>
-<li>Ramp Up Time: 加速时间</li>
-<li>Ramp-Up Steps Count: 加速步奏计数</li>
-<li>Hold Target Rate Time: 保持目标速率运行时间</li>
-<li>Time Unnit: 时间单位（分或秒）</li>
-<li>Thread Iterations Limit：线程迭代次数限制</li>
-<li>Log Threads Status into File: 将线程状态记录到日志文件（线程启动和停止事件保存为日志文件）</li>
-</ul>
-<p>举个栗子：<br>Target Concurrency：10（A）<br>Ramp Up Time： 10（B）<br>Ramp-Up Steps Count: 10（C）<br>Hold Target Rate Time: 1<br>Time Unit: seconds<br>（程序组内每个线程启动的定时器设置为1s）</p>
-<p>由上图可以看出，每隔1s（10(C)/10(A)）启动一个线程。程序内部设置定时器也应该为1s，否则线程启动数量不可控</p>
-<p>再达到目标线程10个，总的启动线程数量为：1+2+3+….+10 = 10<em>(10+1)/2=55<br>持续10个线程运行时间为1s，数量为：10</em>1=10（同理若持续为5s，则为10 * 5=50）<br>总的线程数量为：55+10=65</p>
-<p><strong>注意：最终运行线程数量运算较复杂，非必要场景下，不推荐使用</strong></p>
-<h2 id="3、总结"><a href="#3、总结" class="headerlink" title="3、总结"></a>3、总结</h2><h3 id="Concurrency-Thread-Group与普通-Thread-Group区别："><a href="#Concurrency-Thread-Group与普通-Thread-Group区别：" class="headerlink" title="Concurrency Thread Group与普通 Thread Group区别："></a>Concurrency Thread Group与普通 Thread Group区别：</h3><p><strong>1.最大的区别就是假设目标线程为100，运行过程中若有线程出错，普通线程组最终运行的目标线程会小于100，而Concurrency Thread Group最终运行的目标线程始终会保持100</strong></p>
-<p><strong>2.普通线程组若想查看其中错误的线程出错，根据日志是很难查找得到的（当目标线程很大的情况下），而Concurrency Thread Group可以将错误的线程保存在日志文件中，更容易得到错误线程的报错信息</strong></p>
+        <h2 id="1、js如何将十进制的数字转换成二进制？"><a href="#1、js如何将十进制的数字转换成二进制？" class="headerlink" title="1、js如何将十进制的数字转换成二进制？"></a>1、js如何将十进制的数字转换成二进制？</h2><p>使用toString(2)进行转换即可，例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">8</span>;</span><br><span class="line"><span class="built_in">console</span>.log(num.toString(<span class="number">2</span>)); <span class="comment">// "1000"</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -562,13 +533,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/jmeter学习笔记/" rel="tag"><i class="fa fa-tag"></i> jmeter学习笔记</a>
-          
-            <a href="/tags/jmeter/" rel="tag"><i class="fa fa-tag"></i> jmeter</a>
-          
-            <a href="/tags/性能压测/" rel="tag"><i class="fa fa-tag"></i> 性能压测</a>
-          
-            <a href="/tags/阶梯式加压/" rel="tag"><i class="fa fa-tag"></i> 阶梯式加压</a>
+            <a href="/tags/高性能JavaScript/" rel="tag"><i class="fa fa-tag"></i> 高性能JavaScript</a>
           
         </div>
       
@@ -581,8 +546,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/24/jmeter3/" rel="next" title="Jmeter登录session共享">
-                <i class="fa fa-chevron-left"></i> Jmeter登录session共享
+              <a href="/2019/02/11/hpjavascript3-1/" rel="next" title="DOM编程之渲染引擎原理">
+                <i class="fa fa-chevron-left"></i> DOM编程之渲染引擎原理
               </a>
             
           </div>
@@ -590,10 +555,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/11/hpjavascript3-1/" rel="prev" title="DOM编程之渲染引擎原理">
-                DOM编程之渲染引擎原理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -788,7 +749,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、背景"><span class="nav-number">1.</span> <span class="nav-text">1、背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、阶梯式加压"><span class="nav-number">2.</span> <span class="nav-text">2、阶梯式加压</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、总结"><span class="nav-number">3.</span> <span class="nav-text">3、总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Concurrency-Thread-Group与普通-Thread-Group区别："><span class="nav-number">3.1.</span> <span class="nav-text">Concurrency Thread Group与普通 Thread Group区别：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、js如何将十进制的数字转换成二进制？"><span class="nav-number">1.</span> <span class="nav-text">1、js如何将十进制的数字转换成二进制？</span></a></li></ol></div>
             
 
           </div>
