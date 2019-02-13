@@ -444,7 +444,7 @@
                 
               
 
-              <time title="创建时间：2019-02-13 10:28:33 / 修改时间：10:39:29" itemprop="dateCreated datePublished" datetime="2019-02-13T10:28:33+08:00">2019-02-13</time>
+              <time title="创建时间：2019-02-13 10:28:33 / 修改时间：10:52:15" itemprop="dateCreated datePublished" datetime="2019-02-13T10:28:33+08:00">2019-02-13</time>
             
 
             
@@ -525,6 +525,16 @@
 </blockquote>
 <p>2-4）在pycharm编辑器中引入其他环境依赖包<br><strong><em>打开pycharm编辑器，新建项目或引入h5archetype/frontend项目</em></strong><br>打开配置：File-&gt;settings→<br><img src="/assets/selenium1-1.png" alt=""></p>
 <p>添加python36<br><img src="/assets/selenium1-2.png" alt=""><br><img src="/assets/selenium1-3.png" alt=""></p>
+<p>按照添加selenium的方式，依次添加cx_Oracle，sqlalchemy， 如下图<br><img src="/assets/selenium1-4.png" alt=""></p>
+<p>如上图，所有环境依赖准备就绪后，点击OK即可</p>
+<p>至此，环境已经安装完成！接下来，即可编写自动化编程</p>
+<p><strong><em>最后解答下前面提出的一个问题，为什么选择pycharm编辑器？</em></strong><br>答：<strong>从上面也可注意到，pycharm编辑器提供安装项目依赖环境，方便安装各种依赖包，使用系统window的python环境会出现目录文件找不着的情况。其他编辑器试了都是这种情况，如Intellij IDEA，vscode，eclise等。这是由于全局中的python查找目录文件的默认方式造成的，当然，你可以在引用其他目录文件时修改它的默认查找方式，但还是建议你使用pycharm编辑，既方便又省事。</strong></p>
+<h2 id="3-运行项目"><a href="#3-运行项目" class="headerlink" title="3.运行项目"></a>3.运行项目</h2><p>将/frontend 自己的项目引入pycharm编辑器中<br>进入test_auto/test/test_suite/sample目录，选择suite_sample_create.py或suite_sample_manage.py点击运行即可</p>
+<p>如下图，运行Sample Manage页面的自动化测试<br><img src="/assets/selenium1-5.png" alt=""></p>
+<p>自动打开登录页面<br><img src="/assets/selenium1-6.png" alt=""></p>
+<p>自动打开Sample Manage页面，并自动测试设定的场景（如查询场景，编辑场景）<br><img src="/assets/selenium1-7.png" alt=""></p>
+<p>执行完成后，结果如下：<br><img src="/assets/selenium1-8.png" alt=""></p>
+<p>打开HTML结果报告<br><img src="/assets/selenium1-9.png" alt=""></p>
 <p><code>`</code></p>
 
           
