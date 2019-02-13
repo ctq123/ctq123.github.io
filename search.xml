@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[自动化测试入门篇]]></title>
+    <url>%2F2019%2F02%2F13%2Fselenium1%2F</url>
+    <content type="text"><![CDATA[前言在使用selenium+python实践过自动化测试项目一段时间后，决定将此实践过程记录下来，以便后来的学习者提供借鉴。这里的例子基于h5archetype项目 自动化测试的工具有很多，selenium+python只是其中的一种组合方式，不必纠结于使用什么测试工具，关键看你怎么利用好这些工具 1.环境准备1-1）selenium 测试框架（必须）1-2）python36 编程语言（必须）1-3）pycharm 编辑器（必须）1-4）chromedriver.exe 浏览器引擎（必须）1-5）sqlalchemy 数据库连接引擎（可选，需要连接数据库必须）1-6）cx_Oracle 数据库连接库（可选，需要连接Oracle数据库必须） 2.安装环境2-1）安装python36 编程语言 2-2）安装pycharm 编辑器 下载社区版即可，不需要专业版（为什么选择pycharm编辑器，难道其他的编辑器就不行吗？别急往下看） 2-3）安装chromedriver.exe 浏览器引擎（仅针对chrome61版本，不同版本请自行选择下载） 谷歌浏览器版本与chromedriver.exe版本映射地址：https://blog.csdn.net/qq_40027987/article/details/79544489下载完成后，放入C:\Python36\Scripts目录中，然后将C:\Python36\Scripts配置到系统环境变量path中 2-4）在pycharm编辑器中引入其他环境依赖包打开pycharm编辑器，新建项目或引入h5archetype/frontend项目打开配置：File-&gt;settings→ 添加python36 `]]></content>
+      <categories>
+        <category>selenium</category>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>selenium</tag>
+        <tag>自动化测试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[高性能JavaScript读书笔记]]></title>
     <url>%2F2019%2F02%2F12%2Fhpjavascript8-1%2F</url>
     <content type="text"><![CDATA[1、js如何将十进制的数字转换成二进制？使用toString(2)进行转换即可，例如：12var num = 8;console.log(num.toString(2)); // "1000"]]></content>
