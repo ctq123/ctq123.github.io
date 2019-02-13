@@ -133,7 +133,7 @@
   <meta name="description" content="前言在使用selenium+python实践过自动化测试项目一段时间后，决定将此实践过程记录下来，以便后来的学习者提供借鉴。这里的例子基于h5archetype项目  自动化测试的工具有很多，selenium+python只是其中的一种组合方式，不必纠结于使用什么测试工具，关键看你怎么利用好这些工具  1.环境准备1-1）selenium 测试框架（必须）1-2）python36 编程语言（必须）">
 <meta name="keywords" content="selenium,自动化测试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自动化测试入门篇">
+<meta property="og:title" content="selenium自动化测试入门篇">
 <meta property="og:url" content="http://yoursite.com/2019/02/13/selenium1/index.html">
 <meta property="og:site_name" content="Alan&#39;s Blog">
 <meta property="og:description" content="前言在使用selenium+python实践过自动化测试项目一段时间后，决定将此实践过程记录下来，以便后来的学习者提供借鉴。这里的例子基于h5archetype项目  自动化测试的工具有很多，selenium+python只是其中的一种组合方式，不必纠结于使用什么测试工具，关键看你怎么利用好这些工具  1.环境准备1-1）selenium 测试框架（必须）1-2）python36 编程语言（必须）">
@@ -151,9 +151,9 @@
 <meta property="og:image" content="http://yoursite.com/assets/selenium1-11.png">
 <meta property="og:image" content="http://yoursite.com/assets/selenium1-12.png">
 <meta property="og:image" content="http://yoursite.com/assets/selenium1-13.png">
-<meta property="og:updated_time" content="2019-02-13T03:12:40.071Z">
+<meta property="og:updated_time" content="2019-02-13T03:21:16.794Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自动化测试入门篇">
+<meta name="twitter:title" content="selenium自动化测试入门篇">
 <meta name="twitter:description" content="前言在使用selenium+python实践过自动化测试项目一段时间后，决定将此实践过程记录下来，以便后来的学习者提供借鉴。这里的例子基于h5archetype项目  自动化测试的工具有很多，selenium+python只是其中的一种组合方式，不必纠结于使用什么测试工具，关键看你怎么利用好这些工具  1.环境准备1-1）selenium 测试框架（必须）1-2）python36 编程语言（必须）">
 <meta name="twitter:image" content="http://yoursite.com/assets/selenium1-1.png">
 
@@ -172,7 +172,7 @@
   };
 </script>
 
-  <title>自动化测试入门篇 | Alan's Blog</title>
+  <title>selenium自动化测试入门篇 | Alan's Blog</title>
   
 
 
@@ -434,7 +434,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">自动化测试入门篇
+          <h1 class="post-title" itemprop="name headline">selenium自动化测试入门篇
 
               
             
@@ -460,7 +460,7 @@
                 
               
 
-              <time title="创建时间：2019-02-13 10:28:33 / 修改时间：11:12:40" itemprop="dateCreated datePublished" datetime="2019-02-13T10:28:33+08:00">2019-02-13</time>
+              <time title="创建时间：2019-02-13 10:28:33 / 修改时间：11:21:16" itemprop="dateCreated datePublished" datetime="2019-02-13T10:28:33+08:00">2019-02-13</time>
             
 
             
@@ -557,6 +557,7 @@
 <p>自动打开Sample Manage页面，并自动测试设定的场景（如查询场景，编辑场景）<br><img src="/assets/selenium1-7.png" alt=""></p>
 <p>执行完成后，结果如下：<br><img src="/assets/selenium1-8.png" alt=""></p>
 <p>打开HTML结果报告<br><img src="/assets/selenium1-9.png" alt=""></p>
+<p><strong><em>扩展：</em></strong><br>生成更好看的测试报告可以使用allure工具，<a href="https://www.kancloud.cn/guanfuchang/python_selenium/714653" target="_blank" rel="noopener">详情点击</a></p>
 <h2 id="4-项目解析"><a href="#4-项目解析" class="headerlink" title="4.项目解析"></a>4.项目解析</h2><p><img src="/assets/selenium1-10.png" alt=""></p>
 <p>自动化测试的作用：特别是在回归测试中作用发挥巨大，能帮助我们节省很多的时间和精力，节约成本。<br><strong>其实一个好的自动化测试项目应该有一个好的项目结构，相比于自动化测试工具，我认为项目结构更为重要，项目结构设计的好坏直接影响项目的可扩展性和维护性，也就是测试对象无论怎么变化，作为对应的自动化测试维护工作都应该尽可能少，且不影响测试结果的正确性。</strong><br><strong>（自动化测试项目其实应该是个独立的项目，与各分支无关，不应跟在项目的某个分支下面，这里为了图方便与分支搅在了一起。）</strong></p>
 <p>以下是我们的项目结构：</p>
