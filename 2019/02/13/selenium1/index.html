@@ -151,7 +151,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/selenium1-11.png">
 <meta property="og:image" content="http://yoursite.com/assets/selenium1-12.png">
 <meta property="og:image" content="http://yoursite.com/assets/selenium1-13.png">
-<meta property="og:updated_time" content="2019-02-13T03:03:42.463Z">
+<meta property="og:updated_time" content="2019-02-13T03:10:13.743Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自动化测试入门篇">
 <meta name="twitter:description" content="前言在使用selenium+python实践过自动化测试项目一段时间后，决定将此实践过程记录下来，以便后来的学习者提供借鉴。这里的例子基于h5archetype项目  自动化测试的工具有很多，selenium+python只是其中的一种组合方式，不必纠结于使用什么测试工具，关键看你怎么利用好这些工具  1.环境准备1-1）selenium 测试框架（必须）1-2）python36 编程语言（必须）">
@@ -460,7 +460,7 @@
                 
               
 
-              <time title="创建时间：2019-02-13 10:28:33 / 修改时间：11:03:42" itemprop="dateCreated datePublished" datetime="2019-02-13T10:28:33+08:00">2019-02-13</time>
+              <time title="创建时间：2019-02-13 10:28:33 / 修改时间：11:10:13" itemprop="dateCreated datePublished" datetime="2019-02-13T10:28:33+08:00">2019-02-13</time>
             
 
             
@@ -542,14 +542,15 @@
 </blockquote>
 <p>2-3）<a href="https://chromedriver.storage.googleapis.com/index.html?path=2.30/" target="_blank" rel="noopener">安装chromedriver.exe</a> 浏览器引擎（仅针对chrome61版本，不同版本请自行选择下载）</p>
 <blockquote>
-<p>谷歌浏览器版本与chromedriver.exe版本映射地址：<a href="https://blog.csdn.net/qq_40027987/article/details/79544489" target="_blank" rel="noopener">https://blog.csdn.net/qq_40027987/article/details/79544489</a><br><strong><em>下载完成后，放入C:\Python36\Scripts目录中，然后将C:\Python36\Scripts配置到系统环境变量path中</em></strong></p>
+<p>谷歌浏览器版本与chromedriver.exe版本映射地址：<a href="https://blog.csdn.net/qq_40027987/article/details/79544489" target="_blank" rel="noopener">https://blog.csdn.net/qq_40027987/article/details/79544489</a><br><strong>下载完成后，放入C:\Python36\Scripts目录中，然后将C:\Python36\Scripts配置到系统环境变量path中</strong></p>
 </blockquote>
-<p>2-4）在pycharm编辑器中引入其他环境依赖包<br><strong><em>打开pycharm编辑器，新建项目或引入h5archetype/frontend项目</em></strong><br>打开配置：File-&gt;settings→<br><img src="/assets/selenium1-1.png" alt=""></p>
-<p>添加python36<br><img src="/assets/selenium1-2.png" alt=""><br><img src="/assets/selenium1-3.png" alt=""></p>
+<p>2-4）在pycharm编辑器中引入其他环境依赖包<br><strong>打开pycharm编辑器，新建项目或引入h5archetype/frontend项目</strong><br>打开配置：File-&gt;settings→<br><img src="/assets/selenium1-1.png" alt=""></p>
+<p>添加python36<br><img src="/assets/selenium1-2.png" alt=""></p>
+<p>添加selenium<br><img src="/assets/selenium1-3.png" alt=""></p>
 <p>按照添加selenium的方式，依次添加cx_Oracle，sqlalchemy， 如下图<br><img src="/assets/selenium1-4.png" alt=""></p>
 <p>如上图，所有环境依赖准备就绪后，点击OK即可</p>
 <p>至此，环境已经安装完成！接下来，即可编写自动化编程</p>
-<p><strong><em>最后解答下前面提出的一个问题，为什么选择pycharm编辑器？</em></strong><br>答：<strong>从上面也可注意到，pycharm编辑器提供安装项目依赖环境，方便安装各种依赖包，使用系统window的python环境会出现目录文件找不着的情况。其他编辑器试了都是这种情况，如Intellij IDEA，vscode，eclise等。这是由于全局中的python查找目录文件的默认方式造成的，当然，你可以在引用其他目录文件时修改它的默认查找方式，但还是建议你使用pycharm编辑，既方便又省事。</strong></p>
+<p><strong>最后解答下前面提出的一个问题，为什么选择pycharm编辑器？</strong><br>答：<strong><em>从上面也可注意到，pycharm编辑器提供安装项目依赖环境，方便安装各种依赖包，使用系统window的python环境会出现目录文件找不着的情况。其他编辑器试了都是这种情况，如Intellij IDEA，vscode，eclise等。这是由于全局中的python查找目录文件的默认方式造成的，当然，你可以在引用其他目录文件时修改它的默认查找方式，但还是建议你使用pycharm编辑，既方便又省事。</em></strong></p>
 <h2 id="3-运行项目"><a href="#3-运行项目" class="headerlink" title="3.运行项目"></a>3.运行项目</h2><p>将/frontend 自己的项目引入pycharm编辑器中<br>进入test_auto/test/test_suite/sample目录，选择suite_sample_create.py或suite_sample_manage.py点击运行即可</p>
 <p>如下图，运行Sample Manage页面的自动化测试<br><img src="/assets/selenium1-5.png" alt=""></p>
 <p>自动打开登录页面<br><img src="/assets/selenium1-6.png" alt=""></p>
@@ -557,8 +558,19 @@
 <p>执行完成后，结果如下：<br><img src="/assets/selenium1-8.png" alt=""></p>
 <p>打开HTML结果报告<br><img src="/assets/selenium1-9.png" alt=""></p>
 <h2 id="4-项目解析"><a href="#4-项目解析" class="headerlink" title="4.项目解析"></a>4.项目解析</h2><p><img src="/assets/selenium1-10.png" alt=""></p>
-<p>自动化测试的作用：特别是在回归测试中作用发挥巨大，能帮助我们节省很多的时间和精力，节约成本。<br><strong><em>其实一个好的自动化测试项目应该有一个好的项目结构，相比于自动化测试工具，我认为项目结构更为重要，项目结构设计的好坏直接影响项目的可扩展性和维护性，也就是测试对象无论怎么变化，作为对应的自动化测试维护工作都应该尽可能少，且不影响测试结果的正确性。</em></strong><br><strong>（自动化测试项目其实应该是个独立的项目，与各分支无关，不应跟在项目的某个分支下面，这里为了图方便与分支搅在了一起。）</strong></p>
-<p>以下是我们的项目结构：<br>.<br>├── /common/ # 公共函数目录<br>├── /config/ # 系统配置<br>├── /db/ # 数据库连接目录<br>├── /log/ # 日志函数目录<br>├── /test/ # 测试目录<br>│ ├── /test_data/ # 测试数据<br>│ ├── /test_page/ # 测试逻辑<br>│ ├── /test_suite/ # 测试入口</p>
+<p>自动化测试的作用：特别是在回归测试中作用发挥巨大，能帮助我们节省很多的时间和精力，节约成本。<br><strong>其实一个好的自动化测试项目应该有一个好的项目结构，相比于自动化测试工具，我认为项目结构更为重要，项目结构设计的好坏直接影响项目的可扩展性和维护性，也就是测试对象无论怎么变化，作为对应的自动化测试维护工作都应该尽可能少，且不影响测试结果的正确性。</strong><br><strong>（自动化测试项目其实应该是个独立的项目，与各分支无关，不应跟在项目的某个分支下面，这里为了图方便与分支搅在了一起。）</strong></p>
+<p>以下是我们的项目结构：</p>
+<ul>
+<li>[] .</li>
+<li>[] ├── /common/ # 公共函数目录</li>
+<li>[] ├── /config/ # 系统配置</li>
+<li>[] ├── /db/ # 数据库连接目录</li>
+<li>[] ├── /log/ # 日志函数目录</li>
+<li>[] ├── /test/ # 测试目录</li>
+<li>[] │ ├── /test_data/ # 测试数据</li>
+<li>[] │ ├── /test_page/ # 测试逻辑</li>
+<li>[] │ ├── /test_suite/ # 测试入口</li>
+</ul>
 <p>其中/test作为项目的源码，将测试的数据，逻辑，运行入口进行分离。以页面作为测试对象，以页面操作场景作为最小测试单位（如新建场景，修改场景，查询场景等）</p>
 <h4 id="1）-test-data-存放查找页面元素css和各页面的测试用例"><a href="#1）-test-data-存放查找页面元素css和各页面的测试用例" class="headerlink" title="1）/test_data 存放查找页面元素css和各页面的测试用例"></a>1）/test_data 存放查找页面元素css和各页面的测试用例</h4><p><img src="/assets/selenium1-11.png" alt=""></p>
 <h4 id="2）-test-page-存放各页面操作场景的逻辑"><a href="#2）-test-page-存放各页面操作场景的逻辑" class="headerlink" title="2）/test_page 存放各页面操作场景的逻辑"></a>2）/test_page 存放各页面操作场景的逻辑</h4><p><img src="/assets/selenium1-12.png" alt=""></p>
