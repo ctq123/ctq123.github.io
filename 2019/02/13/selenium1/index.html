@@ -151,7 +151,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/selenium1-11.png">
 <meta property="og:image" content="http://yoursite.com/assets/selenium1-12.png">
 <meta property="og:image" content="http://yoursite.com/assets/selenium1-13.png">
-<meta property="og:updated_time" content="2019-02-13T03:11:30.201Z">
+<meta property="og:updated_time" content="2019-02-13T03:12:40.071Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自动化测试入门篇">
 <meta name="twitter:description" content="前言在使用selenium+python实践过自动化测试项目一段时间后，决定将此实践过程记录下来，以便后来的学习者提供借鉴。这里的例子基于h5archetype项目  自动化测试的工具有很多，selenium+python只是其中的一种组合方式，不必纠结于使用什么测试工具，关键看你怎么利用好这些工具  1.环境准备1-1）selenium 测试框架（必须）1-2）python36 编程语言（必须）">
@@ -460,7 +460,7 @@
                 
               
 
-              <time title="创建时间：2019-02-13 10:28:33 / 修改时间：11:11:30" itemprop="dateCreated datePublished" datetime="2019-02-13T10:28:33+08:00">2019-02-13</time>
+              <time title="创建时间：2019-02-13 10:28:33 / 修改时间：11:12:40" itemprop="dateCreated datePublished" datetime="2019-02-13T10:28:33+08:00">2019-02-13</time>
             
 
             
@@ -561,15 +561,15 @@
 <p>自动化测试的作用：特别是在回归测试中作用发挥巨大，能帮助我们节省很多的时间和精力，节约成本。<br><strong>其实一个好的自动化测试项目应该有一个好的项目结构，相比于自动化测试工具，我认为项目结构更为重要，项目结构设计的好坏直接影响项目的可扩展性和维护性，也就是测试对象无论怎么变化，作为对应的自动化测试维护工作都应该尽可能少，且不影响测试结果的正确性。</strong><br><strong>（自动化测试项目其实应该是个独立的项目，与各分支无关，不应跟在项目的某个分支下面，这里为了图方便与分支搅在了一起。）</strong></p>
 <p>以下是我们的项目结构：</p>
 <ul>
-<li>[] .</li>
-<li>[] ├── /common/ # 公共函数目录</li>
-<li>[] ├── /config/ # 系统配置</li>
-<li>[] ├── /db/ # 数据库连接目录</li>
-<li>[] ├── /log/ # 日志函数目录</li>
-<li>[] ├── /test/ # 测试目录</li>
-<li>[] │ ├── /test_data/ # 测试数据</li>
-<li>[] │ ├── /test_page/ # 测试逻辑</li>
-<li>[] │ ├── /test_suite/ # 测试入口</li>
+<li style="list-style: none"><input type="checkbox"> .</li>
+<li style="list-style: none"><input type="checkbox"> ├── /common/ # 公共函数目录</li>
+<li style="list-style: none"><input type="checkbox"> ├── /config/ # 系统配置</li>
+<li style="list-style: none"><input type="checkbox"> ├── /db/ # 数据库连接目录</li>
+<li style="list-style: none"><input type="checkbox"> ├── /log/ # 日志函数目录</li>
+<li style="list-style: none"><input type="checkbox"> ├── /test/ # 测试目录</li>
+<li style="list-style: none"><input type="checkbox"> │ ├── /test_data/ # 测试数据</li>
+<li style="list-style: none"><input type="checkbox"> │ ├── /test_page/ # 测试逻辑</li>
+<li style="list-style: none"><input type="checkbox"> │ ├── /test_suite/ # 测试入口</li>
 </ul>
 <p>其中/test作为项目的源码，将测试的数据，逻辑，运行入口进行分离。以页面作为测试对象，以页面操作场景作为最小测试单位（如新建场景，修改场景，查询场景等）</p>
 <h3 id="1）-test-data-存放查找页面元素css和各页面的测试用例"><a href="#1）-test-data-存放查找页面元素css和各页面的测试用例" class="headerlink" title="1）/test_data 存放查找页面元素css和各页面的测试用例"></a>1）/test_data 存放查找页面元素css和各页面的测试用例</h3><p><img src="/assets/selenium1-11.png" alt=""></p>
