@@ -961,6 +961,481 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/11/css-flex-layout/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/12124169?s=400&u=39badfedffc31671546ee6843bfcc3ff1fce2df0&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/11/css-flex-layout/" class="post-title-link" itemprop="http://yoursite.com/index.html">css之flex布局</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-11 11:04:49" itemprop="dateCreated datePublished" datetime="2019-02-11T11:04:49+08:00">2019-02-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-02-20 19:49:39" itemprop="dateModified" datetime="2019-02-20T19:49:39+08:00">2019-02-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><blockquote>
+<p>我们知道一切dom元素对css而言都是一个盒子，css正是以盒子模型为基础进行渲染CSSDom，而页面布局一直是css一个应用重点，那么如何通过css实现水平居中和垂直居中？<br>相信实现的方法有很多，如table，float等，但它们都有各自的缺陷。然而当flex出现后，一切都变得相当的简约而不简单，优雅而不优越，因为它也存在兼容性问题。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.centerContainer</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>它的子元素就是水平和垂直居中，浏览器兼容性方面：IE10+  <a href="https://caniuse.com/#search=flex" target="_blank" rel="noopener"><strong><em>详情点击这里</em></strong></a></p>
+</blockquote>
+<h2 id="2、概念"><a href="#2、概念" class="headerlink" title="2、概念"></a>2、概念</h2><p>flex由两个核心概念构成：容器和轴。容器包括父容器和子容器，轴分为主轴和交叉轴（即以横轴为主轴时，纵轴为交叉轴；以纵轴为主轴时，横轴为交叉轴；交叉轴=主轴逆时针90度）。flex属性一共有12个，父容器和子容器对应的属性各6个。</p>
+<h2 id="3、属性介绍"><a href="#3、属性介绍" class="headerlink" title="3、属性介绍"></a>3、属性介绍</h2><p><strong>父容器属性</strong></p>
+<blockquote>
+<p>1) flex-direction (常用)<br>2) justify-content (常用)<br>3) align-items (常用)<br>4) align-content<br>5) flex-warp<br>6) flex-flow</p>
+</blockquote>
+<p><strong>子容器属性</strong></p>
+<blockquote>
+<p>1) align-self (常用)<br>2) flex (常用)<br>3) flex-grow<br>4) flex-shrink<br>5) flex-basis<br>6) order</p>
+</blockquote>
+<h3 id="3-1-常用属性介绍"><a href="#3-1-常用属性介绍" class="headerlink" title="3.1.常用属性介绍"></a>3.1.常用属性介绍</h3><h4 id="1-flex-direction"><a href="#1-flex-direction" class="headerlink" title="1) flex-direction"></a>1) flex-direction</h4><p>功能：flex-direction属性用于确定主轴的方向（等同于确定了交叉轴的方向）<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-direction</span>: row | row-reverse | column | column-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>row</td>
+<td>主轴为水平方向，起点在左端（默认值）</td>
+</tr>
+<tr>
+<td>row-reverse</td>
+<td>主轴为水平方向，起点在右端</td>
+</tr>
+<tr>
+<td>column</td>
+<td>主轴为垂直方向，起点在上</td>
+</tr>
+<tr>
+<td>column-reverse</td>
+<td>主轴为垂直方向，起点在下</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-justify-content"><a href="#2-justify-content" class="headerlink" title="2) justify-content"></a>2) justify-content</h4><p>功能：justify-content属性用于定义如何沿着主轴方向排列子容器（主轴）<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: flex-start | flex-end | center | space-between | space-around;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/assets/css-flex-1.png" alt=""><br><img src="/assets/css-flex-2.png" alt=""><br><img src="/assets/css-flex-3.png" alt=""><br><img src="/assets/css-flex-4.png" alt=""><br><img src="/assets/css-flex-5.png" alt=""><br>图片作者：osimly</p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>flex-start</td>
+<td>左对齐（默认值）</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td>右对齐</td>
+</tr>
+<tr>
+<td>center</td>
+<td>居中</td>
+</tr>
+<tr>
+<td>space-between</td>
+<td>两端对齐，子容器之间间隔相等</td>
+</tr>
+<tr>
+<td>space-around</td>
+<td>均匀分布，首尾两端的子容器到父容器的距离是子容器间距的一半</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-align-items"><a href="#3-align-items" class="headerlink" title="3) align-items"></a>3) align-items</h4><p>功能：align-items属性用于定义如何沿着交叉轴方向排列子容器（交叉轴）<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>flex-start</td>
+<td>起始端对齐（默认值）</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td>末尾端对齐</td>
+</tr>
+<tr>
+<td>center</td>
+<td>居中</td>
+</tr>
+<tr>
+<td>baseline</td>
+<td>基线对齐，即默认指首行文字为基线</td>
+</tr>
+<tr>
+<td>stretch</td>
+<td>拉伸对齐，子容器与父容器（高度/宽度）一致，相对于交叉轴方向而言</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4-align-self"><a href="#4-align-self" class="headerlink" title="4) align-self"></a>4) align-self</h4><p>功能：align-self属性用于定义每个子容器自身如何沿着交叉轴方向排列（交叉轴），注意与align-items区别</p>
+<blockquote>
+<p>align-self属性与align-items属性一致，若是一个子容器同时被定义了align-items和align-self，以align-self属性值为准。<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>flex-start</td>
+<td>起始端对齐（默认值）</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td>末尾端对齐</td>
+</tr>
+<tr>
+<td>center</td>
+<td>居中</td>
+</tr>
+<tr>
+<td>baseline</td>
+<td>基线对齐，即默认指首行文字为基线</td>
+</tr>
+<tr>
+<td>stretch</td>
+<td>拉伸对齐，子容器与父容器（高度/宽度）一致，相对于交叉轴方向而言</td>
+</tr>
+</tbody>
+</table>
+<h4 id="5-flex"><a href="#5-flex" class="headerlink" title="5) flex"></a>5) flex</h4><p>功能：flex是一个复合属性，用于定义子容器自身的的伸缩比例，它是flex-grow,flex-shrink和flex-basis属性的缩写<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">1</span> auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 1 auto</td>
+<td>flex-grow,flex-shrink和flex-basis属性的缩写，具体查看这三个属性的说明（默认值）</td>
+</tr>
+<tr>
+<td>none</td>
+<td>0 0 auto （flex属性值允许1个或2个或3个属性的连用）</td>
+</tr>
+</tbody>
+</table>
+<p>常用的flex属性基本就这5个，掌握这5个属性之后，一般场景下的布局设置可以基本实现了。倘若需要满足其他特殊的布局，那么就有必要进一步了解其他7个属性了。</p>
+<h3 id="3-2-进阶属性介绍"><a href="#3-2-进阶属性介绍" class="headerlink" title="3.2.进阶属性介绍"></a>3.2.进阶属性介绍</h3><h4 id="1-flex-wrap"><a href="#1-flex-wrap" class="headerlink" title="1) flex-wrap"></a>1) flex-wrap</h4><p>功能：flex-wrap属性用于确定子容器是否需要换行<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nowrap</td>
+<td>不换行（默认值）</td>
+</tr>
+<tr>
+<td>wrap</td>
+<td>换行</td>
+</tr>
+<tr>
+<td>wrap-reverse</td>
+<td>逆向换行</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-flex-flow"><a href="#2-flex-flow" class="headerlink" title="2) flex-flow"></a>2) flex-flow</h4><p>功能：flex-flow是一个复合属性，用于确定子容器的主轴方向和换行，是flex-direction和flex-wrap的组合<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-flow</span>: row nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>row nowrap</td>
+<td>左起水平方向主轴，且不换行（默认值）</td>
+</tr>
+<tr>
+<td>row</td>
+<td>左起水平方向主轴。（flex的复合属性，都可以单独设置）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-align-content"><a href="#3-align-content" class="headerlink" title="3) align-content"></a>3) align-content</h4><p>功能：align-content属性用于确定子容器多行排列时，行与行之间的对齐方式（交叉轴），注意与align-items区别</p>
+<blockquote>
+<p>align-items针对单行子容器在交叉轴上的排列，而align-content则针对多行子容器在交叉轴上的排列方式<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-content</span>: flex-start | flex-end | center | space-between | space-around | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>flex-start</td>
+<td>起始端对齐（默认值）</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td>末尾端对齐</td>
+</tr>
+<tr>
+<td>center</td>
+<td>居中</td>
+</tr>
+<tr>
+<td>space-around</td>
+<td>等边距均匀分布, 首尾两端的子容器到父容器的距离是子容器间距的一半</td>
+</tr>
+<tr>
+<td>space-between</td>
+<td>等间距均匀分布, 子容器之间的间距相等</td>
+</tr>
+<tr>
+<td>stretch</td>
+<td>拉伸对齐，多行子容器交叉轴方向长度相同，填满父容器</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4-flex-basis"><a href="#4-flex-basis" class="headerlink" title="4) flex-basis"></a>4) flex-basis</h4><p>功能：flex-basis属性用于确定子容器自身在主轴方向的原始尺寸<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-basis</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100px</td>
+<td>子容器的原始宽度为100px（flex-direction默认为row，因此为宽度）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="5-flex-grow"><a href="#5-flex-grow" class="headerlink" title="5) flex-grow"></a>5) flex-grow</h4><p>功能：flex-grow属性用于确定子容器自身在主轴方向的扩展比例<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box1</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-basis</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box2</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-basis</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">flex-grow</span>: <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>都是相对父容器而言，如上box1和box2为兄弟节点，父节点box宽度为500px，那么计算公式为：box.width = box1.width + box2.width = (100 + 1x) + (100 + 2x) = 500；即box1.width = 200px, box2.width = 300px;</td>
+</tr>
+</tbody>
+</table>
+<h4 id="6-flex-shrink"><a href="#6-flex-shrink" class="headerlink" title="6) flex-shrink"></a>6) flex-shrink</h4><p>功能：flex-shrink属性用于确定子容器自身在主轴方向的收缩比例，注意与flex-grow的区别</p>
+<blockquote>
+<p>flex-grow属性是伸展，flex-shrink属性是收缩<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box1</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-basis</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box2</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-basis</span>: <span class="number">600px</span>;</span><br><span class="line">  <span class="attribute">flex-shrink</span>: <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>都是相对父容器而言，如上box1和box2为兄弟节点，父节点box宽度为300px，那么计算公式为：box.width = box1.width + box2.width = (300-x)+(600-2x) = 300；即box1.width = 100px, box2.width = 200px;</td>
+</tr>
+</tbody>
+</table>
+<h4 id="7-order"><a href="#7-order" class="headerlink" title="7) order"></a>7) order</h4><p>功能：order属性用于确定子容器自身在主轴方向的排列序号<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box1</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">order</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>排列的序号，值越小越靠前，允许为负值（默认值）;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><p>flex的每一个属性都是围绕着容器和轴两个概念而进行描述的。<br>flex有两个复合属性，复合属性允许设置单个属性和多个属性<br>align-self属性与align-items属性值相同，但两者设置的位置不同，前者在子容器中设置子容器自身属性，后者在父容器中设置子容器的属性，因此当同时设置子容器的属性时，以align-self的属性值为准<br>常用的属性如下：<strong><em>flex-direction, justify-content, align-items, align-self, flex</em></strong><br>进阶的属性如下：<strong><em>align-content, flex-warp, flex-flow, flex-grow, flex-shrink, flex-basis, order</em></strong><br>复合属性如下：<strong><em>flex-flow, flex</em></strong></p>
+<p><strong>参考</strong><br><strong><em>一劳永逸的搞定 flex 布局：<a href="https://juejin.im/post/58e3a5a0a0bb9f0069fc16bb" target="_blank" rel="noopener">https://juejin.im/post/58e3a5a0a0bb9f0069fc16bb</a></em></strong><br><strong><em>Flex 布局教程：语法篇：<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></em></strong></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/28/jmeter4/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1435,480 +1910,6 @@
 <p><strong>2.同一线程组，不同轮http请求执行顺序，与线程组的启动时间有关；</strong></p>
 <p><strong>2-1）若启动时间远大于执行完一轮所需的时间，那么每一轮都会按步就班执行；</strong></p>
 <p><strong>2-2）若启动时间小于执行每一轮所需的时间，那么其他线程就会直接抢占cpu资源，先执行</strong></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/16/css-flex-layout/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/12124169?s=400&u=39badfedffc31671546ee6843bfcc3ff1fce2df0&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Alan's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/16/css-flex-layout/" class="post-title-link" itemprop="http://yoursite.com/index.html">css之flex布局</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-16 17:17:25" itemprop="dateCreated datePublished" datetime="2019-01-16T17:17:25+08:00">2019-01-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-01-28 10:55:09" itemprop="dateModified" datetime="2019-01-28T10:55:09+08:00">2019-01-28</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><blockquote>
-<p>我们知道一切dom元素对css而言都是一个盒子，css正是以盒子模型为基础进行渲染CSSDom，而页面布局一直是css一个应用重点，那么如何通过css实现水平居中和垂直居中？<br>相信实现的方法有很多，如table，float等，但它们都有各自的缺陷。然而当flex出现后，一切都变得相当的简约而不简单，优雅而不优越，因为它也存在兼容性问题。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.centerContainer</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>它的子元素就是水平和垂直居中，浏览器兼容性方面：IE10+  <a href="https://caniuse.com/#search=flex" target="_blank" rel="noopener"><strong><em>详情点击这里</em></strong></a></p>
-</blockquote>
-<h2 id="2、概念"><a href="#2、概念" class="headerlink" title="2、概念"></a>2、概念</h2><p>flex由两个核心概念构成：容器和轴。容器包括父容器和子容器，轴分为主轴和交叉轴（即以横轴为主轴时，纵轴为交叉轴；以纵轴为主轴时，横轴为交叉轴；交叉轴=主轴逆时针90度）。flex属性一共有12个，父容器和子容器对应的属性各6个。</p>
-<h2 id="3、属性介绍"><a href="#3、属性介绍" class="headerlink" title="3、属性介绍"></a>3、属性介绍</h2><p><strong>父容器属性</strong></p>
-<blockquote>
-<p>1) flex-direction (常用)<br>2) justify-content (常用)<br>3) align-items (常用)<br>4) align-content<br>5) flex-warp<br>6) flex-flow</p>
-</blockquote>
-<p><strong>子容器属性</strong></p>
-<blockquote>
-<p>1) align-self (常用)<br>2) flex (常用)<br>3) flex-grow<br>4) flex-shrink<br>5) flex-basis<br>6) order</p>
-</blockquote>
-<h3 id="3-1-常用属性介绍"><a href="#3-1-常用属性介绍" class="headerlink" title="3.1.常用属性介绍"></a>3.1.常用属性介绍</h3><h4 id="1-flex-direction"><a href="#1-flex-direction" class="headerlink" title="1) flex-direction"></a>1) flex-direction</h4><p>功能：flex-direction属性用于确定主轴的方向（等同于确定了交叉轴的方向）<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-direction</span>: row | row-reverse | column | column-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>row</td>
-<td>主轴为水平方向，起点在左端（默认值）</td>
-</tr>
-<tr>
-<td>row-reverse</td>
-<td>主轴为水平方向，起点在右端</td>
-</tr>
-<tr>
-<td>column</td>
-<td>主轴为垂直方向，起点在上</td>
-</tr>
-<tr>
-<td>column-reverse</td>
-<td>主轴为垂直方向，起点在下</td>
-</tr>
-</tbody>
-</table>
-<h4 id="2-justify-content"><a href="#2-justify-content" class="headerlink" title="2) justify-content"></a>2) justify-content</h4><p>功能：justify-content属性用于定义如何沿着主轴方向排列子容器（主轴）<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: flex-start | flex-end | center | space-between | space-around;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>flex-start</td>
-<td>左对齐（默认值）</td>
-</tr>
-<tr>
-<td>flex-end</td>
-<td>右对齐</td>
-</tr>
-<tr>
-<td>center</td>
-<td>居中</td>
-</tr>
-<tr>
-<td>space-between</td>
-<td>两端对齐，子容器之间间隔相等</td>
-</tr>
-<tr>
-<td>space-around</td>
-<td>均匀分布，首尾两端的子容器到父容器的距离是子容器间距的一半</td>
-</tr>
-</tbody>
-</table>
-<h4 id="3-align-items"><a href="#3-align-items" class="headerlink" title="3) align-items"></a>3) align-items</h4><p>功能：align-items属性用于定义如何沿着交叉轴方向排列子容器（交叉轴）<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>flex-start</td>
-<td>起始端对齐（默认值）</td>
-</tr>
-<tr>
-<td>flex-end</td>
-<td>末尾端对齐</td>
-</tr>
-<tr>
-<td>center</td>
-<td>居中</td>
-</tr>
-<tr>
-<td>baseline</td>
-<td>基线对齐，即默认指首行文字为基线</td>
-</tr>
-<tr>
-<td>stretch</td>
-<td>拉伸对齐，子容器与父容器（高度/宽度）一致，相对于交叉轴方向而言</td>
-</tr>
-</tbody>
-</table>
-<h4 id="4-align-self"><a href="#4-align-self" class="headerlink" title="4) align-self"></a>4) align-self</h4><p>功能：align-self属性用于定义每个子容器自身如何沿着交叉轴方向排列（交叉轴），注意与align-items区别</p>
-<blockquote>
-<p>align-self属性与align-items属性一致，若是一个子容器同时被定义了align-items和align-self，以align-self属性值为准。<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>flex-start</td>
-<td>起始端对齐（默认值）</td>
-</tr>
-<tr>
-<td>flex-end</td>
-<td>末尾端对齐</td>
-</tr>
-<tr>
-<td>center</td>
-<td>居中</td>
-</tr>
-<tr>
-<td>baseline</td>
-<td>基线对齐，即默认指首行文字为基线</td>
-</tr>
-<tr>
-<td>stretch</td>
-<td>拉伸对齐，子容器与父容器（高度/宽度）一致，相对于交叉轴方向而言</td>
-</tr>
-</tbody>
-</table>
-<h4 id="5-flex"><a href="#5-flex" class="headerlink" title="5) flex"></a>5) flex</h4><p>功能：flex是一个复合属性，用于定义子容器自身的的伸缩比例，它是flex-grow,flex-shrink和flex-basis属性的缩写<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">1</span> auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0 1 auto</td>
-<td>flex-grow,flex-shrink和flex-basis属性的缩写，具体查看这三个属性的说明（默认值）</td>
-</tr>
-<tr>
-<td>none</td>
-<td>0 0 auto （flex属性值允许1个或2个或3个属性的连用）</td>
-</tr>
-</tbody>
-</table>
-<p>常用的flex属性基本就这5个，掌握这5个属性之后，一般场景下的布局设置可以基本实现了。倘若需要满足其他特殊的布局，那么就有必要进一步了解其他7个属性了。</p>
-<h3 id="3-2-进阶属性介绍"><a href="#3-2-进阶属性介绍" class="headerlink" title="3.2.进阶属性介绍"></a>3.2.进阶属性介绍</h3><h4 id="1-flex-wrap"><a href="#1-flex-wrap" class="headerlink" title="1) flex-wrap"></a>1) flex-wrap</h4><p>功能：flex-wrap属性用于确定子容器是否需要换行<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>nowrap</td>
-<td>不换行（默认值）</td>
-</tr>
-<tr>
-<td>wrap</td>
-<td>换行</td>
-</tr>
-<tr>
-<td>wrap-reverse</td>
-<td>逆向换行</td>
-</tr>
-</tbody>
-</table>
-<h4 id="2-flex-flow"><a href="#2-flex-flow" class="headerlink" title="2) flex-flow"></a>2) flex-flow</h4><p>功能：flex-flow是一个复合属性，用于确定子容器的主轴方向和换行，是flex-direction和flex-wrap的组合<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-flow</span>: row nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>row nowrap</td>
-<td>左起水平方向主轴，且不换行（默认值）</td>
-</tr>
-<tr>
-<td>row</td>
-<td>左起水平方向主轴。（flex的复合属性，都可以单独设置）</td>
-</tr>
-</tbody>
-</table>
-<h4 id="3-align-content"><a href="#3-align-content" class="headerlink" title="3) align-content"></a>3) align-content</h4><p>功能：align-content属性用于确定子容器多行排列时，行与行之间的对齐方式（交叉轴），注意与align-items区别</p>
-<blockquote>
-<p>align-items针对单行子容器在交叉轴上的排列，而align-content则针对多行子容器在交叉轴上的排列方式<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-content</span>: flex-start | flex-end | center | space-between | space-around | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>flex-start</td>
-<td>起始端对齐（默认值）</td>
-</tr>
-<tr>
-<td>flex-end</td>
-<td>末尾端对齐</td>
-</tr>
-<tr>
-<td>center</td>
-<td>居中</td>
-</tr>
-<tr>
-<td>space-around</td>
-<td>等边距均匀分布, 首尾两端的子容器到父容器的距离是子容器间距的一半</td>
-</tr>
-<tr>
-<td>space-between</td>
-<td>等间距均匀分布, 子容器之间的间距相等</td>
-</tr>
-<tr>
-<td>stretch</td>
-<td>拉伸对齐，多行子容器交叉轴方向长度相同，填满父容器</td>
-</tr>
-</tbody>
-</table>
-<h4 id="4-flex-basis"><a href="#4-flex-basis" class="headerlink" title="4) flex-basis"></a>4) flex-basis</h4><p>功能：flex-basis属性用于确定子容器自身在主轴方向的原始尺寸<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-basis</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>100px</td>
-<td>子容器的原始宽度为100px（flex-direction默认为row，因此为宽度）</td>
-</tr>
-</tbody>
-</table>
-<h4 id="5-flex-grow"><a href="#5-flex-grow" class="headerlink" title="5) flex-grow"></a>5) flex-grow</h4><p>功能：flex-grow属性用于确定子容器自身在主轴方向的扩展比例<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box1</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-basis</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">flex-grow</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box2</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-basis</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">flex-grow</span>: <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>都是相对父容器而言，如上box1和box2为兄弟节点，父节点box宽度为500px，那么计算公式为：box.width = box1.width + box2.width = (100 + 1x) + (100 + 2x) = 500；即box1.width = 200px, box2.width = 300px;</td>
-</tr>
-</tbody>
-</table>
-<h4 id="6-flex-shrink"><a href="#6-flex-shrink" class="headerlink" title="6) flex-shrink"></a>6) flex-shrink</h4><p>功能：flex-shrink属性用于确定子容器自身在主轴方向的收缩比例，注意与flex-grow的区别</p>
-<blockquote>
-<p>flex-grow属性是伸展，flex-shrink属性是收缩<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box1</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-basis</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box2</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-basis</span>: <span class="number">600px</span>;</span><br><span class="line">  <span class="attribute">flex-shrink</span>: <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>都是相对父容器而言，如上box1和box2为兄弟节点，父节点box宽度为300px，那么计算公式为：box.width = box1.width + box2.width = (300-x)+(600-2x) = 300；即box1.width = 100px, box2.width = 200px;</td>
-</tr>
-</tbody>
-</table>
-<h4 id="7-order"><a href="#7-order" class="headerlink" title="7) order"></a>7) order</h4><p>功能：order属性用于确定子容器自身在主轴方向的排列序号<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box1</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">order</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>排列的序号，值越小越靠前，允许为负值（默认值）;</td>
-</tr>
-</tbody>
-</table>
-<h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><p>flex的每一个属性都是围绕着容器和轴两个概念而进行描述的。<br>flex有两个复合属性，复合属性允许设置单个属性和多个属性<br>align-self属性与align-items属性值相同，但两者设置的位置不同，前者在子容器中设置子容器自身属性，后者在父容器中设置子容器的属性，因此当同时设置子容器的属性时，以align-self的属性值为准<br>常用的属性如下：<strong><em>flex-direction, justify-content, align-items, align-self, flex</em></strong><br>进阶的属性如下：<strong><em>align-content, flex-warp, flex-flow, flex-grow, flex-shrink, flex-basis, order</em></strong><br>复合属性如下：<strong><em>flex-flow, flex</em></strong></p>
-<p><strong>参考</strong><br><strong><em>一劳永逸的搞定 flex 布局：<a href="https://juejin.im/post/58e3a5a0a0bb9f0069fc16bb" target="_blank" rel="noopener">https://juejin.im/post/58e3a5a0a0bb9f0069fc16bb</a></em></strong><br><strong><em>Flex 布局教程：语法篇：<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></em></strong></p>
 
           
         
