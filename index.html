@@ -1023,7 +1023,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-02-21 11:02:34" itemprop="dateModified" datetime="2019-02-21T11:02:34+08:00">2019-02-21</time>
+                <time title="修改时间：2019-02-21 11:07:51" itemprop="dateModified" datetime="2019-02-21T11:07:51+08:00">2019-02-21</time>
               
             
           </span>
@@ -1185,8 +1185,9 @@
 <p>效果：（效果图作者：osimly）<br><img src="/assets/css-flex-11.png" alt=""><br><img src="/assets/css-flex-12.png" alt=""><br><img src="/assets/css-flex-13.png" alt=""><br><img src="/assets/css-flex-14.png" alt=""><br><img src="/assets/css-flex-15.png" alt=""></p>
 <h4 id="4-align-self"><a href="#4-align-self" class="headerlink" title="4) align-self"></a>4) align-self</h4><p>功能：align-self属性用于定义每个子容器自身如何沿着交叉轴方向排列（交叉轴），注意与align-items区别</p>
 <blockquote>
-<p>align-self属性与align-items属性一致，若是一个子容器同时被定义了align-items和align-self，以align-self属性值为准。<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>align-self属性与align-items属性一致，若是一个子容器同时被定义了align-items和align-self，以align-self属性值为准。</p>
 </blockquote>
+<p>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <table>
 <thead>
 <tr>
@@ -1284,8 +1285,9 @@
 </table>
 <h4 id="3-align-content"><a href="#3-align-content" class="headerlink" title="3) align-content"></a>3) align-content</h4><p>功能：align-content属性用于确定子容器多行排列时，行与行之间的对齐方式（交叉轴），注意与align-items区别</p>
 <blockquote>
-<p>align-items针对单行子容器在交叉轴上的排列，而align-content则针对多行子容器在交叉轴上的排列方式<br>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-content</span>: flex-start | flex-end | center | space-between | space-around | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>align-items针对单行子容器在交叉轴上的排列，而align-content则针对多行子容器在交叉轴上的排列方式</p>
 </blockquote>
+<p>使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-content</span>: flex-start | flex-end | center | space-between | space-around | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <table>
 <thead>
 <tr>
@@ -1348,7 +1350,7 @@
 <tbody>
 <tr>
 <td>1</td>
-<td>都是相对父容器而言，如上box1和box2为兄弟节点，父节点box宽度为500px，那么计算公式为：box.width = box1.width + box2.width = (120 + 1x) + (120 + 2x) = 480；即box1.width = 200px, box2.width = 280px;</td>
+<td>都是相对父容器而言，如上box1和box2为兄弟节点，父节点box宽度为480px，那么计算公式为：box.width = box1.width + box2.width = (120 + 1x) + (120 + 2x) = 480；即box1.width = 200px, box2.width = 280px;</td>
 </tr>
 </tbody>
 </table>
