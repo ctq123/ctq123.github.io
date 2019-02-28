@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[随手笔记]]></title>
     <url>%2F2019%2F02%2F28%2Ftake-notes%2F</url>
-    <content type="text"><![CDATA[1.图表绘制底层Canvas, SVG, VML的对比，各适用场景1.性能对比：Canvas的性能受画布尺寸大小影响更大，SVG的性能受图形元素个数影响更大；2.适用场景：2-1）Canvas可以轻松应对大量数据和特效展现的场景；2-2）SVG可以在移动端展示，使其不再为内存而担忧；2-3）VML可以兼容低版本IE；]]></content>
+    <content type="text"><![CDATA[1.图表绘制底层Canvas, SVG, VML的对比，各适用场景1.性能对比：Canvas的性能受画布尺寸大小影响更大，SVG的性能受图形元素个数影响更大；2.适用场景：2-1）Canvas可以轻松应对大量数据和动态特效展现的场景；2-2）SVG可以在移动端展示，使其不再为内存而担忧；2-3）VML可以兼容低版本IE；]]></content>
       <categories>
         <category>javascript</category>
       </categories>
