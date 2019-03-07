@@ -27,7 +27,7 @@
   <entry>
     <title><![CDATA[高性能JavaScript读书笔记]]></title>
     <url>%2F2019%2F02%2F12%2Fhpjavascript8-1%2F</url>
-    <content type="text"><![CDATA[1、js如何将十进制的数字转换成二进制？使用toString(2)进行转换即可，例如：12var num = 8;console.log(num.toString(2)); // "1000" 2、如何获取当前页面有多少个dom节点数？1console.log(document.getElementsByTagName('*').length); // "1000"]]></content>
+    <content type="text"><![CDATA[1、js如何将十进制的数字转换成二进制？使用toString(2)进行转换即可，例如：12var num = 8;console.log(num.toString(2)); // "1000" 2、如何获取当前页面有多少个dom节点数？1console.log(document.getElementsByTagName('*').length); // "1000" 3、js打印函数方法运行时长1234567// 启动计时器console.time('testForTime');// 运行程序……// 停止计时console.timeEnd('testForTime')// 4343.123ms]]></content>
       <categories>
         <category>javascript</category>
       </categories>
