@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[js实现鼠标可拖拽的div]]></title>
     <url>%2F2019%2F03%2F12%2Fjs-drag-div%2F</url>
-    <content type="text"><![CDATA[1、背景最近公司项目的一项功能，是基于一个可拖拽的div基础上实现其业务逻辑的。经过探索，有两种实现方式，分别是基于mousedown和drag技术实现的。下面把遇到的一些坑记录下来，希望对小伙伴们有帮助^-^ 2、基于mousedown技术3、基于drag技术4、总结]]></content>
+    <content type="text"><![CDATA[1、背景最近公司项目的一项功能，是基于一个可拖拽的div基础上实现其业务逻辑的。经过探索，有两种实现方式，分别是基于mousedown和drag技术实现的。下面把遇到的一些坑记录下来，希望对小伙伴们有帮助^-^ 2、基于mousedown技术这种技术是目前网络中较为“流行”的技术，意思就是随便google一下，网络上就会有一大堆，然而这种技术在某些应用场景下会存在一些不可避免的缺陷，下面会讲到。12345678910111213141516171819202122232425262728293031323334353637class TestTab extends Component &#123; constructor (props) &#123; super(props) this.state = &#123; x: 0, y: 0 &#125; &#125; handleOnMouseDown (e) &#123; e.preventDefault() document.onmousemove = (ev) =&gt; &#123; ev.preventDefault() this.setState(&#123; x: ev.clientX, y: ev.clientY &#125;) &#125; document.onmouseup = (ev) =&gt; &#123; ev.preventDefault() document.onmousemove = null document.onmouseup = null &#125; &#125; render () &#123; const &#123; x, y &#125; = this.state return ( &lt;div className='parent' style=&#123;&#123; left: x, top: y &#125;&#125; onMouseDown=&#123;e =&gt; this.handleOnMouseDown(e)&#125;&gt; &lt;div className='child' style=&#123;&#123; 'height': '200px', 'width': '300px', 'border': '1px solid red' &#125;&#125;&gt; &lt;/div&gt; &lt;/div&gt; ) &#125;&#125; 上述便可实现最简单的拖拽效果 然而，上面会出现这样一个问题，正常业务中，拖拽往往只能限制在一定地区域内拖拽，比如不能拖拽出window窗口(调试模式下)，不能拖出某个区域。 3、基于drag技术4、总结]]></content>
       <categories>
         <category>javascript</category>
       </categories>
