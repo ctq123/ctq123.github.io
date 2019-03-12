@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[js实现鼠标可拖拽的div]]></title>
     <url>%2F2019%2F03%2F12%2Fjs-drag-div%2F</url>
-    <content type="text"><![CDATA[1、背景最近公司项目的一项功能，是基于一个可拖拽的div基础上实现其业务逻辑的。经过探索，有两种实现方式，分别是基于mousedown和drag技术实现的。下面把遇到的一些坑记录下来，希望对小伙伴们有帮助^-^ 2、基于mousedown技术]]></content>
+    <content type="text"><![CDATA[1、背景最近公司项目的一项功能，是基于一个可拖拽的div基础上实现其业务逻辑的。经过探索，有两种实现方式，分别是基于mousedown和drag技术实现的。下面把遇到的一些坑记录下来，希望对小伙伴们有帮助^-^ 2、基于mousedown技术3、基于drag技术4、总结]]></content>
       <categories>
         <category>javascript</category>
       </categories>
