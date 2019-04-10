@@ -290,7 +290,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">19</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">22</span></a>
 
   </li>
         
@@ -328,7 +328,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">12</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">13</span></a>
 
   </li>
         
@@ -383,6 +383,169 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/10/take-notes.1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/12124169?s=400&u=39badfedffc31671546ee6843bfcc3ff1fce2df0&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/10/take-notes.1/" class="post-title-link" itemprop="http://yoursite.com/index.html">随手笔记</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-10 10:39:15" itemprop="dateCreated datePublished" datetime="2019-04-10T10:39:15+08:00">2019-04-10</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-图表绘制底层Canvas-SVG-VML的对比，各适用场景"><a href="#1-图表绘制底层Canvas-SVG-VML的对比，各适用场景" class="headerlink" title="1.图表绘制底层Canvas, SVG, VML的对比，各适用场景"></a>1.图表绘制底层Canvas, SVG, VML的对比，各适用场景</h2><p>1.性能对比：Canvas的性能受画布尺寸大小影响更大，SVG的性能受图形元素个数影响更大；<br>2.适用场景：<br>2-1）Canvas可以轻松应对大量数据和动态特效展现的场景；<br>2-2）SVG可以在移动端展示，使其不再为内存而担忧；<br>2-3）VML可以兼容低版本IE；</p>
+<h2 id="2-let和var区别"><a href="#2-let和var区别" class="headerlink" title="2.let和var区别"></a>2.let和var区别</h2><p>1.let定义了块级作用域，只在代码块内有效；<br>2.let在同一作用域内，不允许重复声明同一个变量，但允许在垮作用域声明同一个变量；<br>3.ES5只有全局作用域和函数作用域：</p>
+<blockquote>
+<p>全局作用域，局部作用域会覆盖全局作用域<br>函数作用域，用来计数的循环变量会泄露为全局变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i)<span class="comment">// 10</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i)<span class="comment">// 报错</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong><em>此外，for的每一次循环相当于一个新的块级作用域，var是不断覆盖老的变量（在整个for循环体内有效），而let则是声明新的变量（只在本轮循环有效）</em></strong></p>
+<h2 id="3-const变量"><a href="#3-const变量" class="headerlink" title="3.const变量"></a>3.const变量</h2><p>1.const声明一个常量，它实际保证的并非是它的值不变，而是保证变量指向那个内存地址所保存的数据不得改动（对简单类型如数值，字符串，布尔值好理解，但对复合型如对象和数组，则需要理解指针地址的概念）<br>2.const声明一个常量必须立刻初始化赋值；<br>3.const作用域与let作用域相同；</p>
+<h2 id="4-js获取时间戳方法"><a href="#4-js获取时间戳方法" class="headerlink" title="4.js获取时间戳方法"></a>4.js获取时间戳方法</h2><p>1) var cur = Date.parse(new Date());<br>2) var cur = (new Date()).valueOf();<br>3) var cur = new Date().getTime();<br>4) var cur = Date.now();</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -667,7 +830,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-06 11:11:30" itemprop="dateModified" datetime="2019-03-06T11:11:30+08:00">2019-03-06</time>
+                <time title="修改时间：2019-04-10 10:39:07" itemprop="dateModified" datetime="2019-04-10T10:39:07+08:00">2019-04-10</time>
               
             
           </span>
@@ -727,6 +890,7 @@
 </blockquote>
 <p><strong><em>此外，for的每一次循环相当于一个新的块级作用域，var是不断覆盖老的变量（在整个for循环体内有效），而let则是声明新的变量（只在本轮循环有效）</em></strong></p>
 <h2 id="3-const变量"><a href="#3-const变量" class="headerlink" title="3.const变量"></a>3.const变量</h2><p>1.const声明一个常量，它实际保证的并非是它的值不变，而是保证变量指向那个内存地址所保存的数据不得改动（对简单类型如数值，字符串，布尔值好理解，但对复合型如对象和数组，则需要理解指针地址的概念）<br>2.const声明一个常量必须立刻初始化赋值；<br>3.const作用域与let作用域相同；</p>
+<h2 id="4-js获取时间戳方法"><a href="#4-js获取时间戳方法" class="headerlink" title="4.js获取时间戳方法"></a>4.js获取时间戳方法</h2><p>1) var cur = Date.parse(new Date());<br>2) var cur = (new Date()).valueOf();<br>3) var cur = new Date().getTime();<br>4) var cur = Date.now();</p>
 
           
         
@@ -2349,191 +2513,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/07/jmeter1/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/12124169?s=400&u=39badfedffc31671546ee6843bfcc3ff1fce2df0&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Alan's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/07/jmeter1/" class="post-title-link" itemprop="http://yoursite.com/index.html">jmeter介绍</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-07 17:32:00" itemprop="dateCreated datePublished" datetime="2019-01-07T17:32:00+08:00">2019-01-07</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-01-24 11:23:08" itemprop="dateModified" datetime="2019-01-24T11:23:08+08:00">2019-01-24</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/jmeter/" itemprop="url" rel="index"><span itemprop="name">jmeter</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h2><blockquote>
-<p>测试系统的负载能力和性能测试工具<br>纯Java开发<br>支持多种类型服务和协议<br>界面模式和命令行模式<br>扩展性强</p>
-</blockquote>
-<h2 id="2、安装和启动"><a href="#2、安装和启动" class="headerlink" title="2、安装和启动"></a>2、安装和启动</h2><p><strong>下载地址：<a href="https://jmeter.apache.org/download_jmeter.cgi" target="_blank" rel="noopener">https://jmeter.apache.org/download_jmeter.cgi</a></strong><br><strong>历史版本：<a href="https://archive.apache.org/dist/jmeter/binaries/" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/</a></strong><br><strong>加压后双击运行 jmeter-3.3/bin/jmeter.bat 即可</strong></p>
-<h2 id="3、各元件介绍"><a href="#3、各元件介绍" class="headerlink" title="3、各元件介绍"></a>3、各元件介绍</h2><p>jmeter有许多的元件，如图：<br><img src="/assets/jmeter1.png" alt=""></p>
-<p><strong>Jmeter元件主要包括：</strong></p>
-<blockquote>
-<p>1.逻辑控制器（controller）<br>2.配置元件<br>3.定时器<br>4.前置处理器<br>5.采样器（Sampler）<br>6.后置处理器<br>7.断言<br>8.监听器</p>
-</blockquote>
-<p><strong>Jmeter各元件优先级顺序：</strong></p>
-<blockquote>
-<p>1.配置元件<br><strong>2.前置处理器</strong><br><strong>3.定时器</strong><br>4.采样器（Sampler）<br>5.后置处理器<br>6.断言<br>7.监听器</p>
-</blockquote>
-<p><strong>Jmeter各元件是以控制器（controller）和采样器（sampler）为中心，其他元件都是围绕这两个元件进行逻辑处理。</strong><br><strong>采样器一般内嵌在逻辑控制器Controller中</strong></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2583,7 +2562,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2657,7 +2636,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
