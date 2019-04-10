@@ -444,7 +444,7 @@
                 
               
 
-              <time title="创建时间：2019-04-10 10:39:45 / 修改时间：19:34:44" itemprop="dateCreated datePublished" datetime="2019-04-10T10:39:45+08:00">2019-04-10</time>
+              <time title="创建时间：2019-04-10 10:39:45 / 修改时间：20:37:30" itemprop="dateCreated datePublished" datetime="2019-04-10T10:39:45+08:00">2019-04-10</time>
             
 
             
@@ -506,20 +506,30 @@
 <h2 id="2-基础"><a href="#2-基础" class="headerlink" title="2.基础"></a>2.基础</h2><h3 id="2-1-web-worker特性"><a href="#2-1-web-worker特性" class="headerlink" title="2.1 web worker特性"></a>2.1 web worker特性</h3><blockquote>
 <p>web worker有自己的特性，有些属性名称与window中的属性名称相同，但其功能只是后者特性的一个子集。<br>由于web worker线程的设计理念就是为减轻UI线程计算方面问题，因此跟UI渲染相关对象都不能读取。</p>
 </blockquote>
-<p><strong>2.1.1 重要特性</strong></p>
-<p>1）navigator对象（只有四个属性appName、appVersion、userAgent、platform）</p>
+<h4 id="2-1-1-重要特性"><a href="#2-1-1-重要特性" class="headerlink" title="2.1.1 重要特性"></a>2.1.1 重要特性</h4><p>1）navigator对象（只有四个属性appName、appVersion、userAgent、platform）</p>
 <p>2）location对象（属性与window.location相同，但所有属性都是只读）</p>
-<p>3）self对象（指向worker线程自身）</p>
+<p>3）self对象（指向worker线程用例自身）</p>
 <p>4）XMLHttpRequest对象</p>
 <p>5）setTimeout/setInterval方法</p>
 <p>6）importScript()方法</p>
 <p>7）close()方法</p>
 <p>8）所有ECMAScript对象，如Object/Array/Date等</p>
-<p><strong>2.1.2 不能读取特性</strong></p>
-<p>1）DOM对象</p>
+<h4 id="2-1-2-不能读取特性"><a href="#2-1-2-不能读取特性" class="headerlink" title="2.1.2 不能读取特性"></a>2.1.2 不能读取特性</h4><p>1）DOM对象</p>
 <p>2）window对象</p>
 <p>3）document对象</p>
-<h3 id="2-2-基本用法"><a href="#2-2-基本用法" class="headerlink" title="2.2 基本用法"></a>2.2 基本用法</h3><h2 id="3-进阶"><a href="#3-进阶" class="headerlink" title="3.进阶"></a>3.进阶</h2><p><img src="/assets/js-web-worker-1.png" alt=""></p>
+<h3 id="2-2-基本用法"><a href="#2-2-基本用法" class="headerlink" title="2.2 基本用法"></a>2.2 基本用法</h3><h4 id="2-2-1-语法"><a href="#2-2-1-语法" class="headerlink" title="2.2.1 语法"></a>2.2.1 语法</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myworker = <span class="keyword">new</span> Worker(jsURL, options)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>jsURL: 必选，worker将执行的脚本的url（必须同源）<br>options: 可选，该对象包括{type, credentials, name}属性</p>
+</blockquote>
+<h4 id="2-2-2-主线程创建worker"><a href="#2-2-2-主线程创建worker" class="headerlink" title="2.2.2 主线程创建worker"></a>2.2.2 主线程创建worker</h4><p>main.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myworker = <span class="keyword">new</span> Worker(<span class="string">'my_worker.js'</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-2-3-主线程发送数据"><a href="#2-2-3-主线程发送数据" class="headerlink" title="2.2.3 主线程发送数据"></a>2.2.3 主线程发送数据</h4><p>main.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myworker.postMessage(<span class="string">'Jack'</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-2-4-主线程接收数据"><a href="#2-2-4-主线程接收数据" class="headerlink" title="2.2.4 主线程接收数据"></a>2.2.4 主线程接收数据</h4><p>main.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">myworker.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(event.data)</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-2-5-worker线程接收数据"><a href="#2-2-5-worker线程接收数据" class="headerlink" title="2.2.5 worker线程接收数据"></a>2.2.5 worker线程接收数据</h4><p>my_worker.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">self.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;<span class="comment">// self指向my_worker线程当前用例</span></span><br><span class="line">  <span class="built_in">console</span>.log(event.data)</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-2-6-worker线程发送数据"><a href="#2-2-6-worker线程发送数据" class="headerlink" title="2.2.6 worker线程发送数据"></a>2.2.6 worker线程发送数据</h4><p>my_worker.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.postMessage(<span class="string">'hello'</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-2-7-小用例"><a href="#2-2-7-小用例" class="headerlink" title="2.2.7 小用例"></a>2.2.7 小用例</h4><p>main.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.Worker) &#123;</span><br><span class="line">  <span class="keyword">var</span> myworker = <span class="keyword">new</span> Worker(<span class="string">'my_worker.js'</span>)</span><br><span class="line">  myworker.postMessage(<span class="string">'Jack'</span>)</span><br><span class="line">  myworker.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(event.data) <span class="comment">// hello, Jack</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>my_worker.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">self.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(event.data) <span class="comment">// Jack</span></span><br><span class="line">  self.postMessage(<span class="string">'hello, '</span>+ event.data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-进阶"><a href="#3-进阶" class="headerlink" title="3.进阶"></a>3.进阶</h2><p><img src="/assets/js-web-worker-1.png" alt=""></p>
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h2><h2 id="5-参考"><a href="#5-参考" class="headerlink" title="5.参考"></a>5.参考</h2><p>1.【MDN文档worker()API介绍】<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Worker/Worker" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/API/Worker/Worker</a><br>2.【MDN文档worker()API使用】<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers</a><br>2.【高性能JavaScript】第6章 快速响应的用户界面<br>3.【阮一峰的Web Worker 使用教程】<a href="http://www.ruanyifeng.com/blog/2018/07/web-worker.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2018/07/web-worker.html</a><br>4.【腾讯AlloyTeam 深入理解Web Worker】<a href="http://www.alloyteam.com/2015/11/deep-in-web-worker/" target="_blank" rel="noopener">http://www.alloyteam.com/2015/11/deep-in-web-worker/</a></p>
 
           
         
