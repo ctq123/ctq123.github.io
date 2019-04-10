@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[深入理解Web Worker]]></title>
     <url>%2F2019%2F04%2F10%2Fjs-web-worker%2F</url>
-    <content type="text"><![CDATA[1.背景javascript采用的是单线程模型，随着时代的进步，单线程模型已无法充分发挥多核CPU计算机的计算能力，而web worker的出现为javascript创造了多线程环境，为未来javascript的发展提供一条光明大道。同时我们必须要充分了解web worker带来多线程编程的真正用意，真正理解它的运用场景，不要为了单纯地使用多线程而滥用web worker。javascript主线程（UI线程）创建worker线程，充分利用多核CPU计算资源，将一些*计算任务分配给worker线程处理，减少因高负载计算而导致UI卡顿的问题，提升用户体验。 2.基础2.1 web worker特性 web worker有自己的特性，有些属性名称与window中的属性名称相同，但其功能只是后者特性的一个子集。1）navigator对象（只有四个属性appName、appVersion、userAgent、platform） 2）location对象（属性与window.location相同，但所有属性都是只读） 3）self对象（指向worker线程自身） 4）XMLHttpRequest对象 5）setTimeout/setInterval方法 6）importScript()方法 7）close()方法 8）所有ECMAScript对象，如Object/Array/Date等 由于web worker线程的设计理念就是为减轻UI线程计算方面问题，因此跟UI渲染相关对象都不能读取，如：1）DOM对象 2）window对象 3）document对象 2.2 基本用法3.进阶]]></content>
+    <content type="text"><![CDATA[1.背景javascript采用的是单线程模型，随着时代的进步，单线程模型已无法充分发挥多核CPU计算机的计算能力，而web worker的出现为javascript创造了多线程环境，为未来javascript的发展提供一条光明大道。同时我们必须要充分了解web worker带来多线程编程的真正用意，真正理解它的运用场景，不要为了单纯地使用多线程而滥用web worker。javascript主线程（UI线程）创建worker线程，充分利用多核CPU计算资源，将一些计算任务分配给worker线程处理，减少因高负载计算而导致UI卡顿的问题，提升用户体验。 2.基础2.1 web worker特性 web worker有自己的特性，有些属性名称与window中的属性名称相同，但其功能只是后者特性的一个子集。由于web worker线程的设计理念就是为减轻UI线程计算方面问题，因此跟UI渲染相关对象都不能读取。 2.1.1 重要特性 1）navigator对象（只有四个属性appName、appVersion、userAgent、platform） 2）location对象（属性与window.location相同，但所有属性都是只读） 3）self对象（指向worker线程自身） 4）XMLHttpRequest对象 5）setTimeout/setInterval方法 6）importScript()方法 7）close()方法 8）所有ECMAScript对象，如Object/Array/Date等 2.1.2 不能读取特性 1）DOM对象 2）window对象 3）document对象 2.2 基本用法3.进阶]]></content>
       <categories>
         <category>javascript</category>
       </categories>
