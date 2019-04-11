@@ -444,12 +444,24 @@
                 
               
 
-              <time title="创建时间：2019-04-10 10:39:45 / 修改时间：21:05:28" itemprop="dateCreated datePublished" datetime="2019-04-10T10:39:45+08:00">2019-04-10</time>
+              <time title="创建时间：2019-04-10 10:39:45" itemprop="dateCreated datePublished" datetime="2019-04-10T10:39:45+08:00">2019-04-10</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-11 11:12:09" itemprop="dateModified" datetime="2019-04-11T11:12:09+08:00">2019-04-11</time>
               
             
           </span>
@@ -521,6 +533,66 @@
 <blockquote>
 <p>jsURL: 必选，worker将执行的脚本的url（必须同源）<br>options: 可选，该对象包括{type, credentials, name}属性</p>
 </blockquote>
+<table>
+<thead>
+<tr>
+<th>主线程属性</th>
+<th>属性名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Worker.onmessage</td>
+<td>接收消息函数</td>
+</tr>
+<tr>
+<td>Worker.postMessage</td>
+<td>向worker线程发送消息函数</td>
+</tr>
+<tr>
+<td>Worker.onerror</td>
+<td>worker线程错误监听函数</td>
+</tr>
+<tr>
+<td>Worker.onmessageerror</td>
+<td>接收消息错误监听函数（发送数据无法序列化成字符串时触发）</td>
+</tr>
+<tr>
+<td>Worker.terminate</td>
+<td>关闭worker线程函数</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>worker线程属性</th>
+<th>属性名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self.onmessage</td>
+<td>接收消息函数</td>
+</tr>
+<tr>
+<td>self.postMessage</td>
+<td>向主线程发送消息函数</td>
+</tr>
+<tr>
+<td>self.onmessageerror</td>
+<td>接收消息错误监听函数（发送数据无法序列化成字符串时触发）</td>
+</tr>
+<tr>
+<td>self.importScripts</td>
+<td>加载外部js函数</td>
+</tr>
+<tr>
+<td>self.close</td>
+<td>关闭worker线程函数</td>
+</tr>
+</tbody>
+</table>
 <h4 id="2-2-2-主线程创建worker"><a href="#2-2-2-主线程创建worker" class="headerlink" title="2.2.2 主线程创建worker"></a>2.2.2 主线程创建worker</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">var</span> myworker = <span class="keyword">new</span> Worker(<span class="string">'my_worker.js'</span>)</span><br></pre></td></tr></table></figure>
 <h4 id="2-2-3-主线程发送数据"><a href="#2-2-3-主线程发送数据" class="headerlink" title="2.2.3 主线程发送数据"></a>2.2.3 主线程发送数据</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line">myworker.postMessage(<span class="string">'Jack'</span>)</span><br></pre></td></tr></table></figure>
 <h4 id="2-2-4-主线程接收数据"><a href="#2-2-4-主线程接收数据" class="headerlink" title="2.2.4 主线程接收数据"></a>2.2.4 主线程接收数据</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line">myworker.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(event.data)</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
