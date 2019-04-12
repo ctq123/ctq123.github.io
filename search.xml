@@ -60,6 +60,62 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[jmeter介绍]]></title>
+    <url>%2F2019%2F02%2F11%2Fjmeter1%2F</url>
+    <content type="text"><![CDATA[1、简介 测试系统的负载能力和性能测试工具纯Java开发支持多种类型服务和协议界面模式和命令行模式扩展性强 2、安装和启动下载地址：https://jmeter.apache.org/download_jmeter.cgi历史版本：https://archive.apache.org/dist/jmeter/binaries/加压后双击运行 jmeter-3.3/bin/jmeter.bat 即可 3、各元件介绍jmeter有许多的元件，如图： Jmeter元件主要包括： 1.逻辑控制器（controller）2.配置元件3.定时器4.前置处理器5.采样器（Sampler）6.后置处理器7.断言8.监听器 Jmeter各元件优先级顺序： 1.配置元件2.前置处理器3.定时器4.采样器（Sampler）5.后置处理器6.断言7.监听器 Jmeter各元件是以控制器（controller）和采样器（sampler）为中心，其他元件都是围绕这两个元件进行逻辑处理。采样器一般内嵌在逻辑控制器Controller中]]></content>
+      <categories>
+        <category>jmeter</category>
+      </categories>
+      <tags>
+        <tag>jmeter学习笔记</tag>
+        <tag>jmeter</tag>
+        <tag>性能压测</tag>
+        <tag>jmeter执行顺序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Jmeter登录session共享]]></title>
+    <url>%2F2019%2F02%2F11%2Fjmeter3%2F</url>
+    <content type="text"><![CDATA[1、背景有很多情况，我测试的接口或场景与登录操作无关，而又必须先登录才拥有对应的接口权限，测试对应的接口。那么有哪些共享session的方法？ 2、共享登录session方式2.1、利用仅一次控制器共享session（单个线程组）利用简单的仅一次控制器，处理登录操作，如下图 提取登录请求的session，然后将其保存在一个变量中即可。 然而，上述方式只适用于在当前线程组内session共享，若需要跨线程组共享一个session，那就需要使用property属性。 2.2、利用property属性共享session（多个线程组）利用Jmeter本身提供的property属性，垮线程组的session共享，使用${ __setProperty(,,) }保存，如图 然后在要用的地方，使用${ __property() }提取， 如图 3、总结仅一次控制器适用于单线程组内共享session，property属性适用于多个线程组共享session]]></content>
+      <categories>
+        <category>jmeter</category>
+      </categories>
+      <tags>
+        <tag>jmeter学习笔记</tag>
+        <tag>jmeter</tag>
+        <tag>性能压测</tag>
+        <tag>session共享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用Jmeter做阶梯式加压]]></title>
+    <url>%2F2019%2F02%2F11%2Fjmeter4%2F</url>
+    <content type="text"><![CDATA[1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《Jmeter线程组内各请求的执行顺序》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Thread Group加压是有一些区别，具体后面会有介绍。 2、阶梯式加压Jmeter提供两种方式可以实现批量逐步往上加的效果，一是Stepping Thread Group，二是Concurrency Thread Group 下载方式： Jmeter Plugins Manager中下载Custom Thread Groups 如果选项中没有Plugins Manager（如下图），请自行下载，地址：https://jmeter-plugins.org/install/Install/ 使用Concurrency Thread Group,如图 Concurrency Thread Group比Stepping Thread Group优点： 1）并发线程组允许控制测试的长度2）线程在进程中间结束的情况下创建替换线程，节省内存（压测机器） 参数说明： Target Concurrency: 并发线程数 Ramp Up Time: 加速时间 Ramp-Up Steps Count: 加速步奏计数 Hold Target Rate Time: 保持目标速率运行时间 Time Unnit: 时间单位（分或秒） Thread Iterations Limit：线程迭代次数限制 Log Threads Status into File: 将线程状态记录到日志文件（线程启动和停止事件保存为日志文件） 举个栗子：Target Concurrency：10（A）Ramp Up Time： 10（B）Ramp-Up Steps Count: 10（C）Hold Target Rate Time: 1Time Unit: seconds（程序组内每个线程启动的定时器设置为1s） 由上图可以看出，每隔1s（10(C)/10(A)）启动一个线程。程序内部设置定时器也应该为1s，否则线程启动数量不可控 再达到目标线程10个，总的启动线程数量为：1+2+3+….+10 = 10(10+1)/2=55持续10个线程运行时间为1s，数量为：101=10（同理若持续为5s，则为10 * 5=50）总的线程数量为：55+10=65 注意：最终运行线程数量运算较复杂，非必要场景下，不推荐使用 3、总结Concurrency Thread Group与普通 Thread Group区别：1.最大的区别就是假设目标线程为100，运行过程中若有线程出错，普通线程组最终运行的目标线程会小于100，而Concurrency Thread Group最终运行的目标线程始终会保持100 2.普通线程组若想查看其中错误的线程出错，根据日志是很难查找得到的（当目标线程很大的情况下），而Concurrency Thread Group可以将错误的线程保存在日志文件中，更容易得到错误线程的报错信息]]></content>
+      <categories>
+        <category>jmeter</category>
+      </categories>
+      <tags>
+        <tag>jmeter学习笔记</tag>
+        <tag>jmeter</tag>
+        <tag>性能压测</tag>
+        <tag>阶梯式加压</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Jmeter线程组内各请求的执行顺序]]></title>
+    <url>%2F2019%2F02%2F11%2Fjmeter2%2F</url>
+    <content type="text"><![CDATA[1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘假设有5个http请求，其中第3个http加入固定定时器，等待3秒，如图 2.1、例子1-单个线程线程组控制参数，如下 执行结果如下： 可是我们的线程（模拟的用户数），通常情况下都不会只有一个，而是有多个 2.2、例子2-多个线程线程组控制参数，如下 执行结果如下： 如上图，对应的线程1，先执行线程1的第一轮和线程1的第二轮，接下来执行线程2，线程2的第一轮和线程2的第二轮……以此类推 答案是不是那么简单？ 如果真是这么简单，呵呵，我就没必要写这篇博客笔记了…… 2.3、例子3-多个线程调整启动时间我们调整线程组启动时间参数，如下 执行结果如下： 如上图，对应的线程组就不是按步就班地执行了，线程1，线程2，线程3所对应的第一轮前两个http先抢占cpu资源，先执行，等到线程1的第3个http等待3秒的时间到后，才执行线程1剩余的后3个http请求。 由此可见，前一个http加入定时器后会影响下一个http请求，等待资源期间，其他线程的http请求会抢占cpu，先执行；批量http请求的执行顺序与线程组启动时间有关； 3、总结1.同一线程组，同一轮http请求执行顺序，按从上到下顺序执行； 2.同一线程组，不同轮http请求执行顺序，与线程组的启动时间有关； 2-1）若启动时间远大于执行完一轮所需的时间，那么每一轮都会按步就班执行； 2-2）若启动时间小于执行每一轮所需的时间，那么其他线程就会直接抢占cpu资源，先执行]]></content>
+      <categories>
+        <category>jmeter</category>
+      </categories>
+      <tags>
+        <tag>jmeter学习笔记</tag>
+        <tag>jmeter</tag>
+        <tag>性能压测</tag>
+        <tag>jmeter执行顺序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[DOM编程之渲染引擎原理]]></title>
     <url>%2F2019%2F02%2F11%2Fhpjavascript3-1%2F</url>
     <content type="text"><![CDATA[1、背景 浏览器引擎主要由两部分组成：渲染引擎（rendering engine）和js解析器（javascript interpreter） 参考浏览器工作原理：http://domenicodefelice.blogspot.com/2015/08/how-browsers-work.html?t=2]]></content>
@@ -73,77 +129,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秒懂flex布局]]></title>
-    <url>%2F2019%2F02%2F11%2Fcss-flex-layout%2F</url>
-    <content type="text"><![CDATA[1、背景 我们知道一切dom元素对css而言都是一个盒子，css正是以盒子模型为基础进行渲染CSSDom，而页面布局一直是css一个应用重点，那么如何通过css实现水平居中和垂直居中？相信实现的方法有很多，如table，float等，但它们都有各自的缺陷。然而当flex出现后，一切都变得相当的简约而不简单，优雅而不优越，因为它也存在兼容性问题。12345.centerContainer &#123; display: flex; justify-content: center; align-items: center;&#125; 它的子元素就是水平和垂直居中，浏览器兼容性方面：IE10+ 详情点击这里 2、概念flex由两个核心概念构成：容器和轴。容器包括父容器和子容器，轴分为主轴和交叉轴（即以横轴为主轴时，纵轴为交叉轴；以纵轴为主轴时，横轴为交叉轴；交叉轴=主轴逆时针90度）。flex属性一共有12个，父容器和子容器对应的属性各6个。 3、属性介绍父容器属性 1) flex-direction (常用)2) justify-content (常用)3) align-items (常用)4) align-content5) flex-warp6) flex-flow 子容器属性 1) align-self (常用)2) flex (常用)3) flex-grow4) flex-shrink5) flex-basis6) order 3.1.常用属性介绍1) flex-direction功能：flex-direction属性用于确定主轴的方向（等同于确定了交叉轴的方向）使用：1234.box &#123; display: flex; flex-direction: row | row-reverse | column | column-reverse;&#125; 属性值 说明 row 主轴为水平方向，起点在左端（默认值） row-reverse 主轴为水平方向，起点在右端 column 主轴为垂直方向，起点在上 column-reverse 主轴为垂直方向，起点在下 效果：（效果图作者：osimly） 2) justify-content功能：justify-content属性用于定义如何沿着主轴方向排列子容器（主轴）使用：1234.box &#123; display: flex; justify-content: flex-start | flex-end | center | space-between | space-around;&#125; 属性值 说明 flex-start 左对齐（默认值） flex-end 右对齐 center 居中 space-between 两端对齐，子容器之间间隔相等 space-around 均匀分布，首尾两端的子容器到父容器的距离是子容器间距的一半 效果：（效果图作者：osimly） 3) align-items功能：align-items属性用于定义如何沿着交叉轴方向排列子容器（交叉轴）使用：1234.box &#123; display: flex; align-items: flex-start | flex-end | center | baseline | stretch;&#125; 属性值 说明 flex-start 起始端对齐（默认值） flex-end 末尾端对齐 center 居中 baseline 基线对齐，即默认指首行文字为基线 stretch 拉伸对齐，子容器与父容器（高度/宽度）一致，相对于交叉轴方向而言 效果：（效果图作者：osimly） 4) align-self功能：align-self属性用于定义每个子容器自身如何沿着交叉轴方向排列（交叉轴），注意与align-items区别 align-self属性与align-items属性一致，若是一个子容器同时被定义了align-items和align-self，以align-self属性值为准。 使用：1234.box &#123; display: flex; align-items: flex-start | flex-end | center | baseline | stretch;&#125; 属性值 说明 flex-start 起始端对齐（默认值） flex-end 末尾端对齐 center 居中 baseline 基线对齐，即默认指首行文字为基线 stretch 拉伸对齐，子容器与父容器（高度/宽度）一致，相对于交叉轴方向而言 效果：（效果图作者：osimly）align-self属性与align-items属性一致，若是一个子容器同时被定义了align-items和align-self，以align-self属性值为准 5) flex功能：flex是一个复合属性，用于定义子容器自身的的伸缩比例，它是flex-grow,flex-shrink和flex-basis属性的缩写使用：1234.box &#123; display: flex; flex: 0 1 auto;&#125; 属性值 说明 0 1 auto flex-grow,flex-shrink和flex-basis属性的缩写，具体查看这三个属性的说明（默认值） none 0 0 auto （flex属性值允许1个或2个或3个属性的连用） 效果：（效果图作者：osimly） 常用的flex属性基本就这5个，掌握这5个属性之后，一般场景下的布局设置可以基本实现了。倘若需要满足其他特殊的布局，那么就有必要进一步了解其他7个属性了。 3.2.进阶属性介绍1) flex-wrap功能：flex-wrap属性用于确定子容器是否需要换行使用：1234.box &#123; display: flex; flex-wrap: nowrap | wrap | wrap-reverse;&#125; 属性值 说明 nowrap 不换行（默认值） wrap 换行 wrap-reverse 逆向换行 效果：（效果图作者：osimly） 2) flex-flow功能：flex-flow是一个复合属性，用于确定子容器的主轴方向和换行，是flex-direction和flex-wrap的组合使用：1234.box &#123; display: flex; flex-flow: row nowrap;&#125; 属性值 说明 row nowrap 左起水平方向主轴，且不换行（默认值） row 左起水平方向主轴。（flex的复合属性，都可以单独设置） 3) align-content功能：align-content属性用于确定子容器多行排列时，行与行之间的对齐方式（交叉轴），注意与align-items区别 align-items针对单行子容器在交叉轴上的排列，而align-content则针对多行子容器在交叉轴上的排列方式 使用：1234.box &#123; display: flex; align-content: flex-start | flex-end | center | space-between | space-around | stretch;&#125; 属性值 说明 flex-start 起始端对齐（默认值） flex-end 末尾端对齐 center 居中 space-around 等边距均匀分布, 首尾两端的子容器到父容器的距离是子容器间距的一半 space-between 等间距均匀分布, 子容器之间的间距相等 stretch 拉伸对齐，多行子容器交叉轴方向长度相同，填满父容器 效果：（效果图作者：osimly） 4) flex-basis功能：flex-basis属性用于确定子容器自身在主轴方向的原始尺寸使用：1234.box &#123; display: flex; flex-basis: 100px;&#125; 属性值 说明 100px 子容器的原始宽度为100px（flex-direction默认为row，因此为宽度） 效果：（效果图作者：osimly）结合flex-grow属性说明会更清晰一些 5) flex-grow功能：flex-grow属性用于确定子容器自身在主轴方向的扩展比例使用：12345678910.box1 &#123; display: flex; flex-basis: 100px; flex-grow: 1;&#125;.box2 &#123; display: flex; flex-basis: 100px; flex-grow: 2;&#125; 属性值 说明 1 都是相对父容器而言，如上box1和box2为兄弟节点，父节点box宽度为480px，那么计算公式为：box.width = box1.width + box2.width = (120 + 1x) + (120 + 2x) = 480；即box1.width = 200px, box2.width = 280px; 效果：（效果图作者：osimly） 6) flex-shrink功能：flex-shrink属性用于确定子容器自身在主轴方向的收缩比例，注意与flex-grow的区别 flex-grow属性是伸展，flex-shrink属性是收缩使用：12345678910.box1 &#123; display: flex; flex-basis: 300px; flex-shrink: 1;&#125;.box2 &#123; display: flex; flex-basis: 600px; flex-shrink: 2;&#125; 属性值 说明 1 都是相对父容器而言，如上box1和box2为兄弟节点，父节点box宽度为480px，那么计算公式为：box.width = box1.width + box2.width = (480-x)+(480-2x) = 480；即box1.width = 320px, box2.width = 160px; 效果：（效果图作者：osimly） 7) order功能：order属性用于确定子容器自身在主轴方向的排列序号使用：1234.box1 &#123; display: flex; order: 0;&#125; 属性值 说明 0 排列的序号，值越小越靠前，允许为负值（默认值）; 效果：（效果图作者：osimly） 4、总结flex的每一个属性都是围绕着容器和轴两个概念而进行描述的。flex有两个复合属性，复合属性允许设置单个属性和多个属性align-self属性与align-items属性值相同，但两者设置的位置不同，前者在子容器中设置子容器自身属性，后者在父容器中设置子容器的属性，因此当同时设置子容器的属性时，以align-self的属性值为准常用的属性如下：flex-direction, justify-content, align-items, align-self, flex进阶的属性如下：align-content, flex-warp, flex-flow, flex-grow, flex-shrink, flex-basis, order复合属性如下：flex-flow, flex 参考一劳永逸的搞定 flex 布局：https://juejin.im/post/58e3a5a0a0bb9f0069fc16bbFlex 布局教程：语法篇：http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-      <tags>
-        <tag>flex布局</tag>
-        <tag>css3</tag>
-        <tag>css居中</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[使用Jmeter做阶梯式加压]]></title>
-    <url>%2F2019%2F01%2F28%2Fjmeter4%2F</url>
-    <content type="text"><![CDATA[1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《Jmeter线程组内各请求的执行顺序》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Thread Group加压是有一些区别，具体后面会有介绍。 2、阶梯式加压Jmeter提供两种方式可以实现批量逐步往上加的效果，一是Stepping Thread Group，二是Concurrency Thread Group 下载方式： Jmeter Plugins Manager中下载Custom Thread Groups 如果选项中没有Plugins Manager（如下图），请自行下载，地址：https://jmeter-plugins.org/install/Install/ 使用Concurrency Thread Group,如图 Concurrency Thread Group比Stepping Thread Group优点： 1）并发线程组允许控制测试的长度2）线程在进程中间结束的情况下创建替换线程，节省内存（压测机器） 参数说明： Target Concurrency: 并发线程数 Ramp Up Time: 加速时间 Ramp-Up Steps Count: 加速步奏计数 Hold Target Rate Time: 保持目标速率运行时间 Time Unnit: 时间单位（分或秒） Thread Iterations Limit：线程迭代次数限制 Log Threads Status into File: 将线程状态记录到日志文件（线程启动和停止事件保存为日志文件） 举个栗子：Target Concurrency：10（A）Ramp Up Time： 10（B）Ramp-Up Steps Count: 10（C）Hold Target Rate Time: 1Time Unit: seconds（程序组内每个线程启动的定时器设置为1s） 由上图可以看出，每隔1s（10(C)/10(A)）启动一个线程。程序内部设置定时器也应该为1s，否则线程启动数量不可控 再达到目标线程10个，总的启动线程数量为：1+2+3+….+10 = 10(10+1)/2=55持续10个线程运行时间为1s，数量为：101=10（同理若持续为5s，则为10 * 5=50）总的线程数量为：55+10=65 注意：最终运行线程数量运算较复杂，非必要场景下，不推荐使用 3、总结Concurrency Thread Group与普通 Thread Group区别：1.最大的区别就是假设目标线程为100，运行过程中若有线程出错，普通线程组最终运行的目标线程会小于100，而Concurrency Thread Group最终运行的目标线程始终会保持100 2.普通线程组若想查看其中错误的线程出错，根据日志是很难查找得到的（当目标线程很大的情况下），而Concurrency Thread Group可以将错误的线程保存在日志文件中，更容易得到错误线程的报错信息]]></content>
-      <categories>
-        <category>jmeter</category>
-      </categories>
-      <tags>
-        <tag>jmeter学习笔记</tag>
-        <tag>jmeter</tag>
-        <tag>性能压测</tag>
-        <tag>阶梯式加压</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Jmeter登录session共享]]></title>
-    <url>%2F2019%2F01%2F24%2Fjmeter3%2F</url>
-    <content type="text"><![CDATA[1、背景有很多情况，我测试的接口或场景与登录操作无关，而又必须先登录才拥有对应的接口权限，测试对应的接口。那么有哪些共享session的方法？ 2、共享登录session方式2.1、利用仅一次控制器共享session（单个线程组）利用简单的仅一次控制器，处理登录操作，如下图 提取登录请求的session，然后将其保存在一个变量中即可。 然而，上述方式只适用于在当前线程组内session共享，若需要跨线程组共享一个session，那就需要使用property属性。 2.2、利用property属性共享session（多个线程组）利用Jmeter本身提供的property属性，垮线程组的session共享，使用${ __setProperty(,,) }保存，如图 然后在要用的地方，使用${ __property() }提取， 如图 3、总结仅一次控制器适用于单线程组内共享session，property属性适用于多个线程组共享session]]></content>
-      <categories>
-        <category>jmeter</category>
-      </categories>
-      <tags>
-        <tag>jmeter学习笔记</tag>
-        <tag>jmeter</tag>
-        <tag>性能压测</tag>
-        <tag>session共享</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Jmeter线程组内各请求的执行顺序]]></title>
-    <url>%2F2019%2F01%2F24%2Fjmeter2%2F</url>
-    <content type="text"><![CDATA[1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘假设有5个http请求，其中第3个http加入固定定时器，等待3秒，如图 2.1、例子1-单个线程线程组控制参数，如下 执行结果如下： 可是我们的线程（模拟的用户数），通常情况下都不会只有一个，而是有多个 2.2、例子2-多个线程线程组控制参数，如下 执行结果如下： 如上图，对应的线程1，先执行线程1的第一轮和线程1的第二轮，接下来执行线程2，线程2的第一轮和线程2的第二轮……以此类推 答案是不是那么简单？ 如果真是这么简单，呵呵，我就没必要写这篇博客笔记了…… 2.3、例子3-多个线程调整启动时间我们调整线程组启动时间参数，如下 执行结果如下： 如上图，对应的线程组就不是按步就班地执行了，线程1，线程2，线程3所对应的第一轮前两个http先抢占cpu资源，先执行，等到线程1的第3个http等待3秒的时间到后，才执行线程1剩余的后3个http请求。 由此可见，前一个http加入定时器后会影响下一个http请求，等待资源期间，其他线程的http请求会抢占cpu，先执行；批量http请求的执行顺序与线程组启动时间有关； 3、总结1.同一线程组，同一轮http请求执行顺序，按从上到下顺序执行； 2.同一线程组，不同轮http请求执行顺序，与线程组的启动时间有关； 2-1）若启动时间远大于执行完一轮所需的时间，那么每一轮都会按步就班执行； 2-2）若启动时间小于执行每一轮所需的时间，那么其他线程就会直接抢占cpu资源，先执行]]></content>
-      <categories>
-        <category>jmeter</category>
-      </categories>
-      <tags>
-        <tag>jmeter学习笔记</tag>
-        <tag>jmeter</tag>
-        <tag>性能压测</tag>
-        <tag>jmeter执行顺序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[jmeter介绍]]></title>
-    <url>%2F2019%2F01%2F07%2Fjmeter1%2F</url>
-    <content type="text"><![CDATA[1、简介 测试系统的负载能力和性能测试工具纯Java开发支持多种类型服务和协议界面模式和命令行模式扩展性强 2、安装和启动下载地址：https://jmeter.apache.org/download_jmeter.cgi历史版本：https://archive.apache.org/dist/jmeter/binaries/加压后双击运行 jmeter-3.3/bin/jmeter.bat 即可 3、各元件介绍jmeter有许多的元件，如图： Jmeter元件主要包括： 1.逻辑控制器（controller）2.配置元件3.定时器4.前置处理器5.采样器（Sampler）6.后置处理器7.断言8.监听器 Jmeter各元件优先级顺序： 1.配置元件2.前置处理器3.定时器4.采样器（Sampler）5.后置处理器6.断言7.监听器 Jmeter各元件是以控制器（controller）和采样器（sampler）为中心，其他元件都是围绕这两个元件进行逻辑处理。采样器一般内嵌在逻辑控制器Controller中]]></content>
-      <categories>
-        <category>jmeter</category>
-      </categories>
-      <tags>
-        <tag>jmeter学习笔记</tag>
-        <tag>jmeter</tag>
-        <tag>性能压测</tag>
-        <tag>jmeter执行顺序</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[作用域管理原理]]></title>
-    <url>%2F2019%2F01%2F02%2Fhpjavascript2-1%2F</url>
+    <url>%2F2019%2F02%2F11%2Fhpjavascript2-1%2F</url>
     <content type="text"><![CDATA[1、执行环境context执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁 1234function add(num1, num2)&#123; var sum = num1 + num2; return ;&#125; 2、作用域链与活动对象每个执行环境都有自己的作用域链，用于解析标识符。如图 当执行环境被创建时，它的作用域链初始化为当前运行函数的[Scope]属性中的对象。这些值按照它们出现在函数中的顺序，被复制到执行环境的作用域链中这个过程一旦完成，一个称为“活动对象”(activation Object)的新对象在执行环境中创建好了如上图，活动对象与其他的对象在一个队列中，作用链的最顶端为活动对象，当执行环境被销毁，活动对象也随之销毁 在函数执行过程中，每遇到一个变量，都会经历一次标识符解析过程： 搜索过程从作用域链头部开始搜索（当前活动对象）该变量标识符 如找到则使用，直接使用该标识符 如没有找到，继续搜索作用域链的下一个对象，直到找到为止 若作用域链中所有对象中都没有找到该标识符，那么该标识符被视为未定义的。 全局变量总是存在于执行环境作用域链的最末端，因此它是最远的。要想提高代码性能，请将函数内的全局变量转化成局部变量，提高读取标识符解析速度。 3、改变作用域链一般来说，一个执行环境的作用域链是不会改变的，但是有两个语句可以使其发生改变：1.with语句2.try-catch中catch子句 4、优化JavaScript代码策略1.访问字面量和局部变量的速度最快，相反，访问数组元素和对象成员相对较慢 2.由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨域变量更快。变量在作用域链的位置越深，访问的速度越慢。由于全局变量总处于作用域链的最末端，因此访问的速度也是最慢的 3.避免使用with语句，因为它会改变执行环境的作用域链，同样，try-catch语句中的catch子句也有同样的影响，因此要小心使用 4.嵌套的对象成员会明显影响性能，因此尽量少用 5.属性和方法在原型链中的位置越深，访问它的速度也就越慢 6.通常来说，你可以通过把常用的对象成员，数组元素，跨域变量保存在局部变量中来改善JavaScript性能，因为局部变量访问的速度更快。以空间换时间的代价，需要自己权衡]]></content>
       <categories>
         <category>javascript</category>
@@ -156,7 +143,7 @@
   </entry>
   <entry>
     <title><![CDATA[无阻塞加载js文件]]></title>
-    <url>%2F2019%2F01%2F02%2Fhpjavascript1%2F</url>
+    <url>%2F2019%2F02%2F11%2Fhpjavascript1%2F</url>
     <content type="text"><![CDATA[代码11&lt;script type=&quot;text/javascript&quot; src=&quot;file1.js&quot;&gt;&lt;/script&gt; 代码2 1234var script = document.createElement(&quot;script&quot;);script.type = &quot;text/javascript&quot;;script.src = &quot;file1.js&quot;document.getElementsByTagName(&quot;head&quot;)[0].appendChild(script); 代码1与代码2的异同： 代码1在执行过程中，文件下载后会立刻执行，堵塞页面的其他进程（如其他下载进程） 代码2在执行过程中，文件下载和执行过程不会堵塞页面的其他进程，直到DOM加载完成，因此该方法可以与其他资源并行下载 有多种无堵塞下载JavaScript的方法： 1. 使用script标签的defer属性 2. 使用动态创建的script元素来下载并执行代码 3. 使用XHR对象下载JavaScript代码并注入页面中 以上三种方法各有缺点： 1-1) 支持的浏览器较少 2-1) IE内核浏览器需要额外处理 3-1) 不支持CDN下载]]></content>
       <categories>
         <category>javascript</category>
@@ -164,6 +151,19 @@
       <tags>
         <tag>高性能JavaScript</tag>
         <tag>无堵塞加载</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[秒懂flex布局]]></title>
+    <url>%2F2019%2F02%2F11%2Fcss-flex-layout%2F</url>
+    <content type="text"><![CDATA[1、背景 我们知道一切dom元素对css而言都是一个盒子，css正是以盒子模型为基础进行渲染CSSDom，而页面布局一直是css一个应用重点，那么如何通过css实现水平居中和垂直居中？相信实现的方法有很多，如table，float等，但它们都有各自的缺陷。然而当flex出现后，一切都变得相当的简约而不简单，优雅而不优越，因为它也存在兼容性问题。12345.centerContainer &#123; display: flex; justify-content: center; align-items: center;&#125; 它的子元素就是水平和垂直居中，浏览器兼容性方面：IE10+ 详情点击这里 2、概念flex由两个核心概念构成：容器和轴。容器包括父容器和子容器，轴分为主轴和交叉轴（即以横轴为主轴时，纵轴为交叉轴；以纵轴为主轴时，横轴为交叉轴；交叉轴=主轴逆时针90度）。flex属性一共有12个，父容器和子容器对应的属性各6个。 3、属性介绍父容器属性 1) flex-direction (常用)2) justify-content (常用)3) align-items (常用)4) align-content5) flex-warp6) flex-flow 子容器属性 1) align-self (常用)2) flex (常用)3) flex-grow4) flex-shrink5) flex-basis6) order 3.1.常用属性介绍1) flex-direction功能：flex-direction属性用于确定主轴的方向（等同于确定了交叉轴的方向）使用：1234.box &#123; display: flex; flex-direction: row | row-reverse | column | column-reverse;&#125; 属性值 说明 row 主轴为水平方向，起点在左端（默认值） row-reverse 主轴为水平方向，起点在右端 column 主轴为垂直方向，起点在上 column-reverse 主轴为垂直方向，起点在下 效果：（效果图作者：osimly） 2) justify-content功能：justify-content属性用于定义如何沿着主轴方向排列子容器（主轴）使用：1234.box &#123; display: flex; justify-content: flex-start | flex-end | center | space-between | space-around;&#125; 属性值 说明 flex-start 左对齐（默认值） flex-end 右对齐 center 居中 space-between 两端对齐，子容器之间间隔相等 space-around 均匀分布，首尾两端的子容器到父容器的距离是子容器间距的一半 效果：（效果图作者：osimly） 3) align-items功能：align-items属性用于定义如何沿着交叉轴方向排列子容器（交叉轴）使用：1234.box &#123; display: flex; align-items: flex-start | flex-end | center | baseline | stretch;&#125; 属性值 说明 flex-start 起始端对齐（默认值） flex-end 末尾端对齐 center 居中 baseline 基线对齐，即默认指首行文字为基线 stretch 拉伸对齐，子容器与父容器（高度/宽度）一致，相对于交叉轴方向而言 效果：（效果图作者：osimly） 4) align-self功能：align-self属性用于定义每个子容器自身如何沿着交叉轴方向排列（交叉轴），注意与align-items区别 align-self属性与align-items属性一致，若是一个子容器同时被定义了align-items和align-self，以align-self属性值为准。 使用：1234.box &#123; display: flex; align-items: flex-start | flex-end | center | baseline | stretch;&#125; 属性值 说明 flex-start 起始端对齐（默认值） flex-end 末尾端对齐 center 居中 baseline 基线对齐，即默认指首行文字为基线 stretch 拉伸对齐，子容器与父容器（高度/宽度）一致，相对于交叉轴方向而言 效果：（效果图作者：osimly）align-self属性与align-items属性一致，若是一个子容器同时被定义了align-items和align-self，以align-self属性值为准 5) flex功能：flex是一个复合属性，用于定义子容器自身的的伸缩比例，它是flex-grow,flex-shrink和flex-basis属性的缩写使用：1234.box &#123; display: flex; flex: 0 1 auto;&#125; 属性值 说明 0 1 auto flex-grow,flex-shrink和flex-basis属性的缩写，具体查看这三个属性的说明（默认值） none 0 0 auto （flex属性值允许1个或2个或3个属性的连用） 效果：（效果图作者：osimly） 常用的flex属性基本就这5个，掌握这5个属性之后，一般场景下的布局设置可以基本实现了。倘若需要满足其他特殊的布局，那么就有必要进一步了解其他7个属性了。 3.2.进阶属性介绍1) flex-wrap功能：flex-wrap属性用于确定子容器是否需要换行使用：1234.box &#123; display: flex; flex-wrap: nowrap | wrap | wrap-reverse;&#125; 属性值 说明 nowrap 不换行（默认值） wrap 换行 wrap-reverse 逆向换行 效果：（效果图作者：osimly） 2) flex-flow功能：flex-flow是一个复合属性，用于确定子容器的主轴方向和换行，是flex-direction和flex-wrap的组合使用：1234.box &#123; display: flex; flex-flow: row nowrap;&#125; 属性值 说明 row nowrap 左起水平方向主轴，且不换行（默认值） row 左起水平方向主轴。（flex的复合属性，都可以单独设置） 3) align-content功能：align-content属性用于确定子容器多行排列时，行与行之间的对齐方式（交叉轴），注意与align-items区别 align-items针对单行子容器在交叉轴上的排列，而align-content则针对多行子容器在交叉轴上的排列方式 使用：1234.box &#123; display: flex; align-content: flex-start | flex-end | center | space-between | space-around | stretch;&#125; 属性值 说明 flex-start 起始端对齐（默认值） flex-end 末尾端对齐 center 居中 space-around 等边距均匀分布, 首尾两端的子容器到父容器的距离是子容器间距的一半 space-between 等间距均匀分布, 子容器之间的间距相等 stretch 拉伸对齐，多行子容器交叉轴方向长度相同，填满父容器 效果：（效果图作者：osimly） 4) flex-basis功能：flex-basis属性用于确定子容器自身在主轴方向的原始尺寸使用：1234.box &#123; display: flex; flex-basis: 100px;&#125; 属性值 说明 100px 子容器的原始宽度为100px（flex-direction默认为row，因此为宽度） 效果：（效果图作者：osimly）结合flex-grow属性说明会更清晰一些 5) flex-grow功能：flex-grow属性用于确定子容器自身在主轴方向的扩展比例使用：12345678910.box1 &#123; display: flex; flex-basis: 100px; flex-grow: 1;&#125;.box2 &#123; display: flex; flex-basis: 100px; flex-grow: 2;&#125; 属性值 说明 1 都是相对父容器而言，如上box1和box2为兄弟节点，父节点box宽度为480px，那么计算公式为：box.width = box1.width + box2.width = (120 + 1x) + (120 + 2x) = 480；即box1.width = 200px, box2.width = 280px; 效果：（效果图作者：osimly） 6) flex-shrink功能：flex-shrink属性用于确定子容器自身在主轴方向的收缩比例，注意与flex-grow的区别 flex-grow属性是伸展，flex-shrink属性是收缩使用：12345678910.box1 &#123; display: flex; flex-basis: 300px; flex-shrink: 1;&#125;.box2 &#123; display: flex; flex-basis: 600px; flex-shrink: 2;&#125; 属性值 说明 1 都是相对父容器而言，如上box1和box2为兄弟节点，父节点box宽度为480px，那么计算公式为：box.width = box1.width + box2.width = (480-x)+(480-2x) = 480；即box1.width = 320px, box2.width = 160px; 效果：（效果图作者：osimly） 7) order功能：order属性用于确定子容器自身在主轴方向的排列序号使用：1234.box1 &#123; display: flex; order: 0;&#125; 属性值 说明 0 排列的序号，值越小越靠前，允许为负值（默认值）; 效果：（效果图作者：osimly） 4、总结flex的每一个属性都是围绕着容器和轴两个概念而进行描述的。flex有两个复合属性，复合属性允许设置单个属性和多个属性align-self属性与align-items属性值相同，但两者设置的位置不同，前者在子容器中设置子容器自身属性，后者在父容器中设置子容器的属性，因此当同时设置子容器的属性时，以align-self的属性值为准常用的属性如下：flex-direction, justify-content, align-items, align-self, flex进阶的属性如下：align-content, flex-warp, flex-flow, flex-grow, flex-shrink, flex-basis, order复合属性如下：flex-flow, flex 参考一劳永逸的搞定 flex 布局：https://juejin.im/post/58e3a5a0a0bb9f0069fc16bbFlex 布局教程：语法篇：http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>flex布局</tag>
+        <tag>css3</tag>
+        <tag>css居中</tag>
       </tags>
   </entry>
 </search>
