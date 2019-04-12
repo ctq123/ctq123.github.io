@@ -130,19 +130,19 @@
 
 
 
-  <meta name="description" content="1.背景javascript采用的是单线程模型，随着时代的进步，单线程模型已无法充分发挥多核CPU计算机的计算能力，而web worker的出现为javascript创造了多线程环境，为未来javascript的发展提供另外一种新思路。我们必须要充分了解web worker带来多线程编程的真正用意，真正理解它的运用场景，不要为了多线程而滥用web worker。javascript主线程创建wor">
+  <meta name="description" content="1.背景javascript采用的是单线程模型，随着时代的进步，单线程模型已无法充分发挥多核CPU计算机的计算能力，而Web Worker的出现为javascript创造了多线程环境，为未来javascript的发展提供另外一种新思路。我们必须要充分了解Web Worker带来多线程编程的真正用意，真正理解它的运用场景，不要为了多线程而滥用Web Worker。用于执行javascript和更新用">
 <meta name="keywords" content="web worker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解Web Worker">
 <meta property="og:url" content="http://yoursite.com/2019/04/10/js-web-worker/index.html">
 <meta property="og:site_name" content="Alan&#39;s Blog">
-<meta property="og:description" content="1.背景javascript采用的是单线程模型，随着时代的进步，单线程模型已无法充分发挥多核CPU计算机的计算能力，而web worker的出现为javascript创造了多线程环境，为未来javascript的发展提供另外一种新思路。我们必须要充分了解web worker带来多线程编程的真正用意，真正理解它的运用场景，不要为了多线程而滥用web worker。javascript主线程创建wor">
+<meta property="og:description" content="1.背景javascript采用的是单线程模型，随着时代的进步，单线程模型已无法充分发挥多核CPU计算机的计算能力，而Web Worker的出现为javascript创造了多线程环境，为未来javascript的发展提供另外一种新思路。我们必须要充分了解Web Worker带来多线程编程的真正用意，真正理解它的运用场景，不要为了多线程而滥用Web Worker。用于执行javascript和更新用">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/js-web-worker-1.png">
-<meta property="og:updated_time" content="2019-04-12T05:04:06.504Z">
+<meta property="og:updated_time" content="2019-04-12T06:21:19.339Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解Web Worker">
-<meta name="twitter:description" content="1.背景javascript采用的是单线程模型，随着时代的进步，单线程模型已无法充分发挥多核CPU计算机的计算能力，而web worker的出现为javascript创造了多线程环境，为未来javascript的发展提供另外一种新思路。我们必须要充分了解web worker带来多线程编程的真正用意，真正理解它的运用场景，不要为了多线程而滥用web worker。javascript主线程创建wor">
+<meta name="twitter:description" content="1.背景javascript采用的是单线程模型，随着时代的进步，单线程模型已无法充分发挥多核CPU计算机的计算能力，而Web Worker的出现为javascript创造了多线程环境，为未来javascript的发展提供另外一种新思路。我们必须要充分了解Web Worker带来多线程编程的真正用意，真正理解它的运用场景，不要为了多线程而滥用Web Worker。用于执行javascript和更新用">
 <meta name="twitter:image" content="http://yoursite.com/assets/js-web-worker-1.png">
 
 
@@ -465,7 +465,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-12 13:04:06" itemprop="dateModified" datetime="2019-04-12T13:04:06+08:00">2019-04-12</time>
+                <time title="修改时间：2019-04-12 14:21:19" itemprop="dateModified" datetime="2019-04-12T14:21:19+08:00">2019-04-12</time>
               
             
           </span>
@@ -523,7 +523,7 @@
       
 
       
-        <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h2><p>javascript采用的是单线程模型，随着时代的进步，单线程模型已无法充分发挥多核CPU计算机的计算能力，而web worker的出现为javascript创造了多线程环境，为未来javascript的发展提供另外一种新思路。我们必须要充分了解web worker带来多线程编程的真正用意，真正理解它的运用场景，不要为了多线程而滥用web worker。javascript主线程创建worker线程，充分利用了多核CPU计算资源，将一些<strong>计算任务</strong>分配给worker线程处理，减少因高负载计算而导致UI卡顿的问题，提升了用户体验。</p>
+        <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h2><p>javascript采用的是单线程模型，随着时代的进步，单线程模型已无法充分发挥多核CPU计算机的计算能力，而Web Worker的出现为javascript创造了多线程环境，为未来javascript的发展提供另外一种新思路。我们必须要充分了解Web Worker带来多线程编程的真正用意，真正理解它的运用场景，不要为了多线程而滥用Web Worker。<br>用于执行javascript和更新用户界面的进程通常被称为“浏览器UI线程”（尽管对所有浏览器来说，称为“线程”不一定准确），以下我们将其简称为“主线程”。</p>
 <h2 id="2-基础部分"><a href="#2-基础部分" class="headerlink" title="2.基础部分"></a>2.基础部分</h2><h3 id="2-1-web-worker特性"><a href="#2-1-web-worker特性" class="headerlink" title="2.1 web worker特性"></a>2.1 web worker特性</h3><blockquote>
 <p><strong><em>web worker有自己的特性，有些属性名称与window中的属性名称相同，但其功能只是后者特性的一个子集。</em></strong><br><strong><em>由于web worker线程的设计理念就是为减轻主线程计算方面问题，因此跟UI渲染相关对象都不能读取。</em></strong></p>
 </blockquote>
