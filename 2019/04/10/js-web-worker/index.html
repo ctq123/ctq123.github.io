@@ -139,7 +139,7 @@
 <meta property="og:description" content="1.背景javascript采用的是单线程模型，随着时代的进步，单线程模型已无法充分发挥多核CPU计算机的计算能力，而web worker的出现为javascript创造了多线程环境，为未来javascript的发展提供另外一种新思路。我们必须要充分了解web worker带来多线程编程的真正用意，真正理解它的运用场景，不要为了多线程而滥用web worker。javascript主线程创建wor">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/js-web-worker-1.png">
-<meta property="og:updated_time" content="2019-04-12T05:01:19.273Z">
+<meta property="og:updated_time" content="2019-04-12T05:02:24.569Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解Web Worker">
 <meta name="twitter:description" content="1.背景javascript采用的是单线程模型，随着时代的进步，单线程模型已无法充分发挥多核CPU计算机的计算能力，而web worker的出现为javascript创造了多线程环境，为未来javascript的发展提供另外一种新思路。我们必须要充分了解web worker带来多线程编程的真正用意，真正理解它的运用场景，不要为了多线程而滥用web worker。javascript主线程创建wor">
@@ -465,7 +465,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-12 13:01:19" itemprop="dateModified" datetime="2019-04-12T13:01:19+08:00">2019-04-12</time>
+                <time title="修改时间：2019-04-12 13:02:24" itemprop="dateModified" datetime="2019-04-12T13:02:24+08:00">2019-04-12</time>
               
             
           </span>
@@ -626,7 +626,7 @@
 <p>在worker线程创建完成的前提下，主线程再次发送消息给worker线程时，worker线程会直接收到消息，而不必经过临时消息队列。</p>
 <p>当woker线程完成任务后，主线程和worker线程都有权力关闭worker线程，主线程通过worker.terminate关闭，worker线程通过调用自身的self.close()关闭。</p>
 <blockquote>
-<p><strong><em>主线程和worker线程发送消息和接收消息流程基本相同，然而事实上，由于主线程受到内核任务调度的影响，worker线程发送的消息，主线程未必会收到消息并马上往下执行，需要等待前面的任务执行完成才会继续往下执行；而主线程正确发出消息后，worker线程一般会收到消息就会继续往下执行。</em></strong></p>
+<p><strong><em>主线程和worker线程发送消息和接收消息流程基本相同，然而事实上，由于主线程受到内核任务调度的影响，worker线程发送的消息，主线程未必会收到消息就会马上往下执行，需要等待前面的任务执行完成才会继续往下执行；而主线程正确发出消息后，worker线程一般会收到消息就会继续往下执行。</em></strong></p>
 </blockquote>
 <h3 id="3-2-数据通讯方式"><a href="#3-2-数据通讯方式" class="headerlink" title="3.2 数据通讯方式"></a>3.2 数据通讯方式</h3><p>主线程与worker线程数据通信中传递的内容一般有两种，一种是传递原始值（字符串，数字，布尔值，null和undefined），另一种是传递object和Array的实例，其他的类型就不可以了。</p>
 <p>当传递的内容为原始值时，传递的内容将被串行化，然后将串行化的字符串发送给worker线程，然后再还原，反过来亦是如此；</p>
