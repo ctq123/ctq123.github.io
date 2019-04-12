@@ -118,8 +118,7 @@ http://selenium-python-zh.readthedocs.io/en/latest/getting-started.html
 #coding:utf-8
 from selenium import webdriver
 import time
- 
- 
+
 browser = webdriver.Chrome()
 browser.get('https://www.baidu.com/')
 # time.sleep(2)
@@ -142,8 +141,7 @@ browser.quit() # 关闭整个浏览器
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
- 
- 
+
 class db_help:
     engine = create_engine('oracle://db_username:db_password@sql_address:sql_port/db_name', echo=False) #请先替换自己的oracle数据库对应的数据库名，登录名，密码
     #构造函数
@@ -162,8 +160,7 @@ class db_help:
         print ('delete session')
         self.session.close()
         self.session = None
- 
- 
+
 db = db_help()
 session = db.getSession()
 result = session.execute('select * from crm_user where username =:user_name', {'user_name': 'admin'}).fetchall()
@@ -171,4 +168,5 @@ if len(result) > 0:
     for item in result:
         print(item)
 ```
+
 功能：查询crm_user表中admin的数据并打印出来
