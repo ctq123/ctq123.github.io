@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[高性能JavaScript系列-作用域管理原理]]></title>
+    <url>%2F2019%2F04%2F23%2Fhpjavascript2-1.1%2F</url>
+    <content type="text"><![CDATA[1、执行环境context执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁 1234function add(num1, num2)&#123; var sum = num1 + num2; return ;&#125; 2、作用域链与活动对象每个执行环境都有自己的作用域链，用于解析标识符。如图 当执行环境被创建时，它的作用域链初始化为当前运行函数的[Scope]属性中的对象。这些值按照它们出现在函数中的顺序，被复制到执行环境的作用域链中这个过程一旦完成，一个称为“活动对象”(activation Object)的新对象在执行环境中创建好了如上图，活动对象与其他的对象在一个队列中，作用链的最顶端为活动对象，当执行环境被销毁，活动对象也随之销毁 在函数执行过程中，每遇到一个变量，都会经历一次标识符解析过程： 搜索过程从作用域链头部开始搜索（当前活动对象）该变量标识符 如找到则使用，直接使用该标识符 如没有找到，继续搜索作用域链的下一个对象，直到找到为止 若作用域链中所有对象中都没有找到该标识符，那么该标识符被视为未定义的。 全局变量总是存在于执行环境作用域链的最末端，因此它是最远的。要想提高代码性能，请将函数内的全局变量转化成局部变量，提高读取标识符解析速度。 3、改变作用域链一般来说，一个执行环境的作用域链是不会改变的，但是有两个语句可以使其发生改变：1.with语句2.try-catch中catch子句 4、优化JavaScript代码策略1.访问字面量和局部变量的速度最快，相反，访问数组元素和对象成员相对较慢 2.由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨域变量更快。变量在作用域链的位置越深，访问的速度越慢。由于全局变量总处于作用域链的最末端，因此访问的速度也是最慢的 3.避免使用with语句，因为它会改变执行环境的作用域链，同样，try-catch语句中的catch子句也有同样的影响，因此要小心使用 4.嵌套的对象成员会明显影响性能，因此尽量少用 5.属性和方法在原型链中的位置越深，访问它的速度也就越慢 6.通常来说，你可以通过把常用的对象成员，数组元素，跨域变量保存在局部变量中来改善JavaScript性能，因为局部变量访问的速度更快。以空间换时间的代价，需要自己权衡]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>高性能JavaScript</tag>
+        <tag>作用域</tag>
+        <tag>执行环境context</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[深入理解Web Worker]]></title>
     <url>%2F2019%2F04%2F10%2Fjs-web-worker%2F</url>
     <content type="text"><![CDATA[1.背景javascript采用的是单线程模型，随着时代的进步，单线程编程已无法充分发挥多核CPU计算机的计算能力，而Web Worker的出现为javascript创造了多线程编程，为未来javascript的发展提供另外一种新思路，这并不是说javascript未来会将单线程模型改为多线程模型，因为涉及到一个核心问题，假设javascript有两个线程，一个线程要添加dom节点，另外一个线程要删除这个节点，那浏览器引擎要以哪个为准呢？因此单线程模型将来也不会改变。Web Worker的出现只是为javascript提供了一种多线程编程模式，但并未改变javascript核心本质单线程模型。因为Web Worker本身有很多的限制，不允许操作DOM，且受主线程的控制。那么什么是“主线程”？ 用于执行javascript和更新用户界面的进程通常被称为“浏览器UI线程”（尽管对所有浏览器来说，称为“线程”不一定准确, 以下我们将其简称为“主线程”）。通常情况下，执行javascript和更新用户界面是交替进行的，倘若执行javascript时间过长，势必会出现界面“假死”现象。为了更优雅地解决这种情况，Web Worker应运而生。 2.基础部分2.1 web worker特性 web worker有自己的特性，有些属性名称与window中的属性名称相同，但其功能只是后者特性的一个子集。由于web worker线程的设计理念就是为减轻主线程计算方面问题，因此跟UI渲染相关对象不能也不应该读取。 2.1.1 web worker重要特性1）navigator对象（只有四个属性appName、appVersion、userAgent、platform） 2）location对象（属性与window.location相同，但所有属性都是只读） 3）self对象（指向worker线程用例自身） 4）XMLHttpRequest对象 5）setTimeout/setInterval方法 6）importScript()方法 7）close()方法 8）所有ECMAScript对象，如Object/Array/Date等 2.1.2 web worker不能读取特性1）DOM对象 2）window对象 3）document对象 2.2 基本用法2.2.1 web worker 的API 主线程属性 属性名称 Worker.onmessage 接收消息函数 Worker.postMessage 向worker线程发送消息函数 Worker.onerror worker线程错误监听函数 Worker.onmessageerror 接收消息错误监听函数（发送数据无法序列化成字符串时触发） Worker.terminate 关闭worker线程函数 worker线程属性 属性名称 self.onmessage 接收消息函数 self.postMessage 向主线程发送消息函数 self.onmessageerror 接收消息错误监听函数（发送数据无法序列化成字符串时触发） self.importScripts 加载外部js函数 self.close 关闭worker线程函数 2.2.2 主线程创建worker首先让我们看看如何创建worker线程：1const myworker = new Worker(jsURL, options) 参数说明： jsURL: 必选，worker将执行的脚本的url（必须同源）options: 可选，该对象包括{type, credentials, name}属性例子如下：1234// main.jsvar myworker = new Worker('my_worker.js')var myworker = new Worker('my_worker.js', &#123;name: 'my_worker', type: 'listen_status'&#125;) 2.2.3 主线程发送数据主线程向子线程发送一个“Jack”字符串数据：12// main.jsmyworker.postMessage('Jack') 2.2.4 主线程接收数据主线程接收子线程返回的数据，并打印出来：12345// main.jsmyworker.onmessage = function(event) &#123; console.log(event.data) ...&#125; 2.2.5 worker线程接收数据子线程接收主线程的数据并打印：12345// my_worker.jsself.onmessage = function(event) &#123;// self指向my_worker线程当前用例 console.log(event.data) ...&#125; 2.2.6 worker线程发送数据子线程向主线程发送一个“hello”字符串的数据：12// my_worker.jsself.postMessage('hello') 2.2.7 终止worker若我们想要关闭子线程，我们可以在主线程中直接关闭，方法为：12// main.jsmyworker.terminate() 我们也可以在子线程中直接关闭，通常在子线程任务结束后关闭，方法为：12// my_worker.jsself.close() 2.2.8 错误处理主线程可以监听worker线程是否发生错误，并做出相应的处理1234567// main.jsmyworker.onerror(function(e) &#123; var line = e.lineno // 错误文件行号 var filename = e.filename // 错误文件名 var msg = e.message // 错误内容 console.error('line:'+line+' in '+filename+': '+msg)&#125;) 2.2.9 加载外部文件子线程可以通过importScripts()方法引入其他脚本，接收0个或者多个url作为参数来引入资源1234// my_worker.jsimportScripts() // 什么都不引入importScripts('file1.js') // 加载一个文件importScripts('file1.js', 'file2.js') // 加载两个文件 2.2.10 完整小用例下面我们通过看一个完整的小用例，看看主线程与子线程的交互过程：12345678// main.jsif (window.Worker) &#123; var myworker = new Worker('my_worker.js') myworker.postMessage('Jack') myworker.onmessage = function(event) &#123; console.log(event.data) // hello, Jack &#125;&#125; 123456// my_worker.jsself.onmessage = function(event) &#123; console.log(event.data) // Jack self.postMessage('hello, '+ event.data) self.close()&#125; 注意： 上述以on开头的函数是一个回调函数，都可以使用addEventListener替换，如slef.onmessage(function)等同于self.addEventListener(‘message’, function)。如果你细心会发现一件很有趣的事情，在javascript衍生的技术或语言，它们的设计者都遵循这样一种规则：所有以on开头的函数都可以作为一种回调函数。子线程中其实也可以嵌套创建另外一个子线程，可以一直嵌套创建下去，但对应的逻辑就会变得复杂，不建议这样做。 至此，Web Worker基础使用方法已经介绍完毕。当然，我们知其然，应当知其所以然。 3.进阶部分事实上，Web Worker定义了两类工作线程：专用线程和共享线程。上述介绍的是专用线程。专用worker只能在一个页面所使用，而共享worker可以被多个页面所共享。创建共享worker的代码如下：1var shareworker = new SharedWorker('share_worker.js') 共享worker和专用worker它们的API基本上是一致的，除了名称不同以外，其实它们之间的最大区别在于它们的数据通信方式。共享worker通过端口port连接进行通信，在通信之前必须打开该端口，打开方法为:123456789// main.jsshareworker.port.start()shareworker.port.onmessage = function(e)&#123;&#125;shareworker.port.postMessage()// share_worker.jsself.port.start()self.port.onmessage = function(e)&#123;&#125;self.port.postMessage() 如果主线程与共享线程之间需要双向通信，那么它们都需要调用start()方法。同时，使用API接口方法时也需要通过port来调用，如上述代码例子，这里就不一一展开说明了。 下面将进一步解析主线程与worker线程并行执行的关系流程，主线程与worker线程的数据通信方式，以及worker线程的实际应用场景。 3.1 主线程与worker线程下面看看主线程与子线程运行时的关系图： 如上图，javascript主线程执行过程中，异步创建worker线程，然后主线程将继续执行其他任务。倘若worker线程还没有创建完成，主线程就直接通过worker.postMessage发送消息给Worker线程，该消息会进入一个临时消息队列中，等worker线程创建成功后，worker线程会从临时消息队列中接收消息，并处理。等处理完成后，通过self.postMessage将消息发送会主线程中。主线程接收到消息后，等待主线程处理完其他任务片段后，才会继续执行worker.onmessage中的回调函数。 在worker线程创建完成的前提下，主线程再次发送消息给worker线程时，worker线程会直接收到消息，而不必经过临时消息队列，如上图对应的交互过程1和2。 最后，当任务结束后，主线程和worker线程都可以关闭worker线程，主线程通过worker.terminate关闭，worker线程通过调用自身的self.close()关闭。 主线程和worker线程发送消息和接收消息流程基本相同，然而事实上，由于主线程受到内核任务调度的影响，worker线程发送的消息，主线程未必会收到消息就会马上往下执行，需要等待前面的任务执行完成才会继续往下执行；而主线程正确发出消息后，worker线程一般会收到消息就会继续往下执行。 3.2 数据通讯方式主线程与worker线程数据通信中传递的内容一般有两种，一种是传递原始值（字符串，数字，布尔值，null和undefined），另一种是传递object和Array的实例，其他的类型就不可以了。 当传递的内容为原始值时，传递的内容将被串行化，然后将串行化的字符串发送给worker线程，然后再还原，反过来亦是如此； 当传递的内容是对象或文件时，传递的内容将进行二进制转换，然后将二进制数据发送给worker线程。 其实若是了解java的同学，可以将这一过程理解为序列化和反序列化的过程。 由此可知，主线程与worker线程之间的通信数据，是一种拷贝关系，即值传递，而不是传址。worker线程改变传递进来的数据并不会影响到主线程。 既然是一种值传递的拷贝关系，倘若传递的数据很大，比如100M的文件（转化成二进制数据），默认情况下浏览器会生成一个原文件的拷贝，就会引起很大的性能问题。 为了解决这个问题，worker线程提供了一种方法叫做Transferable Objects，允许主线程把二进制数据直接转移给worker线程，但一旦转移，主线程将无法使用这些二进制数据。这对处理影音文件，3D运算，图片处理等意义重大，方法如下：123456// Transferable Objects语法worker.postMessage(arrayBuffer, [arrayBuffer])// 示例var arrbuf = new ArrayBuffer(1);worker.postMessage(arrbuf, [arrbuf]) 3.3 实际应用场景Web Worker适用于处理纯数据，或者与浏览器UI无关的长时间运行脚本。 那么我们如何定义日常UI响应为长时间呢？多久才算“长时间”，300毫秒，500毫秒，还是1秒？ 事实上，据国外专家研究，单个JavaScript操作花费的总时间不应该超过100毫秒。当然不包括文件上传和下载这种操作，这里针对的只是一般的UI响应场景 考虑这样一个例子：解析一个很大的JSON字符串，假设其数据量很大至少需要5000毫秒才能完成解析。很明显，它远远超出客户端允许javascript运行的时间，将严重影响用户体验。这种场景下，worker线程则成为最理想的解决方案。代码如下：123456789101112131415// main.jsif (window.Worker) &#123; var worker = new Worker('my_worker.js'); worker.onmessage = function(e) &#123; var jsonData = e.data; // 业务中处理json数据的函数 doSomething(jsonData); &#125; worker.postMessage(jsonStr); // 业务中处理json数据的函数 function doSomething(jsonData) &#123; // …… &#125;&#125; 123456// my_worker.jsself.onmessage = function(e) &#123; var jsonStr = e.data; var jsonData = JSON.parse(jsonStr); self.postMessage(jsonData);&#125; 解析一个大字符串只是web worker其中一个应用场景，典型的应用场景如下： 1）编码/解码大字符串2）复杂的数学运算（包括图像或视频处理）3）大数组排序 事实上，任何超过100毫秒的处理过程，都应该考虑Worker线程方案处理，当然前提是浏览器支持Web Workers。 4.总结由上所述，Web Worker的出现，充分发挥了多核CPU计算能力，解决浏览器单线程中高负载计算的问题，提升了用户体验。由浏览器的渲染原理可知，浏览器的主线程任务包括两部分：渲染任务和js解析任务，而Web Worker只是js解析任务中的一部分，处理计算相关的任务，因此它有自己的特性，不可以直接调用window中的绝大部分对象，dom对象以及document对象。 5.参考1.【MDN文档Web Worker API介绍】https://developer.mozilla.org/zh-CN/docs/Web/API/Worker/Worker2.【MDN文档Web Worker API使用】https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers3.【高性能JavaScript】第6章 快速响应的用户界面4.【阮一峰的Web Worker 使用教程】http://www.ruanyifeng.com/blog/2018/07/web-worker.html5.【腾讯AlloyTeam 深入理解Web Worker】http://www.alloyteam.com/2015/11/deep-in-web-worker/]]></content>
@@ -50,7 +63,7 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[高性能JavaScript读书笔记]]></title>
+    <title><![CDATA[高性能JavaScript系列-高性能JavaScript读书笔记]]></title>
     <url>%2F2019%2F02%2F12%2Fhpjavascript8-1%2F</url>
     <content type="text"><![CDATA[1、js如何将十进制的数字转换成二进制？使用toString(2)进行转换即可，例如：12var num = 8;console.log(num.toString(2)); // "1000" 2、如何获取当前页面有多少个dom节点数？1console.log(document.getElementsByTagName('*').length); // "1000" 3、js打印函数方法运行时长1234567// 启动计时器console.time('testForTime');// 运行程序……// 停止计时console.timeEnd('testForTime')// 4343.123ms]]></content>
       <categories>
@@ -58,6 +71,34 @@
       </categories>
       <tags>
         <tag>高性能JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Jmeter线程组内各请求的执行顺序]]></title>
+    <url>%2F2019%2F02%2F11%2Fjmeter2%2F</url>
+    <content type="text"><![CDATA[1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘假设有5个http请求，其中第3个http加入固定定时器，等待3秒，如图 2.1、例子1-单个线程线程组控制参数，如下 执行结果如下： 可是我们的线程（模拟的用户数），通常情况下都不会只有一个，而是有多个 2.2、例子2-多个线程线程组控制参数，如下 执行结果如下： 如上图，对应的线程1，先执行线程1的第一轮和线程1的第二轮，接下来执行线程2，线程2的第一轮和线程2的第二轮……以此类推 答案是不是那么简单？ 如果真是这么简单，呵呵，我就没必要写这篇博客笔记了…… 2.3、例子3-多个线程调整启动时间我们调整线程组启动时间参数，如下 执行结果如下： 如上图，对应的线程组就不是按步就班地执行了，线程1，线程2，线程3所对应的第一轮前两个http先抢占cpu资源，先执行，等到线程1的第3个http等待3秒的时间到后，才执行线程1剩余的后3个http请求。 由此可见，前一个http加入定时器后会影响下一个http请求，等待资源期间，其他线程的http请求会抢占cpu，先执行；批量http请求的执行顺序与线程组启动时间有关； 3、总结1.同一线程组，同一轮http请求执行顺序，按从上到下顺序执行； 2.同一线程组，不同轮http请求执行顺序，与线程组的启动时间有关； 2-1）若启动时间远大于执行完一轮所需的时间，那么每一轮都会按步就班执行； 2-2）若启动时间小于执行每一轮所需的时间，那么其他线程就会直接抢占cpu资源，先执行]]></content>
+      <categories>
+        <category>jmeter</category>
+      </categories>
+      <tags>
+        <tag>jmeter学习笔记</tag>
+        <tag>jmeter</tag>
+        <tag>性能压测</tag>
+        <tag>jmeter执行顺序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用Jmeter做阶梯式加压]]></title>
+    <url>%2F2019%2F02%2F11%2Fjmeter4%2F</url>
+    <content type="text"><![CDATA[1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《Jmeter线程组内各请求的执行顺序》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Thread Group加压是有一些区别，具体后面会有介绍。 2、阶梯式加压Jmeter提供两种方式可以实现批量逐步往上加的效果，一是Stepping Thread Group，二是Concurrency Thread Group 下载方式： Jmeter Plugins Manager中下载Custom Thread Groups 如果选项中没有Plugins Manager（如下图），请自行下载，地址：https://jmeter-plugins.org/install/Install/ 使用Concurrency Thread Group,如图 Concurrency Thread Group比Stepping Thread Group优点： 1）并发线程组允许控制测试的长度2）线程在进程中间结束的情况下创建替换线程，节省内存（压测机器） 参数说明： Target Concurrency: 并发线程数 Ramp Up Time: 加速时间 Ramp-Up Steps Count: 加速步奏计数 Hold Target Rate Time: 保持目标速率运行时间 Time Unnit: 时间单位（分或秒） Thread Iterations Limit：线程迭代次数限制 Log Threads Status into File: 将线程状态记录到日志文件（线程启动和停止事件保存为日志文件） 举个栗子：Target Concurrency：10（A）Ramp Up Time： 10（B）Ramp-Up Steps Count: 10（C）Hold Target Rate Time: 1Time Unit: seconds（程序组内每个线程启动的定时器设置为1s） 由上图可以看出，每隔1s（10(C)/10(A)）启动一个线程。程序内部设置定时器也应该为1s，否则线程启动数量不可控 再达到目标线程10个，总的启动线程数量为：1+2+3+….+10 = 10(10+1)/2=55持续10个线程运行时间为1s，数量为：101=10（同理若持续为5s，则为10 * 5=50）总的线程数量为：55+10=65 注意：最终运行线程数量运算较复杂，非必要场景下，不推荐使用 3、总结Concurrency Thread Group与普通 Thread Group区别：1.最大的区别就是假设目标线程为100，运行过程中若有线程出错，普通线程组最终运行的目标线程会小于100，而Concurrency Thread Group最终运行的目标线程始终会保持100 2.普通线程组若想查看其中错误的线程出错，根据日志是很难查找得到的（当目标线程很大的情况下），而Concurrency Thread Group可以将错误的线程保存在日志文件中，更容易得到错误线程的报错信息]]></content>
+      <categories>
+        <category>jmeter</category>
+      </categories>
+      <tags>
+        <tag>jmeter学习笔记</tag>
+        <tag>jmeter</tag>
+        <tag>性能压测</tag>
+        <tag>阶梯式加压</tag>
       </tags>
   </entry>
   <entry>
@@ -89,34 +130,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[使用Jmeter做阶梯式加压]]></title>
-    <url>%2F2019%2F02%2F11%2Fjmeter4%2F</url>
-    <content type="text"><![CDATA[1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《Jmeter线程组内各请求的执行顺序》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Thread Group加压是有一些区别，具体后面会有介绍。 2、阶梯式加压Jmeter提供两种方式可以实现批量逐步往上加的效果，一是Stepping Thread Group，二是Concurrency Thread Group 下载方式： Jmeter Plugins Manager中下载Custom Thread Groups 如果选项中没有Plugins Manager（如下图），请自行下载，地址：https://jmeter-plugins.org/install/Install/ 使用Concurrency Thread Group,如图 Concurrency Thread Group比Stepping Thread Group优点： 1）并发线程组允许控制测试的长度2）线程在进程中间结束的情况下创建替换线程，节省内存（压测机器） 参数说明： Target Concurrency: 并发线程数 Ramp Up Time: 加速时间 Ramp-Up Steps Count: 加速步奏计数 Hold Target Rate Time: 保持目标速率运行时间 Time Unnit: 时间单位（分或秒） Thread Iterations Limit：线程迭代次数限制 Log Threads Status into File: 将线程状态记录到日志文件（线程启动和停止事件保存为日志文件） 举个栗子：Target Concurrency：10（A）Ramp Up Time： 10（B）Ramp-Up Steps Count: 10（C）Hold Target Rate Time: 1Time Unit: seconds（程序组内每个线程启动的定时器设置为1s） 由上图可以看出，每隔1s（10(C)/10(A)）启动一个线程。程序内部设置定时器也应该为1s，否则线程启动数量不可控 再达到目标线程10个，总的启动线程数量为：1+2+3+….+10 = 10(10+1)/2=55持续10个线程运行时间为1s，数量为：101=10（同理若持续为5s，则为10 * 5=50）总的线程数量为：55+10=65 注意：最终运行线程数量运算较复杂，非必要场景下，不推荐使用 3、总结Concurrency Thread Group与普通 Thread Group区别：1.最大的区别就是假设目标线程为100，运行过程中若有线程出错，普通线程组最终运行的目标线程会小于100，而Concurrency Thread Group最终运行的目标线程始终会保持100 2.普通线程组若想查看其中错误的线程出错，根据日志是很难查找得到的（当目标线程很大的情况下），而Concurrency Thread Group可以将错误的线程保存在日志文件中，更容易得到错误线程的报错信息]]></content>
-      <categories>
-        <category>jmeter</category>
-      </categories>
-      <tags>
-        <tag>jmeter学习笔记</tag>
-        <tag>jmeter</tag>
-        <tag>性能压测</tag>
-        <tag>阶梯式加压</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Jmeter线程组内各请求的执行顺序]]></title>
-    <url>%2F2019%2F02%2F11%2Fjmeter2%2F</url>
-    <content type="text"><![CDATA[1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘假设有5个http请求，其中第3个http加入固定定时器，等待3秒，如图 2.1、例子1-单个线程线程组控制参数，如下 执行结果如下： 可是我们的线程（模拟的用户数），通常情况下都不会只有一个，而是有多个 2.2、例子2-多个线程线程组控制参数，如下 执行结果如下： 如上图，对应的线程1，先执行线程1的第一轮和线程1的第二轮，接下来执行线程2，线程2的第一轮和线程2的第二轮……以此类推 答案是不是那么简单？ 如果真是这么简单，呵呵，我就没必要写这篇博客笔记了…… 2.3、例子3-多个线程调整启动时间我们调整线程组启动时间参数，如下 执行结果如下： 如上图，对应的线程组就不是按步就班地执行了，线程1，线程2，线程3所对应的第一轮前两个http先抢占cpu资源，先执行，等到线程1的第3个http等待3秒的时间到后，才执行线程1剩余的后3个http请求。 由此可见，前一个http加入定时器后会影响下一个http请求，等待资源期间，其他线程的http请求会抢占cpu，先执行；批量http请求的执行顺序与线程组启动时间有关； 3、总结1.同一线程组，同一轮http请求执行顺序，按从上到下顺序执行； 2.同一线程组，不同轮http请求执行顺序，与线程组的启动时间有关； 2-1）若启动时间远大于执行完一轮所需的时间，那么每一轮都会按步就班执行； 2-2）若启动时间小于执行每一轮所需的时间，那么其他线程就会直接抢占cpu资源，先执行]]></content>
-      <categories>
-        <category>jmeter</category>
-      </categories>
-      <tags>
-        <tag>jmeter学习笔记</tag>
-        <tag>jmeter</tag>
-        <tag>性能压测</tag>
-        <tag>jmeter执行顺序</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[DOM编程之渲染引擎原理]]></title>
     <url>%2F2019%2F02%2F11%2Fhpjavascript3-1%2F</url>
     <content type="text"><![CDATA[1、背景 浏览器引擎主要由两部分组成：渲染引擎（rendering engine）和js解析器（javascript interpreter） 参考浏览器工作原理：http://domenicodefelice.blogspot.com/2015/08/how-browsers-work.html?t=2]]></content>
@@ -130,7 +143,7 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[作用域管理原理]]></title>
+    <title><![CDATA[高性能JavaScript系列-作用域管理原理]]></title>
     <url>%2F2019%2F02%2F11%2Fhpjavascript2-1%2F</url>
     <content type="text"><![CDATA[1、执行环境context执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁 1234function add(num1, num2)&#123; var sum = num1 + num2; return ;&#125; 2、作用域链与活动对象每个执行环境都有自己的作用域链，用于解析标识符。如图 当执行环境被创建时，它的作用域链初始化为当前运行函数的[Scope]属性中的对象。这些值按照它们出现在函数中的顺序，被复制到执行环境的作用域链中这个过程一旦完成，一个称为“活动对象”(activation Object)的新对象在执行环境中创建好了如上图，活动对象与其他的对象在一个队列中，作用链的最顶端为活动对象，当执行环境被销毁，活动对象也随之销毁 在函数执行过程中，每遇到一个变量，都会经历一次标识符解析过程： 搜索过程从作用域链头部开始搜索（当前活动对象）该变量标识符 如找到则使用，直接使用该标识符 如没有找到，继续搜索作用域链的下一个对象，直到找到为止 若作用域链中所有对象中都没有找到该标识符，那么该标识符被视为未定义的。 全局变量总是存在于执行环境作用域链的最末端，因此它是最远的。要想提高代码性能，请将函数内的全局变量转化成局部变量，提高读取标识符解析速度。 3、改变作用域链一般来说，一个执行环境的作用域链是不会改变的，但是有两个语句可以使其发生改变：1.with语句2.try-catch中catch子句 4、优化JavaScript代码策略1.访问字面量和局部变量的速度最快，相反，访问数组元素和对象成员相对较慢 2.由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨域变量更快。变量在作用域链的位置越深，访问的速度越慢。由于全局变量总处于作用域链的最末端，因此访问的速度也是最慢的 3.避免使用with语句，因为它会改变执行环境的作用域链，同样，try-catch语句中的catch子句也有同样的影响，因此要小心使用 4.嵌套的对象成员会明显影响性能，因此尽量少用 5.属性和方法在原型链中的位置越深，访问它的速度也就越慢 6.通常来说，你可以通过把常用的对象成员，数组元素，跨域变量保存在局部变量中来改善JavaScript性能，因为局部变量访问的速度更快。以空间换时间的代价，需要自己权衡]]></content>
       <categories>
@@ -143,7 +156,7 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[无阻塞加载js文件]]></title>
+    <title><![CDATA[高性能JavaScript系列-无阻塞加载js文件]]></title>
     <url>%2F2019%2F02%2F11%2Fhpjavascript1%2F</url>
     <content type="text"><![CDATA[代码11&lt;script type=&quot;text/javascript&quot; src=&quot;file1.js&quot;&gt;&lt;/script&gt; 代码2 1234var script = document.createElement(&quot;script&quot;);script.type = &quot;text/javascript&quot;;script.src = &quot;file1.js&quot;document.getElementsByTagName(&quot;head&quot;)[0].appendChild(script); 代码1与代码2的异同： 代码1在执行过程中，文件下载后会立刻执行，堵塞页面的其他进程（如其他下载进程） 代码2在执行过程中，文件下载和执行过程不会堵塞页面的其他进程，直到DOM加载完成，因此该方法可以与其他资源并行下载 有多种无堵塞下载JavaScript的方法： 1. 使用script标签的defer属性 2. 使用动态创建的script元素来下载并执行代码 3. 使用XHR对象下载JavaScript代码并注入页面中 以上三种方法各有缺点： 1-1) 支持的浏览器较少 2-1) IE内核浏览器需要额外处理 3-1) 不支持CDN下载]]></content>
       <categories>
