@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Alan&#39;s Blog">
 <meta property="og:description" content="1、背景与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？ 2.编辑机制直观上理解javascript是在运行时一行一行代码往下执行的，但实际上并非如此。 考虑下面的例子：1234// 例子Aa = 1;var a;console.log(a); 你认为输出的结果会是什么呢？ 有人会认为第">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-23T10:53:50.498Z">
+<meta property="og:updated_time" content="2019-04-23T10:54:37.641Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你不知道的javascript系列-初探js编译机制">
 <meta name="twitter:description" content="1、背景与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？ 2.编辑机制直观上理解javascript是在运行时一行一行代码往下执行的，但实际上并非如此。 考虑下面的例子：1234// 例子Aa = 1;var a;console.log(a); 你认为输出的结果会是什么呢？ 有人会认为第">
@@ -475,7 +475,7 @@
                 
               
 
-              <time title="创建时间：2019-04-23 17:13:10 / 修改时间：18:53:50" itemprop="dateCreated datePublished" datetime="2019-04-23T17:13:10+08:00">2019-04-23</time>
+              <time title="创建时间：2019-04-23 17:13:10 / 修改时间：18:54:37" itemprop="dateCreated datePublished" datetime="2019-04-23T17:13:10+08:00">2019-04-23</time>
             
 
             
@@ -561,7 +561,7 @@
 <blockquote>
 <p>1）词法分析<br>2）语法分析<br>3）语义分析和中间代码生成<br>4）优化<br>5）目标代码生成</p>
 </blockquote>
-<p>在前三个阶段当中，其实作用域已经很明了，<strong>包括变量和函数在内的所有声明都会在任何代码执行前首先被处理</strong>。这也间接说明为什么不能使用eval和with等函数。</p>
+<p>在前三个阶段当中，其实作用域已经很明了，<strong>包括变量和函数在内的所有声明都会在任何代码执行前首先被处理</strong>。这也间接说明为什么不建议使用eval和with等函数。</p>
 <p>根据上述编译过程的第三阶段，那么我们回过头分析上述两个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子A-分析</span></span><br><span class="line">a = <span class="number">1</span>; <span class="comment">// 赋值，等待执行</span></span><br><span class="line"><span class="keyword">var</span> a; <span class="comment">// 声明，被提取</span></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 打印，等待执行</span></span><br></pre></td></tr></table></figure></p>
 <p>那么最终目标代码生成如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子A-分析</span></span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line">a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure></p>
 <p>同理，可自行分析例子B。</p>
