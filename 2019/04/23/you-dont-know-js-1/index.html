@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Alan&#39;s Blog">
 <meta property="og:description" content="1、背景与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？ 2.编辑机制直观上理解javascript是在运行时一行一行代码往下执行的，但实际上并非如此。 考虑下面的例子：1234// 例子Aa = 1;var a;console.log(a); 你认为输出的结果会是什么呢？ 有人会认为第">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-23T10:51:14.615Z">
+<meta property="og:updated_time" content="2019-04-23T10:53:50.498Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你不知道的javascript系列-初探js编译机制">
 <meta name="twitter:description" content="1、背景与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？ 2.编辑机制直观上理解javascript是在运行时一行一行代码往下执行的，但实际上并非如此。 考虑下面的例子：1234// 例子Aa = 1;var a;console.log(a); 你认为输出的结果会是什么呢？ 有人会认为第">
@@ -475,7 +475,7 @@
                 
               
 
-              <time title="创建时间：2019-04-23 17:13:10 / 修改时间：18:51:14" itemprop="dateCreated datePublished" datetime="2019-04-23T17:13:10+08:00">2019-04-23</time>
+              <time title="创建时间：2019-04-23 17:13:10 / 修改时间：18:53:50" itemprop="dateCreated datePublished" datetime="2019-04-23T17:13:10+08:00">2019-04-23</time>
             
 
             
@@ -556,7 +556,7 @@
 <p>让我们再看另外一个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子B</span></span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
 <p>你认为输出的结果会是什么呢？</p>
 <p>有人认为上述代码在第一行就会抛出异常，或者认为上述最终会输出1，但其实上述代码最终输出的结果会是undefined.</p>
-<p>由上述例子我们可对js编译阶段有了初步的了解，编译阶段的一部分工作就是找到所有声明，并使用合适的作用域将他们关联起来。关于作用域，前面有介绍过<a href="https://ctq123.github.io/2019/04/23/hpjavascript2-1.1/#more" target="_blank" rel="noopener">高性能JavaScript系列-作用域管理原理</a></p>
+<p>由上述例子我们可对js编译阶段有了初步的了解，编译阶段的一部分工作就是找到所有声明，并使用合适的作用域将他们关联起来。关于作用域，前面有介绍过<a href="https://ctq123.github.io/2019/04/23/hpjavascript2-1.1/#more" target="_blank" rel="noopener">《高性能JavaScript系列-作用域管理原理》</a></p>
 <p>让我们再次回忆一下《编译原理》中的编译过程：</p>
 <blockquote>
 <p>1）词法分析<br>2）语法分析<br>3）语义分析和中间代码生成<br>4）优化<br>5）目标代码生成</p>
