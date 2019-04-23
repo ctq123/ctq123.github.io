@@ -290,7 +290,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">23</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">25</span></a>
 
   </li>
         
@@ -428,7 +428,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/hpjavascript2-1.1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/you-dont-know-js-1/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alan">
@@ -448,7 +448,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/04/23/hpjavascript2-1.1/" class="post-title-link" itemprop="http://yoursite.com/index.html">高性能JavaScript系列-作用域管理原理</a>
+                <a href="/2019/04/23/you-dont-know-js-1/" class="post-title-link" itemprop="http://yoursite.com/index.html">你不知道的javascript系列-初探js编译机制</a>
               
             
           </h1>
@@ -473,9 +473,13 @@
                 
               
 
-              <time title="创建时间：2019-04-23 17:13:10" itemprop="dateCreated datePublished" datetime="2019-04-23T17:13:10+08:00">2019-04-23</time>
+              <time title="创建时间：2019-04-23 17:13:10 / 修改时间：18:51:14" itemprop="dateCreated datePublished" datetime="2019-04-23T17:13:10+08:00">2019-04-23</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -527,13 +531,14 @@
       
         
           
-          1、执行环境context执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁
-1234funct
+          1、背景与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？
+2.编辑机制直观上理解javascript是在运行时一行一行代码往下执行的，但实际上并非如此。
+考虑下面的例子：1234// 例子
           ...
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/04/23/hpjavascript2-1.1/#more" rel="contents">
+              <a class="btn" href="/2019/04/23/you-dont-know-js-1/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2285,7 +2290,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
