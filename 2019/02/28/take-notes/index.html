@@ -131,14 +131,14 @@
 
 
   <meta name="description" content="1.图表绘制底层Canvas, SVG, VML的对比，各适用场景1.性能对比：Canvas的性能受画布尺寸大小影响更大，SVG的性能受图形元素个数影响更大；2.适用场景：2-1）Canvas可以轻松应对大量数据和动态特效展现的场景；2-2）SVG可以在移动端展示，使其不再为内存而担忧；2-3）VML可以兼容低版本IE； 2.let和var区别1.let定义了块级作用域，只在代码块内有效；2.le">
-<meta name="keywords" content="let var const,canvas svg vml,js时间戳">
+<meta name="keywords" content="let var const,canvas svg vml,js时间戳,你不知道的javascript,高性能javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="随手笔记">
 <meta property="og:url" content="http://yoursite.com/2019/02/28/take-notes/index.html">
 <meta property="og:site_name" content="Alan&#39;s Blog">
 <meta property="og:description" content="1.图表绘制底层Canvas, SVG, VML的对比，各适用场景1.性能对比：Canvas的性能受画布尺寸大小影响更大，SVG的性能受图形元素个数影响更大；2.适用场景：2-1）Canvas可以轻松应对大量数据和动态特效展现的场景；2-2）SVG可以在移动端展示，使其不再为内存而担忧；2-3）VML可以兼容低版本IE； 2.let和var区别1.let定义了块级作用域，只在代码块内有效；2.le">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-22T10:29:47.213Z">
+<meta property="og:updated_time" content="2019-04-24T06:14:51.452Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="随手笔记">
 <meta name="twitter:description" content="1.图表绘制底层Canvas, SVG, VML的对比，各适用场景1.性能对比：Canvas的性能受画布尺寸大小影响更大，SVG的性能受图形元素个数影响更大；2.适用场景：2-1）Canvas可以轻松应对大量数据和动态特效展现的场景；2-2）SVG可以在移动端展示，使其不再为内存而担忧；2-3）VML可以兼容低版本IE； 2.let和var区别1.let定义了块级作用域，只在代码块内有效；2.le">
@@ -294,7 +294,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">25</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">30</span></a>
 
   </li>
         
@@ -332,7 +332,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">14</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">16</span></a>
 
   </li>
         
@@ -492,7 +492,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-22 18:29:47" itemprop="dateModified" datetime="2019-04-22T18:29:47+08:00">2019-04-22</time>
+                <time title="修改时间：2019-04-24 14:14:51" itemprop="dateModified" datetime="2019-04-24T14:14:51+08:00">2019-04-24</time>
               
             
           </span>
@@ -570,7 +570,7 @@
 <h2 id="4-js获取时间戳方法"><a href="#4-js获取时间戳方法" class="headerlink" title="4.js获取时间戳方法"></a>4.js获取时间戳方法</h2><p>1) var cur = Date.parse(new Date());<br>2) var cur = (new Date()).valueOf();<br>3) var cur = new Date().getTime();<br>4) var cur = Date.now();</p>
 <h2 id="5-匿名函数的递归arguments-callee"><a href="#5-匿名函数的递归arguments-callee" class="headerlink" title="5.匿名函数的递归arguments.callee"></a>5.匿名函数的递归arguments.callee</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i++)</span><br><span class="line">  i === <span class="number">60</span> &amp;&amp; i = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">arguments</span>.callee();</span><br><span class="line">&#125;)(); <span class="comment">// 不断打印0-59的死循环</span></span><br></pre></td></tr></table></figure>
 <p>但是由于arguments.callee每次递归时需要重新创建，浪费内存资源，现已不推荐使用。</p>
-
+<h2 id="6"><a href="#6" class="headerlink" title="6."></a>6.</h2>
       
     </div>
 
@@ -622,6 +622,10 @@
             <a href="/tags/canvas-svg-vml/" rel="tag"><i class="fa fa-tag"></i> canvas svg vml</a>
           
             <a href="/tags/js时间戳/" rel="tag"><i class="fa fa-tag"></i> js时间戳</a>
+          
+            <a href="/tags/你不知道的javascript/" rel="tag"><i class="fa fa-tag"></i> 你不知道的javascript</a>
+          
+            <a href="/tags/高性能javascript/" rel="tag"><i class="fa fa-tag"></i> 高性能javascript</a>
           
         </div>
       
@@ -725,7 +729,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -811,7 +815,17 @@
                     
                       
                     
-                    <span class="site-state-item-count">25</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -872,7 +886,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-图表绘制底层Canvas-SVG-VML的对比，各适用场景"><span class="nav-number">1.</span> <span class="nav-text">1.图表绘制底层Canvas, SVG, VML的对比，各适用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-let和var区别"><span class="nav-number">2.</span> <span class="nav-text">2.let和var区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-const变量"><span class="nav-number">3.</span> <span class="nav-text">3.const变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-js获取时间戳方法"><span class="nav-number">4.</span> <span class="nav-text">4.js获取时间戳方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-匿名函数的递归arguments-callee"><span class="nav-number">5.</span> <span class="nav-text">5.匿名函数的递归arguments.callee</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-图表绘制底层Canvas-SVG-VML的对比，各适用场景"><span class="nav-number">1.</span> <span class="nav-text">1.图表绘制底层Canvas, SVG, VML的对比，各适用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-let和var区别"><span class="nav-number">2.</span> <span class="nav-text">2.let和var区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-const变量"><span class="nav-number">3.</span> <span class="nav-text">3.const变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-js获取时间戳方法"><span class="nav-number">4.</span> <span class="nav-text">4.js获取时间戳方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-匿名函数的递归arguments-callee"><span class="nav-number">5.</span> <span class="nav-text">5.匿名函数的递归arguments.callee</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6"><span class="nav-number">6.</span> <span class="nav-text">6.</span></a></li></ol></div>
             
 
           </div>

@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[js运行机制]]></title>
+    <url>%2F2019%2F04%2F24%2Fjs-thread-event-lood%2F</url>
+    <content type="text"><![CDATA[1、背景]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>运行机制</tag>
+        <tag>事件循环</tag>
+        <tag>js线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[你不知道的javascript系列-闭包的理解]]></title>
+    <url>%2F2019%2F04%2F24%2Fyou-dont-know-js-2%2F</url>
+    <content type="text"><![CDATA[1、背景与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？ 2.编辑机制]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>你不知道的javascript</tag>
+        <tag>闭包</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[你不知道的javascript系列-初探js编译机制]]></title>
     <url>%2F2019%2F04%2F23%2Fyou-dont-know-js-1%2F</url>
-    <content type="text"><![CDATA[1、背景与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？ 2.编辑机制直观上理解javascript是在运行时一行一行代码往下执行的，但实际上并非如此。 考虑下面的例子：1234// 例子Aa = 1;var a;console.log(a); 你认为输出的结果会是什么呢？ 有人会认为第一行就会抛出错误，也有人认为最终会输出undefined，但其实上述代码没有问题，最终输出的结果为1. 让我们再看另外一个例子：123// 例子Bconsole.log(b);var b = 1; 你认为输出的结果会是什么呢？ 有人认为上述代码在第一行就会抛出异常，或者认为上述最终会输出1，但其实上述代码最终输出的结果会是undefined. 由上述例子我们可对js编译阶段有了初步的了解，编译阶段的一部分工作就是找到所有声明，并使用合适的作用域将他们关联起来。关于作用域，前面有介绍过《高性能JavaScript系列-作用域管理原理》 让我们再次回忆一下《编译原理》中的编译过程： 1）词法分析2）语法分析3）语义分析和中间代码生成4）优化5）目标代码生成 javascript引擎进行编译的步骤与传统编译语言的编译步骤非常相似，在某些步骤中会比预想中要复杂。 在前三个阶段当中，其实作用域已经很明了，包括变量和函数在内的所有声明都会在任何代码执行前首先被处理。这也间接说明为什么不建议使用eval和with等函数。 根据上述编译过程的第三阶段，那么我们回过头分析上述例子A：1234// 例子A-分析a = 1; // 赋值，等待执行var a; // 声明，被提取console.log(a); // 打印，等待执行 那么最终目标代码生成如下：1234// 例子A-分析var a;a = 1;console.log(a); 同理，可自行分析例子B。 至此，你是不是对js编译机制有了初步的认识？ ^……^ 接下来，让我们看另外一个例子C：1234// 例子Cc = 1;let c;console.log(c); ES6新增两个属性let和const，let通常要与var对比理解才更深刻一些。上述例子C与前面提到的例子A非常相似，那么结果是不是一样都输出1呢？答案是否定的，输出的结果是第一行会抛出异常c is not undefined。 两个例子几乎是一致的，编译过程也是一样的，结果却是天壤之别，下面让我们分析一下。 let与var最大的差别是let声明时会立刻创建一个块作用域，而var并没有块作用域概念，通常充当一个全局作用域的角色，会被提取当前作用域最顶端。因此，例子C分析如下： 1234// 例子C-分析c = 1; // 赋值，等待执行let c; // 声明，创建块作用域console.log(c); // 打印，等待执行 那么最终目标代码生成如下：123456// 例子C-分析c = 1;&#123; let c; console.log(c);&#125; 因此，这也是为什么在第一行就抛出c is not undefined的异常错误。 3.总结1）包括变量和函数在内的所有声明都会在任何代码执行前首先被处理。2）当变量和函数出现相同名称时，函数声明会被优先提升（var类型变量），与声明的顺序无关。]]></content>
+    <content type="text"><![CDATA[1、背景与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？ 2.编辑机制直观上理解javascript是在运行时一行一行代码往下执行的，但实际上并非如此。 考虑下面的例子：1234// 例子Aa = 1;var a;console.log(a); 你认为输出的结果会是什么呢？ 有人会认为第一行就会抛出错误，也有人认为最终会输出undefined，但其实上述代码没有问题，最终输出的结果为1. 让我们再看另外一个例子：123// 例子Bconsole.log(b);var b = 1; 你认为输出的结果会是什么呢？ 有人认为上述代码在第一行就会抛出异常，或者认为上述最终会输出1，但其实上述代码最终输出的结果会是undefined. 由上述例子我们可对js编译阶段有了初步的了解，编译阶段的一部分工作就是找到所有声明，并使用合适的作用域将他们关联起来。关于作用域，前面有介绍过《高性能JavaScript系列-作用域管理原理》 让我们再次回忆一下《编译原理》中的编译过程： 1）词法分析2）语法分析3）语义分析和中间代码生成4）优化5）目标代码生成 javascript引擎进行编译的步骤与传统编译语言的编译步骤非常相似，在某些步骤中会比预想中要复杂。 在前三个阶段当中，其实作用域已经很明了，包括变量和函数在内的所有声明都会在任何代码执行前首先被处理。这也间接说明为什么不建议使用eval和with等函数。 根据上述编译过程的第三阶段，那么我们回过头分析上述例子A：1234// 例子A-分析a = 1; // 赋值，等待执行var a; // 声明，并被提取到当前作用域最顶端console.log(a); // 打印，等待执行 那么最终目标代码生成如下：1234// 例子A-分析var a;a = 1;console.log(a); 同理，可自行分析例子B。 至此，你是不是对js编译机制有了初步的认识？ ^……^ 接下来，让我们看另外一个例子C：1234// 例子Cc = 1;let c;console.log(c); ES6新增两个属性let和const，let通常要与var对比理解才更深刻一些。上述例子C与前面提到的例子A非常相似，那么结果是不是一样都输出1呢？答案是否定的，输出的结果是第一行会抛出异常c is not undefined。 两个例子几乎是一致的，编译过程也是一样的，结果却是天壤之别，下面让我们分析一下。 let与var最大的差别是：let声明时会立刻创建一个块作用域，并提取到创建块作用域的顶端；而var并没有块作用域概念，通常充当一个全局作用域的角色，会被提取到当前全局作用域的最顶端。具体详情可参考前面提到的《高性能JavaScript系列-作用域管理原理》 因此，例子C分析如下： 1234// 例子C-分析c = 1; // 赋值，等待执行let c; // 声明，创建块作用域，并被提取到当前作用域最顶端console.log(c); // 打印，等待执行 那么最终目标代码生成如下：123456// 例子C-分析c = 1;&#123; let c; console.log(c);&#125; 因此，这也是为什么在第一行就抛出c is not undefined的异常错误。 3.总结1）包括变量和函数在内的所有声明都会在任何代码执行前首先被处理。2）当变量和函数出现相同名称时，函数声明会被优先提升（var类型变量），与声明的顺序无关。]]></content>
       <categories>
         <category>javascript</category>
       </categories>
@@ -38,7 +63,7 @@
   <entry>
     <title><![CDATA[随手笔记]]></title>
     <url>%2F2019%2F02%2F28%2Ftake-notes%2F</url>
-    <content type="text"><![CDATA[1.图表绘制底层Canvas, SVG, VML的对比，各适用场景1.性能对比：Canvas的性能受画布尺寸大小影响更大，SVG的性能受图形元素个数影响更大；2.适用场景：2-1）Canvas可以轻松应对大量数据和动态特效展现的场景；2-2）SVG可以在移动端展示，使其不再为内存而担忧；2-3）VML可以兼容低版本IE； 2.let和var区别1.let定义了块级作用域，只在代码块内有效；2.let在同一作用域内，不允许重复声明同一个变量，但允许在垮作用域声明同一个变量；3.ES5只有全局作用域和函数作用域： 全局作用域，局部作用域会覆盖全局作用域函数作用域，用来计数的循环变量会泄露为全局变量12345678for (var i = 0; i &lt; 10; i++) &#123; // ...&#125;console.log(i)// 10for (let i = 0; i &lt; 10; i++) &#123; // ...&#125;console.log(i)// 报错 此外，for的每一次循环相当于一个新的块级作用域，var是不断覆盖老的变量（在整个for循环体内有效），而let则是声明新的变量（只在本轮循环有效） 3.const变量1.const声明一个常量，它实际保证的并非是它的值不变，而是保证变量指向那个内存地址所保存的数据不得改动（对简单类型如数值，字符串，布尔值好理解，但对复合型如对象和数组，则需要理解指针地址的概念）2.const声明一个常量必须立刻初始化赋值；3.const作用域与let作用域相同； 4.js获取时间戳方法1) var cur = Date.parse(new Date());2) var cur = (new Date()).valueOf();3) var cur = new Date().getTime();4) var cur = Date.now(); 5.匿名函数的递归arguments.callee123456var i = 0;(function()&#123; console.log(i++) i === 60 &amp;&amp; i = 0; arguments.callee();&#125;)(); // 不断打印0-59的死循环 但是由于arguments.callee每次递归时需要重新创建，浪费内存资源，现已不推荐使用。]]></content>
+    <content type="text"><![CDATA[1.图表绘制底层Canvas, SVG, VML的对比，各适用场景1.性能对比：Canvas的性能受画布尺寸大小影响更大，SVG的性能受图形元素个数影响更大；2.适用场景：2-1）Canvas可以轻松应对大量数据和动态特效展现的场景；2-2）SVG可以在移动端展示，使其不再为内存而担忧；2-3）VML可以兼容低版本IE； 2.let和var区别1.let定义了块级作用域，只在代码块内有效；2.let在同一作用域内，不允许重复声明同一个变量，但允许在垮作用域声明同一个变量；3.ES5只有全局作用域和函数作用域： 全局作用域，局部作用域会覆盖全局作用域函数作用域，用来计数的循环变量会泄露为全局变量12345678for (var i = 0; i &lt; 10; i++) &#123; // ...&#125;console.log(i)// 10for (let i = 0; i &lt; 10; i++) &#123; // ...&#125;console.log(i)// 报错 此外，for的每一次循环相当于一个新的块级作用域，var是不断覆盖老的变量（在整个for循环体内有效），而let则是声明新的变量（只在本轮循环有效） 3.const变量1.const声明一个常量，它实际保证的并非是它的值不变，而是保证变量指向那个内存地址所保存的数据不得改动（对简单类型如数值，字符串，布尔值好理解，但对复合型如对象和数组，则需要理解指针地址的概念）2.const声明一个常量必须立刻初始化赋值；3.const作用域与let作用域相同； 4.js获取时间戳方法1) var cur = Date.parse(new Date());2) var cur = (new Date()).valueOf();3) var cur = new Date().getTime();4) var cur = Date.now(); 5.匿名函数的递归arguments.callee123456var i = 0;(function()&#123; console.log(i++) i === 60 &amp;&amp; i = 0; arguments.callee();&#125;)(); // 不断打印0-59的死循环 但是由于arguments.callee每次递归时需要重新创建，浪费内存资源，现已不推荐使用。 6.]]></content>
       <categories>
         <category>javascript</category>
       </categories>
@@ -46,6 +71,8 @@
         <tag>let var const</tag>
         <tag>canvas svg vml</tag>
         <tag>js时间戳</tag>
+        <tag>你不知道的javascript</tag>
+        <tag>高性能javascript</tag>
       </tags>
   </entry>
   <entry>
@@ -73,35 +100,7 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Jmeter线程组内各请求的执行顺序]]></title>
-    <url>%2F2019%2F02%2F11%2Fjmeter2%2F</url>
-    <content type="text"><![CDATA[1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘假设有5个http请求，其中第3个http加入固定定时器，等待3秒，如图 2.1、例子1-单个线程线程组控制参数，如下 执行结果如下： 可是我们的线程（模拟的用户数），通常情况下都不会只有一个，而是有多个 2.2、例子2-多个线程线程组控制参数，如下 执行结果如下： 如上图，对应的线程1，先执行线程1的第一轮和线程1的第二轮，接下来执行线程2，线程2的第一轮和线程2的第二轮……以此类推 答案是不是那么简单？ 如果真是这么简单，呵呵，我就没必要写这篇博客笔记了…… 2.3、例子3-多个线程调整启动时间我们调整线程组启动时间参数，如下 执行结果如下： 如上图，对应的线程组就不是按步就班地执行了，线程1，线程2，线程3所对应的第一轮前两个http先抢占cpu资源，先执行，等到线程1的第3个http等待3秒的时间到后，才执行线程1剩余的后3个http请求。 由此可见，前一个http加入定时器后会影响下一个http请求，等待资源期间，其他线程的http请求会抢占cpu，先执行；批量http请求的执行顺序与线程组启动时间有关； 3、总结1.同一线程组，同一轮http请求执行顺序，按从上到下顺序执行； 2.同一线程组，不同轮http请求执行顺序，与线程组的启动时间有关； 2-1）若启动时间远大于执行完一轮所需的时间，那么每一轮都会按步就班执行； 2-2）若启动时间小于执行每一轮所需的时间，那么其他线程就会直接抢占cpu资源，先执行]]></content>
-      <categories>
-        <category>jmeter</category>
-      </categories>
-      <tags>
-        <tag>jmeter学习笔记</tag>
-        <tag>jmeter</tag>
-        <tag>性能压测</tag>
-        <tag>jmeter执行顺序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[使用Jmeter做阶梯式加压]]></title>
-    <url>%2F2019%2F02%2F11%2Fjmeter4%2F</url>
-    <content type="text"><![CDATA[1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《Jmeter线程组内各请求的执行顺序》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Thread Group加压是有一些区别，具体后面会有介绍。 2、阶梯式加压Jmeter提供两种方式可以实现批量逐步往上加的效果，一是Stepping Thread Group，二是Concurrency Thread Group 下载方式： Jmeter Plugins Manager中下载Custom Thread Groups 如果选项中没有Plugins Manager（如下图），请自行下载，地址：https://jmeter-plugins.org/install/Install/ 使用Concurrency Thread Group,如图 Concurrency Thread Group比Stepping Thread Group优点： 1）并发线程组允许控制测试的长度2）线程在进程中间结束的情况下创建替换线程，节省内存（压测机器） 参数说明： Target Concurrency: 并发线程数 Ramp Up Time: 加速时间 Ramp-Up Steps Count: 加速步奏计数 Hold Target Rate Time: 保持目标速率运行时间 Time Unnit: 时间单位（分或秒） Thread Iterations Limit：线程迭代次数限制 Log Threads Status into File: 将线程状态记录到日志文件（线程启动和停止事件保存为日志文件） 举个栗子：Target Concurrency：10（A）Ramp Up Time： 10（B）Ramp-Up Steps Count: 10（C）Hold Target Rate Time: 1Time Unit: seconds（程序组内每个线程启动的定时器设置为1s） 由上图可以看出，每隔1s（10(C)/10(A)）启动一个线程。程序内部设置定时器也应该为1s，否则线程启动数量不可控 再达到目标线程10个，总的启动线程数量为：1+2+3+….+10 = 10(10+1)/2=55持续10个线程运行时间为1s，数量为：101=10（同理若持续为5s，则为10 * 5=50）总的线程数量为：55+10=65 注意：最终运行线程数量运算较复杂，非必要场景下，不推荐使用 3、总结Concurrency Thread Group与普通 Thread Group区别：1.最大的区别就是假设目标线程为100，运行过程中若有线程出错，普通线程组最终运行的目标线程会小于100，而Concurrency Thread Group最终运行的目标线程始终会保持100 2.普通线程组若想查看其中错误的线程出错，根据日志是很难查找得到的（当目标线程很大的情况下），而Concurrency Thread Group可以将错误的线程保存在日志文件中，更容易得到错误线程的报错信息]]></content>
-      <categories>
-        <category>jmeter</category>
-      </categories>
-      <tags>
-        <tag>jmeter学习笔记</tag>
-        <tag>jmeter</tag>
-        <tag>性能压测</tag>
-        <tag>阶梯式加压</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[jmeter介绍]]></title>
+    <title><![CDATA[Jmeter系列-jmeter介绍]]></title>
     <url>%2F2019%2F02%2F11%2Fjmeter1%2F</url>
     <content type="text"><![CDATA[1、简介 测试系统的负载能力和性能测试工具纯Java开发支持多种类型服务和协议界面模式和命令行模式扩展性强 2、安装和启动下载地址：https://jmeter.apache.org/download_jmeter.cgi历史版本：https://archive.apache.org/dist/jmeter/binaries/加压后双击运行 jmeter-3.3/bin/jmeter.bat 即可 3、各元件介绍jmeter有许多的元件，如图： Jmeter元件主要包括： 1.逻辑控制器（controller）2.配置元件3.定时器4.前置处理器5.采样器（Sampler）6.后置处理器7.断言8.监听器 Jmeter各元件优先级顺序： 1.配置元件2.前置处理器3.定时器4.采样器（Sampler）5.后置处理器6.断言7.监听器 Jmeter各元件是以控制器（controller）和采样器（sampler）为中心，其他元件都是围绕这两个元件进行逻辑处理。采样器一般内嵌在逻辑控制器Controller中]]></content>
       <categories>
@@ -115,7 +114,35 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Jmeter登录session共享]]></title>
+    <title><![CDATA[Jmeter系列-Jmeter线程组内各请求的执行顺序]]></title>
+    <url>%2F2019%2F02%2F11%2Fjmeter2%2F</url>
+    <content type="text"><![CDATA[1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘假设有5个http请求，其中第3个http加入固定定时器，等待3秒，如图 2.1、例子1-单个线程线程组控制参数，如下 执行结果如下： 可是我们的线程（模拟的用户数），通常情况下都不会只有一个，而是有多个 2.2、例子2-多个线程线程组控制参数，如下 执行结果如下： 如上图，对应的线程1，先执行线程1的第一轮和线程1的第二轮，接下来执行线程2，线程2的第一轮和线程2的第二轮……以此类推 答案是不是那么简单？ 如果真是这么简单，呵呵，我就没必要写这篇博客笔记了…… 2.3、例子3-多个线程调整启动时间我们调整线程组启动时间参数，如下 执行结果如下： 如上图，对应的线程组就不是按步就班地执行了，线程1，线程2，线程3所对应的第一轮前两个http先抢占cpu资源，先执行，等到线程1的第3个http等待3秒的时间到后，才执行线程1剩余的后3个http请求。 由此可见，前一个http加入定时器后会影响下一个http请求，等待资源期间，其他线程的http请求会抢占cpu，先执行；批量http请求的执行顺序与线程组启动时间有关； 3、总结1.同一线程组，同一轮http请求执行顺序，按从上到下顺序执行； 2.同一线程组，不同轮http请求执行顺序，与线程组的启动时间有关； 2-1）若启动时间远大于执行完一轮所需的时间，那么每一轮都会按步就班执行； 2-2）若启动时间小于执行每一轮所需的时间，那么其他线程就会直接抢占cpu资源，先执行]]></content>
+      <categories>
+        <category>jmeter</category>
+      </categories>
+      <tags>
+        <tag>jmeter学习笔记</tag>
+        <tag>jmeter</tag>
+        <tag>性能压测</tag>
+        <tag>jmeter执行顺序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Jmeter系列-使用Jmeter做阶梯式加压]]></title>
+    <url>%2F2019%2F02%2F11%2Fjmeter4%2F</url>
+    <content type="text"><![CDATA[1、背景有些场景，需要我们使用阶梯式加压，慢慢一批一批数量，逐渐往上加压，最高并发运行线程不能因为运行出错而减少虽然普通Thread Group也可以进行阶梯式加压，但由上一篇《Jmeter线程组内各请求的执行顺序》我们可以知道，若线程组启动时间参数设置不当，会造成线程组的加压方式并不会按照我们预想地”阶梯式加压”，有可能第一批线程还没跑完，就会先跑第二批线程。注意这里介绍的阶梯式加压，与普通Thread Group加压是有一些区别，具体后面会有介绍。 2、阶梯式加压Jmeter提供两种方式可以实现批量逐步往上加的效果，一是Stepping Thread Group，二是Concurrency Thread Group 下载方式： Jmeter Plugins Manager中下载Custom Thread Groups 如果选项中没有Plugins Manager（如下图），请自行下载，地址：https://jmeter-plugins.org/install/Install/ 使用Concurrency Thread Group,如图 Concurrency Thread Group比Stepping Thread Group优点： 1）并发线程组允许控制测试的长度2）线程在进程中间结束的情况下创建替换线程，节省内存（压测机器） 参数说明： Target Concurrency: 并发线程数 Ramp Up Time: 加速时间 Ramp-Up Steps Count: 加速步奏计数 Hold Target Rate Time: 保持目标速率运行时间 Time Unnit: 时间单位（分或秒） Thread Iterations Limit：线程迭代次数限制 Log Threads Status into File: 将线程状态记录到日志文件（线程启动和停止事件保存为日志文件） 举个栗子：Target Concurrency：10（A）Ramp Up Time： 10（B）Ramp-Up Steps Count: 10（C）Hold Target Rate Time: 1Time Unit: seconds（程序组内每个线程启动的定时器设置为1s） 由上图可以看出，每隔1s（10(C)/10(A)）启动一个线程。程序内部设置定时器也应该为1s，否则线程启动数量不可控 再达到目标线程10个，总的启动线程数量为：1+2+3+….+10 = 10(10+1)/2=55持续10个线程运行时间为1s，数量为：101=10（同理若持续为5s，则为10 * 5=50）总的线程数量为：55+10=65 注意：最终运行线程数量运算较复杂，非必要场景下，不推荐使用 3、总结Concurrency Thread Group与普通 Thread Group区别：1.最大的区别就是假设目标线程为100，运行过程中若有线程出错，普通线程组最终运行的目标线程会小于100，而Concurrency Thread Group最终运行的目标线程始终会保持100 2.普通线程组若想查看其中错误的线程出错，根据日志是很难查找得到的（当目标线程很大的情况下），而Concurrency Thread Group可以将错误的线程保存在日志文件中，更容易得到错误线程的报错信息]]></content>
+      <categories>
+        <category>jmeter</category>
+      </categories>
+      <tags>
+        <tag>jmeter学习笔记</tag>
+        <tag>jmeter</tag>
+        <tag>性能压测</tag>
+        <tag>阶梯式加压</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Jmeter系列-Jmeter登录session共享]]></title>
     <url>%2F2019%2F02%2F11%2Fjmeter3%2F</url>
     <content type="text"><![CDATA[1、背景有很多情况，我测试的接口或场景与登录操作无关，而又必须先登录才拥有对应的接口权限，测试对应的接口。那么有哪些共享session的方法？ 2、共享登录session方式2.1、利用仅一次控制器共享session（单个线程组）利用简单的仅一次控制器，处理登录操作，如下图 提取登录请求的session，然后将其保存在一个变量中即可。 然而，上述方式只适用于在当前线程组内session共享，若需要跨线程组共享一个session，那就需要使用property属性。 2.2、利用property属性共享session（多个线程组）利用Jmeter本身提供的property属性，垮线程组的session共享，使用${ __setProperty(,,) }保存，如图 然后在要用的地方，使用${ __property() }提取， 如图 3、总结仅一次控制器适用于单线程组内共享session，property属性适用于多个线程组共享session]]></content>
       <categories>
@@ -130,7 +157,7 @@
   </entry>
   <entry>
     <title><![CDATA[DOM编程之渲染引擎原理]]></title>
-    <url>%2F2019%2F02%2F11%2Fhpjavascript3-1%2F</url>
+    <url>%2F2019%2F02%2F11%2Fjs-browser-render%2F</url>
     <content type="text"><![CDATA[1、背景 浏览器引擎主要由两部分组成：渲染引擎（rendering engine）和js解析器（javascript interpreter） 参考浏览器工作原理：http://domenicodefelice.blogspot.com/2015/08/how-browsers-work.html?t=2]]></content>
       <categories>
         <category>javascript</category>
@@ -144,7 +171,7 @@
   <entry>
     <title><![CDATA[高性能JavaScript系列-作用域管理原理]]></title>
     <url>%2F2019%2F02%2F11%2Fhpjavascript2-1%2F</url>
-    <content type="text"><![CDATA[1、执行环境context首先我们需要理解什么是执行环境？其实可以简单理解为上下文执行环境，举个栗子： 1234function add(num1, num2)&#123; var sum = num1 + num2; return ;&#125; 执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁 2、作用域链与活动对象每个执行环境都有自己的作用域链，用于解析标识符。如图 当执行环境被创建时，它的作用域链初始化为当前运行函数的[Scope]属性中的对象。这些值按照它们出现在函数中的顺序，被复制到执行环境的作用域链中这个过程一旦完成，一个称为“活动对象”(activation Object)的新对象在执行环境中创建好了如上图，活动对象与其他的对象在一个队列中，作用链的最顶端为活动对象，当执行环境被销毁，活动对象也随之销毁 在函数执行过程中，每遇到一个变量，都会经历一次标识符解析过程： 搜索过程从作用域链头部开始搜索（当前活动对象）该变量标识符 如找到则使用，直接使用该标识符 如没有找到，继续搜索作用域链的下一个对象，直到找到为止 若作用域链中所有对象中都没有找到该标识符，那么该标识符被视为未定义的。 全局变量总是存在于执行环境作用域链的最末端，因此它是最远的。要想提高代码性能，请将函数内的全局变量转化成局部变量，提高读取标识符解析速度。 3、改变作用域链一般来说，一个执行环境的作用域链是不会改变的，但是有两个语句可以使其发生改变：1.with语句2.try-catch中catch子句 4、优化JavaScript代码策略1.访问字面量和局部变量的速度最快，相反，访问数组元素和对象成员相对较慢 2.由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨域变量更快。变量在作用域链的位置越深，访问的速度越慢。由于全局变量总处于作用域链的最末端，因此访问的速度也是最慢的 3.避免使用with语句，因为它会改变执行环境的作用域链，同样，try-catch语句中的catch子句也有同样的影响，因此要小心使用 4.嵌套的对象成员会明显影响性能，因此尽量少用 5.属性和方法在原型链中的位置越深，访问它的速度也就越慢 6.通常来说，你可以通过把常用的对象成员，数组元素，跨域变量保存在局部变量中来改善JavaScript性能，因为局部变量访问的速度更快。以空间换时间的代价，需要自己权衡]]></content>
+    <content type="text"><![CDATA[1、执行环境context首先我们需要理解什么是执行环境？其实可以简单理解为上下文执行环境，举个栗子： 1234function add(num1, num2)&#123; var sum = num1 + num2; return sum;&#125; 执行函数add时，会创建一个被称为执行环境（execution context）的内部对象，一个执行环境定义了一个函数执行时的环境。函数每次执行时对应的执行环境都是独一无二的，所以多次调用同一个函数会创建多个执行环境。当函数执行完成时，执行环境就会被销毁，一般情况下当垃圾回收机制开始执行时，会将其所有作用域变量销毁，但有一种情况是例外，那就是闭包，闭包却会阻止闭包本身所使用的作用域变量被销毁。 2、作用域链与活动对象每个执行环境都有自己的作用域链，用于解析标识符。如图 当执行环境被创建时，它的作用域链初始化为当前运行函数的[Scope]属性中的对象。这些值按照它们出现在函数中的顺序，被复制到执行环境的作用域链中这个过程一旦完成，一个称为“活动对象”(activation Object)的新对象在执行环境中创建好了如上图，活动对象与其他的对象在一个队列中，作用链的最顶端为活动对象，当执行环境被销毁，活动对象也随之销毁 在函数执行过程中，每遇到一个变量，都会经历一次标识符解析过程： 搜索过程从作用域链头部开始搜索（当前活动对象）该变量标识符 如找到则使用，直接使用该标识符 如没有找到，继续搜索作用域链的下一个对象，直到找到为止 若作用域链中所有对象中都没有找到该标识符，那么该标识符被视为未定义的。 全局变量总是存在于执行环境作用域链的最末端，因此它是最远的。要想提高代码性能，请将函数内的全局变量转化成局部变量，提高读取标识符解析速度。 3、改变作用域链一般来说，一个执行环境的作用域链是不会改变的，但是有两个语句可以使其发生改变：1.with语句2.try-catch中catch子句 4、优化JavaScript代码策略1.访问字面量和局部变量的速度最快，相反，访问数组元素和对象成员相对较慢 2.由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨域变量更快。变量在作用域链的位置越深，访问的速度越慢。由于全局变量总处于作用域链的最末端，因此访问的速度也是最慢的 3.避免使用with语句，因为它会改变执行环境的作用域链，同样，try-catch语句中的catch子句也有同样的影响，因此要小心使用 4.嵌套的对象成员会明显影响性能，因此尽量少用 5.属性和方法在原型链中的位置越深，访问它的速度也就越慢 6.通常来说，你可以通过把常用的对象成员，数组元素，跨域变量保存在局部变量中来改善JavaScript性能，因为局部变量访问的速度更快。以空间换时间的代价，需要自己权衡]]></content>
       <categories>
         <category>javascript</category>
       </categories>

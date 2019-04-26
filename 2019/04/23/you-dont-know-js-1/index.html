@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Alan&#39;s Blog">
 <meta property="og:description" content="1、背景与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？ 2.编辑机制直观上理解javascript是在运行时一行一行代码往下执行的，但实际上并非如此。 考虑下面的例子：1234// 例子Aa = 1;var a;console.log(a); 你认为输出的结果会是什么呢？ 有人会认为第">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-24T03:14:22.440Z">
+<meta property="og:updated_time" content="2019-04-25T03:07:48.888Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你不知道的javascript系列-初探js编译机制">
 <meta name="twitter:description" content="1、背景与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？ 2.编辑机制直观上理解javascript是在运行时一行一行代码往下执行的，但实际上并非如此。 考虑下面的例子：1234// 例子Aa = 1;var a;console.log(a); 你认为输出的结果会是什么呢？ 有人会认为第">
@@ -294,7 +294,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">25</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">30</span></a>
 
   </li>
         
@@ -332,7 +332,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">14</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">16</span></a>
 
   </li>
         
@@ -492,7 +492,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-24 11:14:22" itemprop="dateModified" datetime="2019-04-24T11:14:22+08:00">2019-04-24</time>
+                <time title="修改时间：2019-04-25 11:07:48" itemprop="dateModified" datetime="2019-04-25T11:07:48+08:00">2019-04-25</time>
               
             
           </span>
@@ -575,7 +575,7 @@
 </blockquote>
 <p>javascript引擎进行编译的步骤与传统编译语言的编译步骤非常相似，在某些步骤中会比预想中要复杂。</p>
 <p>在前三个阶段当中，其实作用域已经很明了，<strong>包括变量和函数在内的所有声明都会在任何代码执行前首先被处理</strong>。这也间接说明为什么不建议使用eval和with等函数。</p>
-<p>根据上述编译过程的第三阶段，那么我们回过头分析上述例子A：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子A-分析</span></span><br><span class="line">a = <span class="number">1</span>; <span class="comment">// 赋值，等待执行</span></span><br><span class="line"><span class="keyword">var</span> a; <span class="comment">// 声明，被提取</span></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 打印，等待执行</span></span><br></pre></td></tr></table></figure></p>
+<p>根据上述编译过程的第三阶段，那么我们回过头分析上述例子A：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子A-分析</span></span><br><span class="line">a = <span class="number">1</span>; <span class="comment">// 赋值，等待执行</span></span><br><span class="line"><span class="keyword">var</span> a; <span class="comment">// 声明，并被提取到当前作用域最顶端</span></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 打印，等待执行</span></span><br></pre></td></tr></table></figure></p>
 <p>那么最终目标代码生成如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子A-分析</span></span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line">a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure></p>
 <p>同理，可自行分析例子B。</p>
 <p>至此，你是不是对js编译机制有了初步的认识？</p>
@@ -583,8 +583,9 @@
 <p>接下来，让我们看另外一个例子C：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子C</span></span><br><span class="line">c = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> c;</span><br><span class="line"><span class="built_in">console</span>.log(c);</span><br></pre></td></tr></table></figure></p>
 <p>ES6新增两个属性let和const，let通常要与var对比理解才更深刻一些。上述例子C与前面提到的例子A非常相似，那么结果是不是一样都输出1呢？答案是否定的，输出的结果是第一行会抛出异常c is not undefined。</p>
 <p>两个例子几乎是一致的，编译过程也是一样的，结果却是天壤之别，下面让我们分析一下。</p>
-<p><strong>let与var最大的差别是let声明时会立刻创建一个块作用域，而var并没有块作用域概念，通常充当一个全局作用域的角色，会被提取当前作用域最顶端。</strong>因此，例子C分析如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子C-分析</span></span><br><span class="line">c = <span class="number">1</span>; <span class="comment">// 赋值，等待执行</span></span><br><span class="line"><span class="keyword">let</span> c; <span class="comment">// 声明，创建块作用域</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// 打印，等待执行</span></span><br></pre></td></tr></table></figure>
+<p><strong>let与var最大的差别是：let声明时会立刻创建一个块作用域，并提取到创建块作用域的顶端；而var并没有块作用域概念，通常充当一个全局作用域的角色，会被提取到当前全局作用域的最顶端。</strong>具体详情可参考前面提到的<a href="https://ctq123.github.io/2019/04/23/hpjavascript2-1.1/#more" target="_blank" rel="noopener">《高性能JavaScript系列-作用域管理原理》</a></p>
+<p>因此，例子C分析如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子C-分析</span></span><br><span class="line">c = <span class="number">1</span>; <span class="comment">// 赋值，等待执行</span></span><br><span class="line"><span class="keyword">let</span> c; <span class="comment">// 声明，创建块作用域，并被提取到当前作用域最顶端</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// 打印，等待执行</span></span><br></pre></td></tr></table></figure>
 <p>那么最终目标代码生成如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子C-分析</span></span><br><span class="line">c = <span class="number">1</span>;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> c;</span><br><span class="line">  <span class="built_in">console</span>.log(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>因此，这也是为什么在第一行就抛出c is not undefined的异常错误。</p>
 <h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h2><p>1）包括变量和函数在内的所有声明都会在任何代码执行前首先被处理。<br>2）当变量和函数出现相同名称时，函数声明会被优先提升（var类型变量），与声明的顺序无关。</p>
@@ -659,6 +660,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/24/you-dont-know-js-2/" rel="prev" title="你不知道的javascript系列-闭包的理解">
+                你不知道的javascript系列-闭包的理解 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -737,7 +742,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -823,7 +828,17 @@
                     
                       
                     
-                    <span class="site-state-item-count">25</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

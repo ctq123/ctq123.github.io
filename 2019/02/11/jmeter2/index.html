@@ -133,7 +133,7 @@
   <meta name="description" content="1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘假设有5个http请求，其中第3个http加入固定定时器，等待3秒，如图 2.1、">
 <meta name="keywords" content="jmeter学习笔记,jmeter,性能压测,jmeter执行顺序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jmeter线程组内各请求的执行顺序">
+<meta property="og:title" content="Jmeter系列-Jmeter线程组内各请求的执行顺序">
 <meta property="og:url" content="http://yoursite.com/2019/02/11/jmeter2/index.html">
 <meta property="og:site_name" content="Alan&#39;s Blog">
 <meta property="og:description" content="1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘假设有5个http请求，其中第3个http加入固定定时器，等待3秒，如图 2.1、">
@@ -145,9 +145,9 @@
 <meta property="og:image" content="http://yoursite.com/assets/jmeter2-5.png">
 <meta property="og:image" content="http://yoursite.com/assets/jmeter2-6.png">
 <meta property="og:image" content="http://yoursite.com/assets/jmeter2-7.png">
-<meta property="og:updated_time" content="2019-02-11T03:04:49.625Z">
+<meta property="og:updated_time" content="2019-04-24T06:55:20.876Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jmeter线程组内各请求的执行顺序">
+<meta name="twitter:title" content="Jmeter系列-Jmeter线程组内各请求的执行顺序">
 <meta name="twitter:description" content="1、背景在压测的过程中，我们不免会碰到一些疑惑，比如批量http的执行顺序，而这些顺序问题直接关系到我们的脚本逻辑的设计和压测结果的评估。 假设线程组一批请求中多次轮询，是否等每次轮询执行完成，才进行下一轮的请求？批量请求的http执行顺序是怎样子的？前一个http加入定时器后是否会影响下一个http请求？ 2、揭秘假设有5个http请求，其中第3个http加入固定定时器，等待3秒，如图 2.1、">
 <meta name="twitter:image" content="http://yoursite.com/assets/jmeter2-1.png">
 
@@ -166,7 +166,7 @@
   };
 </script>
 
-  <title>Jmeter线程组内各请求的执行顺序 | Alan's Blog</title>
+  <title>Jmeter系列-Jmeter线程组内各请求的执行顺序 | Alan's Blog</title>
   
 
 
@@ -302,7 +302,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">25</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">30</span></a>
 
   </li>
         
@@ -340,7 +340,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">14</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">16</span></a>
 
   </li>
         
@@ -457,7 +457,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Jmeter线程组内各请求的执行顺序
+          <h1 class="post-title" itemprop="name headline">Jmeter系列-Jmeter线程组内各请求的执行顺序
 
               
             
@@ -486,6 +486,22 @@
               <time title="创建时间：2019-02-11 11:04:49" itemprop="dateCreated datePublished" datetime="2019-02-11T11:04:49+08:00">2019-02-11</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-24 14:55:20" itemprop="dateModified" datetime="2019-04-24T14:55:20+08:00">2019-04-24</time>
+              
             
           </span>
 
@@ -637,8 +653,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/11/jmeter4/" rel="next" title="使用Jmeter做阶梯式加压">
-                <i class="fa fa-chevron-left"></i> 使用Jmeter做阶梯式加压
+              <a href="/2019/02/11/jmeter4/" rel="next" title="Jmeter系列-使用Jmeter做阶梯式加压">
+                <i class="fa fa-chevron-left"></i> Jmeter系列-使用Jmeter做阶梯式加压
               </a>
             
           </div>
@@ -647,8 +663,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/12/hpjavascript8-1/" rel="prev" title="高性能JavaScript系列-高性能JavaScript读书笔记">
-                高性能JavaScript系列-高性能JavaScript读书笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/11/jmeter1/" rel="prev" title="Jmeter系列-jmeter介绍">
+                Jmeter系列-jmeter介绍 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -728,7 +744,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -814,7 +830,17 @@
                     
                       
                     
-                    <span class="site-state-item-count">25</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
