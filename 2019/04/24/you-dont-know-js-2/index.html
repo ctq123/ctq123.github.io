@@ -130,18 +130,18 @@
 
 
 
-  <meta name="description" content="1、背景与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？ 2.编辑机制">
+  <meta name="description" content="1、背景对于那些有一点javascript使用经验但从未真正理解闭包概念的人来说，理解闭包可以看作对javascript编程艺术的升华，掌握它将会揭开javascript神秘的一面，帮助你加深理解javascript。网上有很多的文章也介绍过，但看了之后，很快就忘了，始终不得其奥义。归根到底，闭包似乎有一种只可意会不可言传的味道，直到有一天我接触到了作用域的概念，我才深深地理解了它的奥妙，也就是我">
 <meta name="keywords" content="你不知道的javascript,闭包">
 <meta property="og:type" content="article">
 <meta property="og:title" content="你不知道的javascript系列-闭包的理解">
 <meta property="og:url" content="http://yoursite.com/2019/04/24/you-dont-know-js-2/index.html">
 <meta property="og:site_name" content="Alan&#39;s Blog">
-<meta property="og:description" content="1、背景与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？ 2.编辑机制">
+<meta property="og:description" content="1、背景对于那些有一点javascript使用经验但从未真正理解闭包概念的人来说，理解闭包可以看作对javascript编程艺术的升华，掌握它将会揭开javascript神秘的一面，帮助你加深理解javascript。网上有很多的文章也介绍过，但看了之后，很快就忘了，始终不得其奥义。归根到底，闭包似乎有一种只可意会不可言传的味道，直到有一天我接触到了作用域的概念，我才深深地理解了它的奥妙，也就是我">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-24T07:05:34.162Z">
+<meta property="og:updated_time" content="2019-04-26T10:33:20.579Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你不知道的javascript系列-闭包的理解">
-<meta name="twitter:description" content="1、背景与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？ 2.编辑机制">
+<meta name="twitter:description" content="1、背景对于那些有一点javascript使用经验但从未真正理解闭包概念的人来说，理解闭包可以看作对javascript编程艺术的升华，掌握它将会揭开javascript神秘的一面，帮助你加深理解javascript。网上有很多的文章也介绍过，但看了之后，很快就忘了，始终不得其奥义。归根到底，闭包似乎有一种只可意会不可言传的味道，直到有一天我接触到了作用域的概念，我才深深地理解了它的奥妙，也就是我">
 
 
 
@@ -475,12 +475,24 @@
                 
               
 
-              <time title="创建时间：2019-04-24 14:50:50 / 修改时间：15:05:34" itemprop="dateCreated datePublished" datetime="2019-04-24T14:50:50+08:00">2019-04-24</time>
+              <time title="创建时间：2019-04-24 14:50:50" itemprop="dateCreated datePublished" datetime="2019-04-24T14:50:50+08:00">2019-04-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-26 18:33:20" itemprop="dateModified" datetime="2019-04-26T18:33:20+08:00">2019-04-26</time>
               
             
           </span>
@@ -548,8 +560,33 @@
       
 
       
-        <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？</p>
-<h2 id="2-编辑机制"><a href="#2-编辑机制" class="headerlink" title="2.编辑机制"></a>2.编辑机制</h2>
+        <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>对于那些有一点javascript使用经验但从未真正理解闭包概念的人来说，理解闭包可以看作对javascript编程艺术的升华，掌握它将会揭开javascript神秘的一面，帮助你加深理解javascript。网上有很多的文章也介绍过，但看了之后，很快就忘了，始终不得其奥义。归根到底，闭包似乎有一种只可意会不可言传的味道，直到有一天我接触到了作用域的概念，我才深深地理解了它的奥妙，也就是我要传给你的秘诀：<strong>函数嵌套和垮作用域引用</strong>。</p>
+<h2 id="2-介绍"><a href="#2-介绍" class="headerlink" title="2.介绍"></a>2.介绍</h2><p>其实，闭包无处不在。不用怀疑，其实你的代码中也存在，只是它认识你，你不认识它罢了。</p>
+<p>下面就让我们来揭开它的神秘面纱吧。</p>
+<p>根据《你所不知道的JavaScript》一书对闭包的定义：当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。（看到这定义的时候，相信很多伙伴跟我一样一脸懵逼……）</p>
+<p>好了，让我们告别天书，用人类的语言进行交流吧，先看一个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子A</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">par</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">chi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  chi();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">par();</span><br></pre></td></tr></table></figure></p>
+<p>上述例子是一个非常普通的代码例子，也许你的代码中类似的例子遍地都是，那么它是闭包吗？</p>
+<p>确切地说，它只是准闭包，并不是真正的闭包。</p>
+<p>什么是准闭包？就像人修炼到一个境界快要突破到另一个更高级的境界时，此刻他已经初窥门道但尚未真正突破。</p>
+<p>par()函数嵌套了另一个函数chi()，chi()函数调用par()函数词法作用域内的变量a。这些规则都是闭包规则的一部分，而且是非常重要的一部分。</p>
+<p>也就是上面我们介绍到的闭包两个重要组成部分：<strong>函数嵌套和垮作用域引用</strong>。但上述变量a实现了垮作用域，但a所在的作用域依旧没有实现“跨作用域引用”，因此它只能是准闭包，不是真正的闭包。</p>
+<p>接下来我们看另外一个例子，清晰地展示闭包到底长什么样：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子B</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">par</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">chi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> chi;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> out = par();</span><br><span class="line"></span><br><span class="line">out(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></p>
+<p>上述例子就是一个经典的闭包教科书例子。</p>
+<p>函数chi()的此法作用域能够访问par()的内部作用域，然后我们将chi()函数本身当作一个值类型进行传递。在par()函数执行后，其返回值（也就是它的内部chi()函数）赋值给out并调用out()，实际上只是通过不同的标识符引用调用了内部的函数bar().</p>
+<p>对比上述两个例子，它们不同之处在于：第一个例子chi()在自己定义的作用域内执行，而第二个例子chi()则将它传递到外面，在它定义作用域外执行。</p>
+<p>我们都知道，通常情况下，一个函数执行完后（后面不再被利用），js引擎为节省内存会利用垃圾回收机制，将函数内部的作用域销毁，回收函数内部的内存。</p>
+<p>然而，闭包的神奇之处，就是阻止这件的事情发生。事实上，闭包内部作用域依旧存在，不会被销毁。</p>
+<p>例如上述例子A，par()函数执行完后，其内部作用域将被销毁，变量a被回收；而例子B，par()函数执行完后（倒数第二行），chi函数被赋予变量out，而由于chi()函数引用了par()内部的a变量，因此其内部作用域得以存活并不会被销毁。</p>
+<p>最终，<strong>chi()依然持有对par作用域的引用，而这个引用就叫做“闭包”。</strong></p>
+<p>也就是域外引用a所在的作用域，“跨作用域”的真正含义。</p>
+<p>当然，无论使用何种形式，实现上述所谓的跨作用域引用另外一个作用域，它就是闭包。</p>
+<p>我们仅仅抓住闭包的两个核心即可：函数嵌套和垮作用域引用</p>
+<p>例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子C</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">par</span>(<span class="params"></span>) </span>&#123;<span class="comment">// par作用域</span></span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">chi</span>(<span class="params"></span>) </span>&#123;<span class="comment">// chi作用域</span></span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  other(chi);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">other</span>(<span class="params">tt</span>) </span>&#123;<span class="comment">// other作用域</span></span><br><span class="line">  tt(); <span class="comment">// 1 闭包</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述other()函数中执行tt()函数，而tt()函数是par()函数传递它的内部函数chi()域外，而chi()持有对原始定义par作用域的引用，因此它是闭包。</p>
+<blockquote>
+<p>即无论通过何种手段将内部函数传递到它本身所在作用域以外，它都会持有对原始定义作用域的引用，无论在何处执行这个函数都会使用闭包。</p>
+</blockquote>
+
       
     </div>
 
@@ -859,7 +896,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、背景"><span class="nav-number">1.</span> <span class="nav-text">1、背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-编辑机制"><span class="nav-number">2.</span> <span class="nav-text">2.编辑机制</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、背景"><span class="nav-number">1.</span> <span class="nav-text">1、背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-介绍"><span class="nav-number">2.</span> <span class="nav-text">2.介绍</span></a></li></ol></div>
             
 
           </div>
