@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Alan&#39;s Blog">
 <meta property="og:description" content="1、背景对于那些有一点javascript使用经验但从未真正理解闭包概念的人来说，理解闭包可以看作对javascript编程艺术的升华，掌握它将会揭开javascript神秘的一面，帮助你加深理解javascript。网上有很多的文章也介绍过，但看了之后，很快就忘了，始终不得其奥义。归根到底，闭包似乎有一种只可意会不可言传的味道，直到有一天我接触到了作用域的概念，我才深深地理解了它的奥妙，也就是我">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-26T12:31:42.038Z">
+<meta property="og:updated_time" content="2019-04-26T12:37:17.236Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你不知道的javascript系列-深入理解闭包">
 <meta name="twitter:description" content="1、背景对于那些有一点javascript使用经验但从未真正理解闭包概念的人来说，理解闭包可以看作对javascript编程艺术的升华，掌握它将会揭开javascript神秘的一面，帮助你加深理解javascript。网上有很多的文章也介绍过，但看了之后，很快就忘了，始终不得其奥义。归根到底，闭包似乎有一种只可意会不可言传的味道，直到有一天我接触到了作用域的概念，我才深深地理解了它的奥妙，也就是我">
@@ -492,7 +492,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-26 20:31:42" itemprop="dateModified" datetime="2019-04-26T20:31:42+08:00">2019-04-26</time>
+                <time title="修改时间：2019-04-26 20:37:17" itemprop="dateModified" datetime="2019-04-26T20:37:17+08:00">2019-04-26</time>
               
             
           </span>
@@ -563,7 +563,7 @@
         <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>对于那些有一点javascript使用经验但从未真正理解闭包概念的人来说，理解闭包可以看作对javascript编程艺术的升华，掌握它将会揭开javascript神秘的一面，帮助你加深理解javascript。网上有很多的文章也介绍过，但看了之后，很快就忘了，始终不得其奥义。归根到底，闭包似乎有一种只可意会不可言传的味道，直到有一天我接触到了作用域的概念，我才深深地理解了它的奥妙，也就是我要传给你的秘诀：<strong>函数嵌套和垮作用域引用</strong>。</p>
 <h2 id="2、闭包的奥义"><a href="#2、闭包的奥义" class="headerlink" title="2、闭包的奥义"></a>2、闭包的奥义</h2><p>其实，闭包无处不在。不用怀疑，其实你的代码中也存在，只是它认识你，你不认识它罢了。</p>
 <p>下面就让我们来揭开它的神秘面纱吧。</p>
-<p>根据《你所不知道的JavaScript》一书对闭包的定义：当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。（看到这定义的时候，相信很多伙伴跟我一样一脸懵逼……）</p>
+<p>根据《你不知道的JavaScript》一书对闭包的定义：当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。（看到这定义的时候，相信很多伙伴跟我一样一脸懵逼……）</p>
 <p>好了，让我们告别天书，用人类的语言进行交流吧，先看一个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子A</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">par</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">chi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  chi();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">par();</span><br></pre></td></tr></table></figure></p>
 <p>上述例子是一个非常普通的代码例子，也许你的代码中类似的例子遍地都是，那么它是闭包吗？</p>
 <p>确切地说，它只是准闭包，并不是真正的闭包。</p>
@@ -609,7 +609,7 @@
 <h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><p>闭包的影子其实在我们身边无处不在，你不必为了刻意引用闭包而创建闭包代码，它只是javascript编程中自然而然出现的产物，然而掌握它将对我们理解javascript编程有重要意义，就像欣赏艺术一样编写javascript程序，javascript编程因它而变得更加神奇而又玄妙。倘若将普通的代码块理解为普通人类的话，那么闭包就是人类中的艺术家。</p>
 <p><strong>闭包有两个重要的组成部分：嵌套函数和跨作用域引用，理解这两个含义即可窥探它的奥义。</strong></p>
 <p>闭包当然也有其自身的缺陷，如果没有真正理解其含义而滥用闭包会造成不可想象的后果，我们不需要刻意地去引用闭包，我们只需要像欣赏艺术一样快乐地编写javascript程序即可，同时不断提高自身对这么语言的修养。</p>
-<h2 id="5、参考"><a href="#5、参考" class="headerlink" title="5、参考"></a>5、参考</h2><p>1.《你所不知道的JavaScript》p43-57</p>
+<h2 id="5、参考"><a href="#5、参考" class="headerlink" title="5、参考"></a>5、参考</h2><p>1.《你不知道的JavaScript》p43-57</p>
 
       
     </div>
