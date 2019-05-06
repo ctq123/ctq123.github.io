@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Alan&#39;s Blog">
 <meta property="og:description" content="1.图表绘制底层Canvas, SVG, VML的对比，各适用场景1.性能对比：Canvas的性能受画布尺寸大小影响更大，SVG的性能受图形元素个数影响更大；2.适用场景：2-1）Canvas可以轻松应对大量数据和动态特效展现的场景；2-2）SVG可以在移动端展示，使其不再为内存而担忧；2-3）VML可以兼容低版本IE； 2.let和var区别1.let定义了块级作用域，只在代码块内有效；2.le">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-30T04:31:39.784Z">
+<meta property="og:updated_time" content="2019-05-06T02:13:23.197Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="随手笔记">
 <meta name="twitter:description" content="1.图表绘制底层Canvas, SVG, VML的对比，各适用场景1.性能对比：Canvas的性能受画布尺寸大小影响更大，SVG的性能受图形元素个数影响更大；2.适用场景：2-1）Canvas可以轻松应对大量数据和动态特效展现的场景；2-2）SVG可以在移动端展示，使其不再为内存而担忧；2-3）VML可以兼容低版本IE； 2.let和var区别1.let定义了块级作用域，只在代码块内有效；2.le">
@@ -492,7 +492,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-30 12:31:39" itemprop="dateModified" datetime="2019-04-30T12:31:39+08:00">2019-04-30</time>
+                <time title="修改时间：2019-05-06 10:13:23" itemprop="dateModified" datetime="2019-05-06T10:13:23+08:00">2019-05-06</time>
               
             
           </span>
@@ -563,6 +563,7 @@
 <h2 id="6-this的绑定规则及其优先级"><a href="#6-this的绑定规则及其优先级" class="headerlink" title="6.this的绑定规则及其优先级"></a>6.this的绑定规则及其优先级</h2><p>1）由new调用？绑定到新创建的对象<br>2）由call或者bind(或者apply)调用？绑定到指定的对象（显式绑定）<br>3）由上下文对象调用?绑定到那个上下文对象（隐式绑定）<br>4）默认：在严格模式下绑定到undefined,否则绑定到全局对象</p>
 <p>ES6中的箭头函数并不会使用四条标准的绑定规则，而是根据当前词法作用域来决定this,具体来说，箭头函数会继承上一层函数调用的this绑定（无论this绑定到什么）。这其实与代码中的self=this机制是一样的。</p>
 <p>摘自《你不知道的javascript》</p>
+<h2 id="7-创建对象的方法"><a href="#7-创建对象的方法" class="headerlink" title="7.创建对象的方法"></a>7.创建对象的方法</h2><p>1）{}<br>2）new Object()<br>3) Object.create()</p>
 
       
     </div>
@@ -877,7 +878,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-图表绘制底层Canvas-SVG-VML的对比，各适用场景"><span class="nav-number">1.</span> <span class="nav-text">1.图表绘制底层Canvas, SVG, VML的对比，各适用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-let和var区别"><span class="nav-number">2.</span> <span class="nav-text">2.let和var区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-const变量"><span class="nav-number">3.</span> <span class="nav-text">3.const变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-js获取时间戳方法"><span class="nav-number">4.</span> <span class="nav-text">4.js获取时间戳方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-匿名函数的递归arguments-callee"><span class="nav-number">5.</span> <span class="nav-text">5.匿名函数的递归arguments.callee</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-this的绑定规则及其优先级"><span class="nav-number">6.</span> <span class="nav-text">6.this的绑定规则及其优先级</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-图表绘制底层Canvas-SVG-VML的对比，各适用场景"><span class="nav-number">1.</span> <span class="nav-text">1.图表绘制底层Canvas, SVG, VML的对比，各适用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-let和var区别"><span class="nav-number">2.</span> <span class="nav-text">2.let和var区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-const变量"><span class="nav-number">3.</span> <span class="nav-text">3.const变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-js获取时间戳方法"><span class="nav-number">4.</span> <span class="nav-text">4.js获取时间戳方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-匿名函数的递归arguments-callee"><span class="nav-number">5.</span> <span class="nav-text">5.匿名函数的递归arguments.callee</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-this的绑定规则及其优先级"><span class="nav-number">6.</span> <span class="nav-text">6.this的绑定规则及其优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-创建对象的方法"><span class="nav-number">7.</span> <span class="nav-text">7.创建对象的方法</span></a></li></ol></div>
             
 
           </div>
