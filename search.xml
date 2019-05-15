@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[你不知道的javascript系列-深入理解相等比较类型转换]]></title>
+    <url>%2F2019%2F05%2F14%2Fyou-dont-know-js-3%2F</url>
+    <content type="text"><![CDATA[1、背景4、总结5、参考1.《你不知道的JavaScript》p43-57]]></content>
+      <categories>
+        <category>javascript</category>
+        <category>你不知道的javascript</category>
+      </categories>
+      <tags>
+        <tag>相等比较类型转换</tag>
+        <tag>不同类型转换</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[js运行机制]]></title>
     <url>%2F2019%2F04%2F24%2Fjs-thread-event-lood%2F</url>
     <content type="text"><![CDATA[1、背景]]></content>
@@ -19,9 +32,9 @@
     <content type="text"><![CDATA[1、背景对于那些有一点javascript使用经验但从未真正理解闭包概念的人来说，理解闭包可以看作对javascript编程艺术的升华，掌握它将会揭开javascript神秘的一面，帮助你加深理解javascript。网上有很多的文章也介绍过，但看了之后，很快就忘了，始终不得其奥义。归根到底，闭包似乎有一种只可意会不可言传的味道，直到有一天我接触到了作用域的概念，我才深深地理解了它的奥妙，也就是我要传给你的秘诀：函数嵌套和垮作用域引用。 2、闭包的奥义其实，闭包无处不在。不用怀疑，其实你的代码中也存在，只是它认识你，你不认识它罢了。 下面就让我们来揭开它的神秘面纱吧。 根据《你不知道的JavaScript》一书对闭包的定义：当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。 好了，先让我们告别天书，用人类的语言进行交流吧，先看下面一个例子：123456789101112// 例子Afunction par() &#123; var a = 1; function chi() &#123; console.log(a); &#125; chi();&#125;par(); 上述例子是一个非常普通的代码例子，也许你的代码中类似的例子遍地都是，那么它是闭包吗？ 确切地说，它只是准闭包，并不是真正的闭包。 什么是准闭包？若将闭包比作是一个人的修炼境界，那么准闭包就是人从一个境界快要突破到另一个境界的过渡期，此刻他已经初窥另一个境界的门道但尚未真正突破。 例子中，par()函数嵌套了另一个函数chi()，chi()函数调用par()函数词法作用域内的变量a。这些规则都是闭包规则的一部分，而且是非常重要的一部分。 也就是刚开始我们介绍到的闭包两个重要组成部分：函数嵌套和垮作用域引用。但上述变量a实现了垮作用域，但a所在的作用域依旧没有实现“跨作用域引用”，因此它只能是准闭包，并不是真正的闭包。 接下来我们看另外一个例子，清晰地展示闭包到底长什么样：1234567891011121314// 例子Bfunction par() &#123; var a = 1; function chi() &#123; console.log(a); &#125; return chi;&#125;var out = par();out(); // 1 上述例子就是一个经典的闭包教科书例子。 函数chi()的此法作用域能够访问par()的内部作用域，然后我们将chi()函数本身当作一个值类型进行传递给到外面。在par()函数执行后，其返回值（也就是它的内部chi()函数）赋值给out并调用out()，实际上只是通过不同的标识符引用调用了内部的函数bar(). 对比上述两个例子，它们不同之处在于：第一个例子chi()在自己定义的作用域内执行，而第二个例子chi()则将它传递到外面，在它定义作用域外执行。 我们都知道，通常情况下，一个函数执行完后（后面不再被利用），js引擎为节省内存会利用垃圾回收机制，将函数内部的作用域销毁，回收函数内部的内存。 然而，闭包的神奇之处，就是阻止这件的事情发生。事实上，闭包内部作用域依旧存在，不会被销毁。 例如上述例子A，par()函数执行完后，其内部作用域将被销毁，变量a被回收；而例子B，par()函数执行完后（倒数第二行），chi函数被赋予变量out，而由于chi()函数引用了par()内部的a变量，因此其内部作用域得以存活并不会被销毁。 最终，chi()依然持有对par作用域的引用，而这个引用就叫做“闭包”。 也就是域外引用a所在的作用域，“跨作用域引用”的真正含义。 注意：这里指的是对作用域的引用，并不仅仅指的是对作用域中变量a的引用，网上有很多文章认为对某一个变量的域外引用就是闭包，这种观点不敢苟同，对作用域中变量a的跨域引用只是是闭包的一个表现而已，并不是闭包的本质和含义。闭包在“域”而不在“量”。 当然，无论使用何种形式，实现上述所谓的跨作用域引用另外一个作用域，它就是闭包。 这种形式有很多，通常都是通过嵌套函数方式，但其他的方式尚未想到，这里姑且将“嵌套函数”作为闭包先决条件之一，更深层的含义则是“垮作用域引用” 例如：1234567891011121314// 例子Cfunction par() &#123;// par作用域 var a = 1; function chi() &#123;// chi作用域 console.log(a); &#125; other(chi);&#125;function other(tt) &#123;// other作用域 tt(); // 1 闭包&#125; 上述other()函数中执行tt()函数，而tt()函数是par()函数传递它的内部函数chi()域外，而chi()持有对原始定义par作用域的引用，因此它是闭包。 即无论通过何种手段将内部函数传递到它本身所在作用域以外，它都会持有对原始定义作用域的引用，无论在何处执行这个函数都会使用闭包。 3、闭包的应用前面的例子只是为了向大家展示闭包的真正含义，为了解释闭包进行了人为的修饰。日常业务代码中还有很多闭包的例子，比如： 123456function sayHelloAfterTime(var name, var sec=1) &#123; setTimeout(function () &#123; console.log("hello, I'm " + name) &#125;, sec*1000)&#125;sayHelloAfterTime("Jack"); // hello, I'm Jack 分析：由于setTineout将内部匿名函数传递到sayHelloAfterTime外部执行，而匿名函数引用sayHelloAfterTime作用域，因此属于闭包 1234var targ = document.getElementById('test');targ.addEventListener('click', function () &#123; console.log('hello');&#125;, false); 分析：由于addEventListener将内部匿名函数传递到点击事件click的外部执行，而匿名回调函数引用click事件作用域，因此属于闭包 注意：由于闭包是作用域的引用，而this也是作用域的引用，需要注意调用闭包后，此作用域非彼作用域，需要注意匿名函数中this的调用，比如：12345678910function sayHelloAfterTime(var name, var sec=1) &#123; function aa() &#123; console.log("aa") &#125; setTimeout(function () &#123; console.log("hello, I'm " + name) this.aa() // 会提示aa为undefined，此this非彼this &#125;, sec*1000)&#125;sayHelloAfterTime("Jack"); // hello, I'm Jack 上面的类似例子我们会经常用到吧，如果你熟悉Jquery一定会知道下面这个例子：123(function($)&#123; // ……&#125;)(jQuery) 这也属于闭包。 闭包的影子其实无处不在，本质上无论何时何地，如果将函数当作第一级的值类型并向外传递（垮作用域引用产生了），你就会发现闭包的影子。 在定时器，事件监听器，Ajax请求，垮窗口通信，Web Worker或者任何异步/同步任务中，只要使用了回调函数，实际上就是在使用闭包。 下面让我们看看前端精英们使用闭包而创造了不朽的作品： 1）JQuery的应用：前端模块设计的代表之作，利用了闭包的编程方式和原理，因此减少了命名冲突，避免污染全局环境； 2）sessionStorage的应用：前端缓存设计的代表之作，javascript没有私有成员的概念，利用了闭包的编程方式和原理，既实现了缓存的效果，节省访问时间，同时将key封装成私有变量，只能通过set和get方法访问。 向伟大的工程师们致敬！ 4、总结闭包的影子其实在我们身边无处不在，你不必为了刻意引用闭包而创建闭包代码，它只是javascript编程中自然而然出现的产物，然而掌握它将对我们理解javascript编程有重要意义，就像欣赏艺术一样编写javascript程序，javascript编程因它而变得更加神奇而又玄妙。倘若将普通的代码块理解为普通人类的话，那么闭包就是人类中的艺术家。 闭包有两个重要的组成部分：嵌套函数和跨作用域引用，理解这两个含义即可窥探它的奥义。 闭包当然也有其自身的缺陷（内存没有及时释放，this的引用等），如果没有真正理解其含义而滥用闭包将造成不可想象的后果，我们不需要刻意地去引用闭包，而需要时刻保持清醒的头脑，合理地科学地使用闭包。 5、参考1.《你不知道的JavaScript》p43-57]]></content>
       <categories>
         <category>javascript</category>
+        <category>你不知道的javascript</category>
       </categories>
       <tags>
-        <tag>你不知道的javascript</tag>
         <tag>闭包</tag>
       </tags>
   </entry>
@@ -31,9 +44,9 @@
     <content type="text"><![CDATA[1、背景与其他编译型语言不同，javascript是一种解析型语言。这并不是说解析型语言就没有编译阶段，它运行时会进行两个阶段：编译和执行。那么它的编译过程是怎样的呢？ 2.编辑机制直观上理解javascript是在运行时一行一行代码往下执行的，但实际上并非如此。 考虑下面的例子：1234// 例子Aa = 1;var a;console.log(a); 你认为输出的结果会是什么呢？ 有人会认为第一行就会抛出错误，也有人认为最终会输出undefined，但其实上述代码没有问题，最终输出的结果为1. 让我们再看另外一个例子：123// 例子Bconsole.log(b);var b = 1; 你认为输出的结果会是什么呢？ 有人认为上述代码在第一行就会抛出异常，或者认为上述最终会输出1，但其实上述代码最终输出的结果会是undefined. 由上述例子我们可对js编译阶段有了初步的了解，编译阶段的一部分工作就是找到所有声明，并使用合适的作用域将他们关联起来。关于作用域，前面有介绍过《高性能JavaScript系列-作用域管理原理》 让我们再次回忆一下《编译原理》中的编译过程： 1）词法分析2）语法分析3）语义分析和中间代码生成4）优化5）目标代码生成 javascript引擎进行编译的步骤与传统编译语言的编译步骤非常相似，在某些步骤中会比预想中要复杂。 在前三个阶段当中，其实作用域已经很明了，包括变量和函数在内的所有声明都会在任何代码执行前首先被处理。这也间接说明为什么不建议使用eval和with等函数。 根据上述编译过程的第三阶段，那么我们回过头分析上述例子A：1234// 例子A-分析a = 1; // 赋值，等待执行var a; // 声明，并被提取到当前作用域最顶端console.log(a); // 打印，等待执行 那么最终目标代码生成如下：1234// 例子A-分析var a;a = 1;console.log(a); 同理，可自行分析例子B。 至此，你是不是对js编译机制有了初步的认识？ ^……^ 接下来，让我们看另外一个例子C：1234// 例子Cc = 1;let c;console.log(c); ES6新增两个属性let和const，let通常要与var对比理解才更深刻一些。上述例子C与前面提到的例子A非常相似，那么结果是不是一样都输出1呢？答案是否定的，输出的结果是第一行会抛出异常c is not undefined。 两个例子几乎是一致的，编译过程也是一样的，结果却是天壤之别，下面让我们分析一下。 let与var最大的差别是：let声明时会立刻创建一个块作用域，并提取到创建块作用域的顶端；而var并没有块作用域概念，通常充当一个全局作用域的角色，会被提取到当前全局作用域的最顶端。具体详情可参考前面提到的《高性能JavaScript系列-作用域管理原理》 因此，例子C分析如下： 1234// 例子C-分析c = 1; // 赋值，等待执行let c; // 声明，创建块作用域，并被提取到当前作用域最顶端console.log(c); // 打印，等待执行 那么最终目标代码生成如下：123456// 例子C-分析c = 1;&#123; let c; console.log(c);&#125; 因此，这也是为什么在第一行就抛出c is not undefined的异常错误。 3.总结1）包括变量和函数在内的所有声明都会在任何代码执行前首先被处理。2）当变量和函数出现相同名称时，函数声明会被优先提升（var类型变量），与声明的顺序无关。]]></content>
       <categories>
         <category>javascript</category>
+        <category>你不知道的javascript</category>
       </categories>
       <tags>
-        <tag>你不知道的javascript</tag>
         <tag>编译机制</tag>
       </tags>
   </entry>
@@ -63,7 +76,7 @@
   <entry>
     <title><![CDATA[随手笔记]]></title>
     <url>%2F2019%2F02%2F28%2Ftake-notes%2F</url>
-    <content type="text"><![CDATA[1.图表绘制底层Canvas, SVG, VML的对比，各适用场景1.性能对比：Canvas的性能受画布尺寸大小影响更大，SVG的性能受图形元素个数影响更大；2.适用场景：2-1）Canvas可以轻松应对大量数据和动态特效展现的场景；2-2）SVG可以在移动端展示，使其不再为内存而担忧；2-3）VML可以兼容低版本IE； 2.let和var区别1.let定义了块级作用域，只在代码块内有效；2.let在同一作用域内，不允许重复声明同一个变量，但允许在垮作用域声明同一个变量；3.ES5只有全局作用域和函数作用域： 全局作用域，局部作用域会覆盖全局作用域函数作用域，用来计数的循环变量会泄露为全局变量12345678for (var i = 0; i &lt; 10; i++) &#123; // ...&#125;console.log(i)// 10for (let i = 0; i &lt; 10; i++) &#123; // ...&#125;console.log(i)// 报错 此外，for的每一次循环相当于一个新的块级作用域，var是不断覆盖老的变量（在整个for循环体内有效），而let则是声明新的变量（只在本轮循环有效） 3.const变量1.const声明一个常量，它实际保证的并非是它的值不变，而是保证变量指向那个内存地址所保存的数据不得改动（对简单类型如数值，字符串，布尔值好理解，但对复合型如对象和数组，则需要理解指针地址的概念）2.const声明一个常量必须立刻初始化赋值；3.const作用域与let作用域相同； 4.js获取时间戳方法1) var cur = Date.parse(new Date());2) var cur = (new Date()).valueOf();3) var cur = new Date().getTime();4) var cur = Date.now(); 5.匿名函数的递归arguments.callee123456var i = 0;(function()&#123; console.log(i++) i === 60 &amp;&amp; i = 0; arguments.callee();&#125;)(); // 不断打印0-59的死循环 但是由于arguments.callee每次递归时需要重新创建，浪费内存资源，现已不推荐使用。 6.this的绑定规则及其优先级1）由new调用？绑定到新创建的对象2）由call或者bind(或者apply)调用？绑定到指定的对象（显式绑定）3）由上下文对象调用?绑定到那个上下文对象（隐式绑定）4）默认：在严格模式下绑定到undefined,否则绑定到全局对象 ES6中的箭头函数并不会使用四条标准的绑定规则，而是根据当前词法作用域来决定this,具体来说，箭头函数会继承上一层函数调用的this绑定（无论this绑定到什么）。这其实与代码中的self=this机制是一样的。 摘自《你不知道的javascript》 7.创建对象的方法1）{}2）new Object()3) Object.create(null) 如果要访问对象中的一个属性，引擎实际上会先调用内部默认的[[Get]]操作，如果没有找到，就会通过[[prototype]]链来查找。 A和B的委托关系：B = Object.create(A) 8.prototype机制[[Prototype]]机制就是指对象中的一个内部链接引用另一个对象。本质就是对象之间的关联关系。 9.javascript的原类型有7大内置类型：1) null2) undefined3) boolean4) number5) string6) object7) symbol（ES6新增）除了对象之外，其他的称为基本类型。function，array，Date为什么不是呢？这些其实都是object的一个子类型 javascript中变量是没有类型的，只有值才有。变量可以随时持有任何类型的值。 10.数组1）array是一个object的一个子类型，数组中元素可包含任何类型2）数组可以通关过数字检索，也可以通关字符串检索（不会计算在数组长度内），如：123456789var a=[];a[0]=1;a['foor']='aa';// a.length=1var b=[];b['13']='hahha';// 注意数字会转换// b.length=14// b[0]=undefined // 建议不要创建这种空数组，也就是不要使用这种创建方式 11、JSON.stringify()在转换成json字符串的过程中，遇到undefined,function和symbol会自动将其忽略，在数组中会直接返回null12JSON.stringify([1, undefined, function()&#123;&#125;, 'a'])// "[1, null, null, 'a']" 12、==与===区别==和===都是比较值，前者不需要比较类型，后者还需要比较类型 本质上 == 允许在相等比较中进行强制类型转换，而===不允许 13、数字的取值123if (a==0 &amp;&amp; a==1) &#123; console.log('miracle')&#125; 上述代码会打印’miracle’吗？如会，在什么场景下会发生？答案会。只要数字每次取值，对其进行串改即可，如下：1234567891011function myNumber(n) &#123; this.n = n&#125;myNumber.prototype.valueOf = function () &#123; return this.n++&#125;var a=new myNumber(0)// a初始为0，以后a每一次取值都会递增一次// 注意a并不是数字Number类型，若要===比较，需要直接修改Number.prototype.valueOf，但这是危险操作，慎用！慎用！// 其实这个命题本身就是坑爹，一般实际场景不会用到这个诡异的逻辑 14、布尔类型与其他类型等值比较的坑1234567var a='42'var b=truea==b // falsevar c='42'var d=falsec==d // false 一般而言，一个值不应该是非真必假吗？这里怎么出了一个太监，既非真亦非假！？ 根据ES5规范，当布尔类型x与其他基本类型y比较时： 1）如果Type(x)是布尔类型，则返回ToNumber(x) == y的结果；2）如果Type(y)是布尔类型，则返回x == ToNumber(y)的结果； 上述的结果分析过程如下：a=’42’ =&gt; a=42b=true =&gt; b=1a==b =&gt; 42==1 // false c=’42’ =&gt; c=42d=false =&gt; d=0c==d =&gt; 42==0 // false 根本原因是布尔类型的比较，并没有发生布尔值的比较和强制类型转换。 个人建议无论什么情况下都不要使用==true和==false 注意这里只是说==，并不是===，因为===不允许强制类型转换 摘自《你不知道的javascript》]]></content>
+    <content type="text"><![CDATA[1.图表绘制底层Canvas, SVG, VML的对比，各适用场景1.性能对比：Canvas的性能受画布尺寸大小影响更大，SVG的性能受图形元素个数影响更大；2.适用场景：2-1）Canvas可以轻松应对大量数据和动态特效展现的场景；2-2）SVG可以在移动端展示，使其不再为内存而担忧；2-3）VML可以兼容低版本IE； 2.let和var区别1.let定义了块级作用域，只在代码块内有效；2.let在同一作用域内，不允许重复声明同一个变量，但允许在垮作用域声明同一个变量；3.ES5只有全局作用域和函数作用域： 全局作用域，局部作用域会覆盖全局作用域函数作用域，用来计数的循环变量会泄露为全局变量12345678for (var i = 0; i &lt; 10; i++) &#123; // ...&#125;console.log(i)// 10for (let i = 0; i &lt; 10; i++) &#123; // ...&#125;console.log(i)// 报错 此外，for的每一次循环相当于一个新的块级作用域，var是不断覆盖老的变量（在整个for循环体内有效），而let则是声明新的变量（只在本轮循环有效） 3.const变量1.const声明一个常量，它实际保证的并非是它的值不变，而是保证变量指向那个内存地址所保存的数据不得改动（对简单类型如数值，字符串，布尔值好理解，但对复合型如对象和数组，则需要理解指针地址的概念）2.const声明一个常量必须立刻初始化赋值；3.const作用域与let作用域相同； 4.js获取时间戳方法1) var cur = Date.parse(new Date());2) var cur = (new Date()).valueOf();3) var cur = new Date().getTime();4) var cur = Date.now(); 5.匿名函数的递归arguments.callee123456var i = 0;(function()&#123; console.log(i++) i === 60 &amp;&amp; i = 0; arguments.callee();&#125;)(); // 不断打印0-59的死循环 但是由于arguments.callee每次递归时需要重新创建，浪费内存资源，现已不推荐使用。 6.this的绑定规则及其优先级1）由new调用？绑定到新创建的对象2）由call或者bind(或者apply)调用？绑定到指定的对象（显式绑定）3）由上下文对象调用?绑定到那个上下文对象（隐式绑定）4）默认：在严格模式下绑定到undefined,否则绑定到全局对象 ES6中的箭头函数并不会使用四条标准的绑定规则，而是根据当前词法作用域来决定this,具体来说，箭头函数会继承上一层函数调用的this绑定（无论this绑定到什么）。这其实与代码中的self=this机制是一样的。 摘自《你不知道的javascript》 7.创建对象的方法1）{}2）new Object()3) Object.create(null) 如果要访问对象中的一个属性，引擎实际上会先调用内部默认的[[Get]]操作，如果没有找到，就会通过[[prototype]]链来查找。 A和B的委托关系：B = Object.create(A) 8.prototype机制[[Prototype]]机制就是指对象中的一个内部链接引用另一个对象。本质就是对象之间的关联关系。 9.javascript的原类型有7大内置类型：1) null2) undefined3) boolean4) number5) string6) object7) symbol（ES6新增）除了对象之外，其他的称为基本类型。function，array，Date为什么不是呢？这些其实都是object的一个子类型 javascript中变量是没有类型的，只有值才有。变量可以随时持有任何类型的值。 10.数组1）array是一个object的一个子类型，数组中元素可包含任何类型2）数组可以通关过数字检索，也可以通关字符串检索（不会计算在数组长度内），如：123456789var a=[];a[0]=1;a['foor']='aa';// a.length=1var b=[];b['13']='hahha';// 注意数字会转换// b.length=14// b[0]=undefined // 建议不要创建这种空数组，也就是不要使用这种创建方式 11、JSON.stringify()在转换成json字符串的过程中，遇到undefined,function和symbol会自动将其忽略，在数组中会直接返回null12JSON.stringify([1, undefined, function()&#123;&#125;, 'a'])// "[1, null, null, 'a']" 12、==与===区别==和===都是比较值，前者不需要比较类型，后者还需要比较类型 本质上 == 允许在相等比较中进行强制类型转换，而===不允许 13、数字的取值123if (a==0 &amp;&amp; a==1) &#123; console.log('miracle')&#125; 上述代码会打印’miracle’吗？如会，在什么场景下会发生？答案会。只要数字每次取值，对其进行串改即可，如下：1234567891011function myNumber(n) &#123; this.n = n&#125;myNumber.prototype.valueOf = function () &#123; return this.n++&#125;var a=new myNumber(0)// a初始为0，以后a每一次取值都会递增一次// 注意a并不是数字Number类型，若要===比较，需要直接修改Number.prototype.valueOf，但这是危险操作，慎用！慎用！// 其实这个命题本身就是坑爹，一般实际场景不会用到这个诡异的逻辑 14、布尔类型与其他类型等值比较的坑1234567var a='42'var b=truea==b // falsevar c='42'var d=falsec==d // false 一般而言，一个值不应该是非真必假吗？这里怎么出了一个太监，既非真亦非假！？ 根据ES5规范，当布尔类型x与其他基本类型y比较时： 1）如果Type(x)是布尔类型，则返回ToNumber(x) == y的结果；2）如果Type(y)是布尔类型，则返回x == ToNumber(y)的结果； 上述的结果分析过程如下：a=’42’ =&gt; a=42b=true =&gt; b=1a==b =&gt; 42==1 // false c=’42’ =&gt; c=42d=false =&gt; d=0c==d =&gt; 42==0 // false 根本原因是布尔类型的比较，并没有发生布尔值的比较和强制类型转换。 个人建议无论什么情况下都不要使用==true和==false 注意这里只是说==，并不是===，因为===不允许强制类型转换 类似这样的太监还有很多，比如NaN != NaN, [] == ![]。是不是有点颠覆思维？ 摘自《你不知道的javascript》]]></content>
       <categories>
         <category>javascript</category>
       </categories>
@@ -97,20 +110,6 @@
       </categories>
       <tags>
         <tag>高性能JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Jmeter系列-jmeter介绍]]></title>
-    <url>%2F2019%2F02%2F11%2Fjmeter1%2F</url>
-    <content type="text"><![CDATA[1、简介 测试系统的负载能力和性能测试工具纯Java开发支持多种类型服务和协议界面模式和命令行模式扩展性强 2、安装和启动下载地址：https://jmeter.apache.org/download_jmeter.cgi历史版本：https://archive.apache.org/dist/jmeter/binaries/加压后双击运行 jmeter-3.3/bin/jmeter.bat 即可 3、各元件介绍jmeter有许多的元件，如图： Jmeter元件主要包括： 1.逻辑控制器（controller）2.配置元件3.定时器4.前置处理器5.采样器（Sampler）6.后置处理器7.断言8.监听器 Jmeter各元件优先级顺序： 1.配置元件2.前置处理器3.定时器4.采样器（Sampler）5.后置处理器6.断言7.监听器 Jmeter各元件是以控制器（controller）和采样器（sampler）为中心，其他元件都是围绕这两个元件进行逻辑处理。采样器一般内嵌在逻辑控制器Controller中]]></content>
-      <categories>
-        <category>jmeter</category>
-      </categories>
-      <tags>
-        <tag>jmeter学习笔记</tag>
-        <tag>jmeter</tag>
-        <tag>性能压测</tag>
-        <tag>jmeter执行顺序</tag>
       </tags>
   </entry>
   <entry>
@@ -153,6 +152,20 @@
         <tag>jmeter</tag>
         <tag>性能压测</tag>
         <tag>session共享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Jmeter系列-jmeter介绍]]></title>
+    <url>%2F2019%2F02%2F11%2Fjmeter1%2F</url>
+    <content type="text"><![CDATA[1、简介 测试系统的负载能力和性能测试工具纯Java开发支持多种类型服务和协议界面模式和命令行模式扩展性强 2、安装和启动下载地址：https://jmeter.apache.org/download_jmeter.cgi历史版本：https://archive.apache.org/dist/jmeter/binaries/加压后双击运行 jmeter-3.3/bin/jmeter.bat 即可 3、各元件介绍jmeter有许多的元件，如图： Jmeter元件主要包括： 1.逻辑控制器（controller）2.配置元件3.定时器4.前置处理器5.采样器（Sampler）6.后置处理器7.断言8.监听器 Jmeter各元件优先级顺序： 1.配置元件2.前置处理器3.定时器4.采样器（Sampler）5.后置处理器6.断言7.监听器 Jmeter各元件是以控制器（controller）和采样器（sampler）为中心，其他元件都是围绕这两个元件进行逻辑处理。采样器一般内嵌在逻辑控制器Controller中]]></content>
+      <categories>
+        <category>jmeter</category>
+      </categories>
+      <tags>
+        <tag>jmeter学习笔记</tag>
+        <tag>jmeter</tag>
+        <tag>性能压测</tag>
+        <tag>jmeter执行顺序</tag>
       </tags>
   </entry>
   <entry>
