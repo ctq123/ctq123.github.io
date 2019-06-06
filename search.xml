@@ -16,7 +16,7 @@
   <entry>
     <title><![CDATA[js运行机制]]></title>
     <url>%2F2019%2F04%2F24%2Fjs-thread-event-lood%2F</url>
-    <content type="text"><![CDATA[1、背景用户交互，IO和定时器 人脑]]></content>
+    <content type="text"><![CDATA[1、背景用户交互(监听事件回调)，XHR回调，IO操作和定时器 人脑]]></content>
       <categories>
         <category>javascript</category>
       </categories>
