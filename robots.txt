@@ -1,11 +1,12 @@
 User-agent: *
 Allow: /
+Allow: /archives/
 Allow: /schedule/
 Allow: /categories/
-Allow: /_posts/ 
 Allow: /tags/ 
 Allow: /about/ 
 Disallow: /assets/
+Disallow: /css/
 
 Sitemap: https://ctq123.github.io/sitemap.xml
 Sitemap: https://ctq123.github.io/baidusitemap.xml
