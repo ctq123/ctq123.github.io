@@ -131,18 +131,18 @@
 
 
 
-  <meta name="description" content="1、背景4、总结5、参考1.《你不知道的JavaScript》p43-57">
+  <meta name="description" content="1、背景2、类型转换规则1.字符串与数字之间相等比较1）如果Type(x)是数字，Type(y)是字符串，则返回x == ToNumber(y)的结果2）如果Type(x)是字符串，Type(y)是数字，则返回ToNumber(x) == y的结果 2.其他类型与布尔类型之间相等比较1）如果Type(x)是布尔类型，则返回ToNumber(x) == y的结果2）如果Type(y)是布尔类型，则返">
 <meta name="keywords" content="相等比较类型转换,不同类型转换">
 <meta property="og:type" content="article">
 <meta property="og:title" content="你不知道的javascript系列-深入理解相等比较类型转换">
 <meta property="og:url" content="https://ctq123.github.io/2019/05/14/you-dont-know-js-3/index.html">
 <meta property="og:site_name" content="Alan&#39;s Blog">
-<meta property="og:description" content="1、背景4、总结5、参考1.《你不知道的JavaScript》p43-57">
+<meta property="og:description" content="1、背景2、类型转换规则1.字符串与数字之间相等比较1）如果Type(x)是数字，Type(y)是字符串，则返回x == ToNumber(y)的结果2）如果Type(x)是字符串，Type(y)是数字，则返回ToNumber(x) == y的结果 2.其他类型与布尔类型之间相等比较1）如果Type(x)是布尔类型，则返回ToNumber(x) == y的结果2）如果Type(y)是布尔类型，则返">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-03T11:23:41.125Z">
+<meta property="og:updated_time" content="2019-07-14T10:18:10.891Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你不知道的javascript系列-深入理解相等比较类型转换">
-<meta name="twitter:description" content="1、背景4、总结5、参考1.《你不知道的JavaScript》p43-57">
+<meta name="twitter:description" content="1、背景2、类型转换规则1.字符串与数字之间相等比较1）如果Type(x)是数字，Type(y)是字符串，则返回x == ToNumber(y)的结果2）如果Type(x)是字符串，Type(y)是数字，则返回ToNumber(x) == y的结果 2.其他类型与布尔类型之间相等比较1）如果Type(x)是布尔类型，则返回ToNumber(x) == y的结果2）如果Type(y)是布尔类型，则返">
 
 
 
@@ -493,7 +493,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-03 19:23:41" itemprop="dateModified" datetime="2019-06-03T19:23:41+08:00">2019-06-03</time>
+                <time title="修改时间：2019-07-14 18:18:10" itemprop="dateModified" datetime="2019-07-14T18:18:10+08:00">2019-07-14</time>
               
             
           </span>
@@ -551,7 +551,15 @@
       
 
       
-        <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><h2 id="5、参考"><a href="#5、参考" class="headerlink" title="5、参考"></a>5、参考</h2><p>1.《你不知道的JavaScript》p43-57</p>
+        <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><h2 id="2、类型转换规则"><a href="#2、类型转换规则" class="headerlink" title="2、类型转换规则"></a>2、类型转换规则</h2><h3 id="1-字符串与数字之间相等比较"><a href="#1-字符串与数字之间相等比较" class="headerlink" title="1.字符串与数字之间相等比较"></a>1.字符串与数字之间相等比较</h3><p><strong>1）如果Type(x)是数字，Type(y)是字符串，则返回x == ToNumber(y)的结果</strong><br><strong>2）如果Type(x)是字符串，Type(y)是数字，则返回ToNumber(x) == y的结果</strong></p>
+<h3 id="2-其他类型与布尔类型之间相等比较"><a href="#2-其他类型与布尔类型之间相等比较" class="headerlink" title="2.其他类型与布尔类型之间相等比较"></a>2.其他类型与布尔类型之间相等比较</h3><p><strong>1）如果Type(x)是布尔类型，则返回ToNumber(x) == y的结果</strong><br><strong>2）如果Type(y)是布尔类型，则返回x == ToNumber(y)的结果</strong></p>
+<h3 id="3-null与undefined之间相等比较"><a href="#3-null与undefined之间相等比较" class="headerlink" title="3.null与undefined之间相等比较"></a>3.null与undefined之间相等比较</h3><p><strong>1）如果x为null，y为undefined，则结果为true</strong><br><strong>2）如果x为undefined，y为null，则结果为true</strong></p>
+<h3 id="4-对象与非对象之间相等比较"><a href="#4-对象与非对象之间相等比较" class="headerlink" title="4.对象与非对象之间相等比较"></a>4.对象与非对象之间相等比较</h3><p><strong>1）如果Type(x)是数字/字符串，Type(y)是对象，则返回x == ToPrimitive(y)的结果</strong><br><strong>2）如果Type(x)是对象，Type(y)是数字/字符串，则返回ToPrimitive(x) == y的结果</strong></p>
+<blockquote>
+<p>对象（对象、函数、数组），非对象（数字、字符串、布尔值）<br>布尔值会先转换为数字</p>
+</blockquote>
+<h3 id="5-ToNumber-和ToPrimitive"><a href="#5-ToNumber-和ToPrimitive" class="headerlink" title="5.ToNumber()和ToPrimitive()"></a>5.ToNumber()和ToPrimitive()</h3><p>ToNumber对true转换为1，false转换为0，undefined转换为NaN，null转换为0<br>ToPrimitive抽象操作首先检查该值是否有valueOf()的返回值进行强制转换。如果没有就是使用toString()的返回值进行强制转换。<br>如果valueOf()和toString()均不返回基本类型值，会产生TypeError错误。</p>
+<h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><h2 id="5、参考"><a href="#5、参考" class="headerlink" title="5、参考"></a>5、参考</h2><p>1.《你不知道的JavaScript》p43-57</p>
 
       
     </div>
@@ -872,7 +880,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、背景"><span class="nav-number">1.</span> <span class="nav-text">1、背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、总结"><span class="nav-number">2.</span> <span class="nav-text">4、总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、参考"><span class="nav-number">3.</span> <span class="nav-text">5、参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、背景"><span class="nav-number">1.</span> <span class="nav-text">1、背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、类型转换规则"><span class="nav-number">2.</span> <span class="nav-text">2、类型转换规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-字符串与数字之间相等比较"><span class="nav-number">2.1.</span> <span class="nav-text">1.字符串与数字之间相等比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-其他类型与布尔类型之间相等比较"><span class="nav-number">2.2.</span> <span class="nav-text">2.其他类型与布尔类型之间相等比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-null与undefined之间相等比较"><span class="nav-number">2.3.</span> <span class="nav-text">3.null与undefined之间相等比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-对象与非对象之间相等比较"><span class="nav-number">2.4.</span> <span class="nav-text">4.对象与非对象之间相等比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-ToNumber-和ToPrimitive"><span class="nav-number">2.5.</span> <span class="nav-text">5.ToNumber()和ToPrimitive()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、总结"><span class="nav-number">3.</span> <span class="nav-text">4、总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、参考"><span class="nav-number">4.</span> <span class="nav-text">5、参考</span></a></li></ol></div>
             
 
           </div>
