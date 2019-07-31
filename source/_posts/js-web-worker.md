@@ -4,18 +4,20 @@ categories:
 - javascript
 tags: 
 - web worker
+- js多线程
 ---
 
 ## 1.背景
-javascript采用的是单线程模型，随着时代的进步，单线程模型已无法充分发挥多核CPU计算机的计算能力，而Web Worker的出现为javascript创造了多线程环境，为未来javascript的发展提供另外一种新思路。我们必须要充分了解Web Worker带来多线程编程的真正用意，真正理解它的运用场景，不要为了多线程而滥用Web Worker。
-用于执行javascript和更新用户界面的进程通常被称为“浏览器UI线程”（尽管对所有浏览器来说，称为“线程”不一定准确），以下我们将其简称为“主线程”。
+javascript采用的是单线程模型，随着时代的进步，单线程编程已无法充分发挥多核CPU计算机的计算能力，而Web Worker的出现为javascript创造了多线程编程，为未来javascript的发展提供另外一种新思路，这并不是说javascript未来会将单线程模型改为多线程模型，因为涉及到一个核心问题，假设javascript有两个线程，一个线程要添加dom节点，另外一个线程要删除这个节点，那浏览器引擎要以哪个为准呢？因此单线程模型将来也不会改变。Web Worker的出现只是为javascript提供了一种多线程编程模式，但并未改变javascript核心本质单线程模型。因为Web Worker本身有很多的限制，不允许操作DOM，且受主线程的控制。那么什么是“主线程”？
+
+用于执行javascript和更新用户界面的进程通常被称为“浏览器UI线程”（尽管对所有浏览器来说，称为“线程”不一定准确, 以下我们将其简称为“主线程”）。通常情况下，执行javascript和更新用户界面是交替进行的，倘若执行javascript时间过长，势必会出现界面“假死”现象。为了更优雅地解决这种情况，Web Worker应运而生。
 
 ## 2.基础部分
 ### 2.1 web worker特性
 > ***web worker有自己的特性，有些属性名称与window中的属性名称相同，但其功能只是后者特性的一个子集。***
-> ***由于web worker线程的设计理念就是为减轻主线程计算方面问题，因此跟UI渲染相关对象都不能读取。***
+> ***由于web worker线程的设计理念就是为减轻主线程计算方面问题，因此跟UI渲染相关对象不能也不应该读取。***
 
-#### 2.1.1 重要特性
+#### 2.1.1 web worker重要特性
 
 1）navigator对象（只有四个属性appName、appVersion、userAgent、platform）
 
@@ -34,7 +36,7 @@ javascript采用的是单线程模型，随着时代的进步，单线程模型�
 8）所有ECMAScript对象，如Object/Array/Date等
 
 
-#### 2.1.2 不能读取特性
+#### 2.1.2 web worker不能读取特性
 
 1）DOM对象
 
@@ -43,7 +45,7 @@ javascript采用的是单线程模型，随着时代的进步，单线程模型�
 3）document对象
 
 ### 2.2 基本用法
-#### 2.2.1 API
+#### 2.2.1 web worker 的API
 主线程属性 | 属性名称
 --- | ---
 Worker.onmessage | 接收消息函数
@@ -62,6 +64,7 @@ self.close | 关闭worker线程函数
 
 
 #### 2.2.2 主线程创建worker
+首先让我们看看如何创建worker线程：
 ```js
 const myworker = new Worker(jsURL, options)
 ```
@@ -72,15 +75,19 @@ const myworker = new Worker(jsURL, options)
 ```js
 // main.js
 var myworker = new Worker('my_worker.js')
+
+var myworker = new Worker('my_worker.js', {name: 'my_worker', type: 'listen_status'})
 ```
 
 #### 2.2.3 主线程发送数据
+主线程向子线程发送一个“Jack”字符串数据：
 ```js
 // main.js
 myworker.postMessage('Jack')
 ```
 
 #### 2.2.4 主线程接收数据
+主线程接收子线程返回的数据，并打印出来：
 ```js
 // main.js
 myworker.onmessage = function(event) {
@@ -90,6 +97,7 @@ myworker.onmessage = function(event) {
 ```
 
 #### 2.2.5 worker线程接收数据
+子线程接收主线程的数据并打印：
 ```js
 // my_worker.js
 self.onmessage = function(event) {// self指向my_worker线程当前用例
@@ -99,17 +107,19 @@ self.onmessage = function(event) {// self指向my_worker线程当前用例
 ```
 
 #### 2.2.6 worker线程发送数据
+子线程向主线程发送一个“hello”字符串的数据：
 ```js
 // my_worker.js
 self.postMessage('hello')
 ```
 
 #### 2.2.7 终止worker
+若我们想要关闭子线程，我们可以在主线程中直接关闭，方法为：
 ```js
 // main.js
 myworker.terminate()
 ```
-或者
+我们也可以在子线程中直接关闭，通常在子线程任务结束后关闭，方法为：
 ```js
 // my_worker.js
 self.close()
@@ -128,7 +138,7 @@ myworker.onerror(function(e) {
 ```
 
 #### 2.2.9 加载外部文件
-importScripts()引入其他脚本，接收0个或者多个url作为参数来引入资源
+子线程可以通过importScripts()方法引入其他脚本，接收0个或者多个url作为参数来引入资源
 ```js
 // my_worker.js
 importScripts() // 什么都不引入
@@ -137,6 +147,7 @@ importScripts('file1.js', 'file2.js') // 加载两个文件
 ```
 
 #### 2.2.10 完整小用例
+下面我们通过看一个完整的小用例，看看主线程与子线程的交互过程：
 ```js
 // main.js
 if (window.Worker) {
@@ -156,7 +167,10 @@ self.onmessage = function(event) {
   self.close()
 }
 ```
-> 上述以on开头的函数，都可以使用addEventListener替换，如slef.onmessage(function)等同于self.addEventListener('message', function)
+
+注意：
+> 上述以on开头的函数是一个回调函数，都可以使用addEventListener替换，如slef.onmessage(function)等同于self.addEventListener('message', function)。如果你细心会发现一件很有趣的事情，在javascript衍生的技术或语言，它们的设计者都遵循这样一种规则：所有以on开头的函数都可以作为一种回调函数。
+> 子线程中其实也可以嵌套创建另外一个子线程，可以一直嵌套创建下去，但对应的逻辑就会变得复杂，不建议这样做。
 
 至此，Web Worker基础使用方法已经介绍完毕。当然，我们知其然，应当知其所以然。
 
@@ -170,23 +184,27 @@ var shareworker = new SharedWorker('share_worker.js')
 ```js
 // main.js
 shareworker.port.start()
+shareworker.port.onmessage = function(e){}
+shareworker.port.postMessage()
 
 // share_worker.js
 self.port.start()
+self.port.onmessage = function(e){}
+self.port.postMessage()
 ```
-如果主线程与共享线程之间需要双向通信，那么它们都需要调用start()方法。同时，使用API接口方法时也需要通过port来调用，这里就不一一展开说明了。
+如果主线程与共享线程之间需要双向通信，那么它们都需要调用start()方法。同时，使用API接口方法时也需要通过port来调用，如上述代码例子，这里就不一一展开说明了。
 
 下面将进一步解析主线程与worker线程并行执行的关系流程，主线程与worker线程的数据通信方式，以及worker线程的实际应用场景。
 
 ### 3.1 主线程与worker线程
-
+下面看看主线程与子线程运行时的关系图：
 ![](/assets/js-web-worker-1.png)
 
 如上图，javascript主线程执行过程中，异步创建worker线程，然后主线程将继续执行其他任务。倘若worker线程还没有创建完成，主线程就直接通过worker.postMessage发送消息给Worker线程，该消息会进入一个临时消息队列中，等worker线程创建成功后，worker线程会从临时消息队列中接收消息，并处理。等处理完成后，通过self.postMessage将消息发送会主线程中。主线程接收到消息后，等待主线程处理完其他任务片段后，才会继续执行worker.onmessage中的回调函数。
 
-在worker线程创建完成的前提下，主线程再次发送消息给worker线程时，worker线程会直接收到消息，而不必经过临时消息队列。
+在worker线程创建完成的前提下，主线程再次发送消息给worker线程时，worker线程会直接收到消息，而不必经过临时消息队列，如上图对应的交互过程1和2。
 
-当woker线程完成任务后，主线程和worker线程都有权力关闭worker线程，主线程通过worker.terminate关闭，worker线程通过调用自身的self.close()关闭。
+最后，当任务结束后，主线程和worker线程都可以关闭worker线程，主线程通过worker.terminate关闭，worker线程通过调用自身的self.close()关闭。
 
 > ***主线程和worker线程发送消息和接收消息流程基本相同，然而事实上，由于主线程受到内核任务调度的影响，worker线程发送的消息，主线程未必会收到消息就会马上往下执行，需要等待前面的任务执行完成才会继续往下执行；而主线程正确发出消息后，worker线程一般会收到消息就会继续往下执行。***
 
@@ -195,7 +213,9 @@ self.port.start()
 
 当传递的内容为原始值时，传递的内容将被串行化，然后将串行化的字符串发送给worker线程，然后再还原，反过来亦是如此；
 
-当传递的内容是对象时，传递的内容将进行二进制转换，然后将二进制数据发送给worker线程。
+当传递的内容是对象或文件时，传递的内容将进行二进制转换，然后将二进制数据发送给worker线程。
+
+其实若是了解java的同学，可以将这一过程理解为序列化和反序列化的过程。
 
 由此可知，**主线程与worker线程之间的通信数据，是一种拷贝关系，即值传递，而不是传址。worker线程改变传递进来的数据并不会影响到主线程。**
 
@@ -249,7 +269,7 @@ self.onmessage = function(e) {
 > **2）复杂的数学运算（包括图像或视频处理）**
 > **3）大数组排序**
 
-事实上，**任何超过100毫秒的处理过程，都应该考虑Worker方案处理，当然前提是浏览器支持Web Workers**。
+事实上，**任何超过100毫秒的处理过程，都应该考虑Worker线程方案处理，当然前提是浏览器支持Web Workers**。
 
 ## 4.总结
 由上所述，Web Worker的出现，充分发挥了多核CPU计算能力，解决浏览器单线程中高负载计算的问题，提升了用户体验。由浏览器的渲染原理可知，浏览器的主线程任务包括两部分：渲染任务和js解析任务，而Web Worker只是js解析任务中的一部分，处理计算相关的任务，因此它有自己的特性，不可以直接调用window中的绝大部分对象，dom对象以及document对象。
@@ -260,3 +280,4 @@ self.onmessage = function(e) {
 3.【高性能JavaScript】第6章 快速响应的用户界面
 4.【阮一峰的Web Worker 使用教程】http://www.ruanyifeng.com/blog/2018/07/web-worker.html
 5.【腾讯AlloyTeam 深入理解Web Worker】http://www.alloyteam.com/2015/11/deep-in-web-worker/
+

@@ -1,5 +1,5 @@
 ---
-title: 高性能JavaScript读书笔记
+title: 高性能JavaScript系列-高性能JavaScript读书笔记
 categories: 
 - javascript
 tags: 
